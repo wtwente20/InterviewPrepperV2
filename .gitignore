@@ -3,3 +3,5 @@ database
 backend/node_modules
 backend/combined.log
 backend/error.log
+backend/combined.log
+*.log

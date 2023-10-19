@@ -55,6 +55,9 @@ const getDefaultAnswersByUserId = async (req, res) => {
 //update default answer
 const updateDefaultAnswer = async (req, res) => {
   try {
+    const { error } = updateDefaultAnswerValidation(req.body);
+    if (error) return res.status(400).send({ message: error.details[0].message });
+
     const defaultAnswer = await DefaultAnswer.findByPk(req.params.id);
     if (!defaultAnswer) {
       return res.status(404).json({ message: "Default answer not found." });
