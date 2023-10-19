@@ -1,8 +1,9 @@
 const express = require("express");
-const bcrypt = require("bcrypt");
-const db = require("./database");
+const db = require("./config/database");
 const bodyParser = require("body-parser");
+const questionRoutes = require("./routes/questionRoutes");
 const userRoutes = require("./routes/userRoutes");
+const logger = require("./config/logger");
 require("dotenv").config();
 
 const app = express();
@@ -13,22 +14,23 @@ app.use(bodyParser.json());
 const assertDatabaseConnection = async () => {
   try {
     await db.authenticate();
-    console.log("Database connected!");
+    logger.info("Database connected!");
   } catch (error) {
-    console.error("Unable to connect to the database:", error);
+    logger.error("Unable to connect to the database:", error);
     process.exit(1); // Stop the process if connection is not successful
   }
 };
 
 app.use("/users", userRoutes);
+app.use("/questions", questionRoutes);
 
 app.use((err, req, res, next) => {
-  console.error(err.stack);
+  logger.error(err.stack);
   res.status(500).send("Something broke!");
 });
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  logger.info(`Server is running on port ${PORT}`);
   assertDatabaseConnection();
 });

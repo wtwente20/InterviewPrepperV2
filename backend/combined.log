@@ -1,0 +1,85 @@
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"identifier":"admin","level":"info","message":"Attempting login with payload:","password":"admin","service":"user-service"}
+{"level":"info","message":"Looking for user with identifier:","service":"user-service"}
+{"level":"info","message":"User found. Checking password...","service":"user-service"}
+{"level":"info","message":"Password verified. Generating JWT...","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}

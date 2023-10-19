@@ -1,6 +1,6 @@
 const express = require("express");
 const { authenticate, requireAdmin } = require('../middlewares/auth');
-const { registerUser, loginUser, deactivateUser, deleteUser, fetchDeactivatedUser, restoreUser, updateUserDetails, getUserDetails } = require("../controllers/userController");
+const { registerUser, loginUser, deactivateUser, deleteUser, fetchDeactivatedUser, restoreUser, updateUserDetails, getUserDetails, changePassword } = require("../controllers/userController");
 const router = express.Router();
 
 
@@ -22,6 +22,9 @@ router.patch("/details", authenticate, updateUserDetails);
 
 // Get user details
 router.get("/details", authenticate, getUserDetails);
+
+// Change user password
+router.get("/changePassword", authenticate, changePassword);
 
 //                                              //
 //  Set above functions that need admin access  //

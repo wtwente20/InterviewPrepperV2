@@ -2,6 +2,8 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 const { Op } = require("sequelize");
+const logger = require("../config/logger");
+const { validateLogin, validateChangePassword } = require("../validators/userValidator");
 
 const JWT_SECRET = process.env.JWT_SECRET;
 const JWT_EXPIRATION_TIME = process.env.JWT_EXPIRATION_TIME;
@@ -10,6 +12,11 @@ const JWT_EXPIRATION_TIME = process.env.JWT_EXPIRATION_TIME;
 const registerUser = async (req, res) => {
   try {
     const { username, email, password, status } = req.body;
+
+    const validation = validateRegister(req.body);
+    if (validation.error) {
+      return res.status(400).send({ message: validation.error.details[0].message });
+    }
 
     // Make sure user doesn't already exist
     const existingUserEmail = await User.findOne({ where: { email: email } }); // Check email likeness
@@ -43,7 +50,7 @@ const registerUser = async (req, res) => {
       },
     });
   } catch (error) {
-    console.error("Error in /register route:", error);
+    logger.error("Error in /register route:", error);
     res.status(500).send({ message: "Server error for registration route." });
   }
 };
@@ -52,37 +59,48 @@ const registerUser = async (req, res) => {
 const loginUser = async (req, res) => {
   try {
     //
-    console.log("Attempting login with payload:", req.body);
+    logger.info("Attempting login with payload:", req.body);
 
     const { identifier, password } = req.body; // set to identifier for username OR email
     // Identifier will need to be sent via front end
 
+    // Validate user input
+    const { error } = validateLogin(req.body);
+    if (error) {
+      return res.status(400).send({ message: error.details[0].message });
+    }
+
     //
-    console.log("Looking for user with identifier:", identifier);
+    logger.info("Looking for user with identifier:", identifier);
 
     const user = await User.findOne({
       where: { [Op.or]: [{ username: identifier }, { email: identifier }] },
     });
     if (!user) {
       //
-      console.log("User not found for identifier:", identifier);
+      logger.info("User not found for identifier:", identifier);
 
       return res.status(404).send({ message: "User not found" });
     }
 
+    // check inactive users
+    if (!user.isActive) {
+      return res.status(403).send({ message: "Account is deactivated." });
+    }
+
     //
-    console.log("User found. Checking password...");
+    logger.info("User found. Checking password...");
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
       //
-      console.log("Password mismatch for user:", user.username || user.email);
+      logger.info("Password mismatch for user:", user.username || user.email);
 
       return res.status(401).send({ message: "Incorrect password." });
     }
 
     //
-    console.log("Password verified. Generating JWT...");
+    logger.info("Password verified. Generating JWT...");
 
     //Generate JWT token
     const token = jwt.sign(
@@ -107,14 +125,14 @@ const loginUser = async (req, res) => {
       },
     });
   } catch (error) {
-    console.error("Server error during login:", error.message, error.stack);
+    logger.error("Server error during login:", error.message, error.stack);
     res.status(500).send({ message: "Server error for login route" });
   }
 };
 
 // Soft delete
 const deactivateUser = async (req, res) => {
-  console.log("UserID in Deactivate Route:", req.userId);
+  logger.info("UserID in Deactivate Route:", req.userId);
   try {
     const userId = req.userId; // needs to be retrieved from the JWT
 
@@ -136,7 +154,7 @@ const deleteUser = async (req, res) => {
 
     res.status(200).send({ message: "User deleted permanently." });
   } catch (error) {
-    console.error("Error in user deletion : ", error);
+    logger.error("Error in user deletion : ", error);
     res.status(500).send({ message: "Server error during user deactivation" });
   }
 };
@@ -148,7 +166,7 @@ const fetchDeactivatedUser = async (req, res) => {
 
     res.status(200).send(users);
   } catch (error) {
-    console.error("error fetching deactivated users : ", error);
+    logger.error("error fetching deactivated users : ", error);
     res
       .status(500)
       .send({ message: "Server error during fetch of deactivated users." });
@@ -164,7 +182,7 @@ const restoreUser = async (req, res) => {
 
     res.status(200).send({ message: "User restoration complete." });
   } catch (error) {
-    console.error("Error in restoring user:", error);
+    logger.error("Error in restoring user:", error);
     res.status(500).send({ message: "Server error during user restoration" });
   }
 };
@@ -174,8 +192,22 @@ const updateUserDetails = async (req, res) => {
   try {
     const userId = req.userId;
 
+    // Validate user input
+    const { error } = validateUpdateUserDetails(req.body);
+    if (error)
+      return res.status(400).send({ message: error.details[0].message });
+
     // Updatable fields
-    const updatableFields = ['name', 'city', 'state_province', 'country', 'profile_picture', 'current_occupation', 'goal_occupation', 'resume'];
+    const updatableFields = [
+      "name",
+      "city",
+      "state_province",
+      "country",
+      "profile_picture",
+      "current_occupation",
+      "goal_occupation",
+      "resume",
+    ];
     let updates = {};
 
     // Loop through the updatable fields and add them to the updates object if they exist in the request body
@@ -186,33 +218,82 @@ const updateUserDetails = async (req, res) => {
     }
 
     // Expect user to update fields
-    await User.update(updates, { where: { id: userId} });
+    await User.update(updates, { where: { id: userId } });
 
     // All good status
-    res.status(200).send({ message: "User details updated successfully!"});
-
+    res.status(200).send({ message: "User details updated successfully!" });
   } catch (error) {
-    console.error("Error updating user details: ", error);
-    res.status(500).send({ message: "Server error while updating user details!"});
+    logger.error("Error updating user details: ", error);
+    res
+      .status(500)
+      .send({ message: "Server error while updating user details!" });
   }
 };
 
+// Fetch user details
 const getUserDetails = async (req, res) => {
   try {
     const userId = req.userId;
 
-    const user = await User.findByPk(userId, { attributes: ['username', 'email', 'name', 'city', 'state_province', 'country', 'profile_picture', 'current_occupation', 'goal_occupation', 'resume'] });
-    
+    const user = await User.findByPk(userId, {
+      attributes: [
+        "username",
+        "email",
+        "name",
+        "city",
+        "state_province",
+        "country",
+        "profile_picture",
+        "current_occupation",
+        "goal_occupation",
+        "resume",
+      ],
+    });
+
     if (!user) {
       return res.status(404).send({ message: "User not found!" });
     }
 
     // All good status
     res.status(200).send(user);
-  
   } catch (error) {
-    console.error("Error fetching user details:", error);
-    res.status(500).send({ message: "Server error while fetching user details" });
+    logger.error("Error fetching user details:", error);
+    res
+      .status(500)
+      .send({ message: "Server error while fetching user details" });
+  }
+};
+
+// Change user password
+const changePassword = async (req, res) => {
+  try {
+    const userId = req.userId;
+    const { oldPassword, newPassword } = req.body;
+
+    // Validate user input
+    const { error } = validateChangePassword(req.body);
+    if (error) {
+      return res.status(400).send({ message: error.details[0].message });
+    }
+
+    // Find by userId
+    const user = await User.findByPk(userId);
+    if (!user) return res.status(404).send({ message: "User not found." });
+
+    // validate old password
+    const isPasswordValid = await bcrypt.compare(oldPassword, user.password);
+    if (!isPasswordValid)
+      return res.status(401).send({ message: "Old password is incorrect." });
+
+    // Hash new password and save
+    user.password = await bcrypt.hash(newPassword, 10);
+    await user.save();
+
+    // All good status
+    res.status(200).send({ message: "Password changed successfully." });
+  } catch (error) {
+    logger.error("Error in changhing password: ", error);
+    res.status(500).send({ message: "Server error during password change." });
   }
 };
 
@@ -224,5 +305,6 @@ module.exports = {
   fetchDeactivatedUser,
   restoreUser,
   updateUserDetails,
-  getUserDetails
+  getUserDetails,
+  changePassword,
 };
