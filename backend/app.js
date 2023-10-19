@@ -3,6 +3,7 @@ const db = require("./config/database");
 const bodyParser = require("body-parser");
 const questionRoutes = require("./routes/questionRoutes");
 const userRoutes = require("./routes/userRoutes");
+const answerRoutes = require("./routes/answerRoutes");
 const logger = require("./config/logger");
 require("dotenv").config();
 
@@ -23,6 +24,7 @@ const assertDatabaseConnection = async () => {
 
 app.use("/users", userRoutes);
 app.use("/questions", questionRoutes);
+app.use("/answers", answerRoutes);
 
 app.use((err, req, res, next) => {
   logger.error(err.stack);

@@ -2,7 +2,11 @@ const express = require('express');
 const router = express.Router();
 
 const { authenticate } = require('../middlewares/auth');
-const { createQuestion, getAllQuestions, getQuestionsByUserId, getQuestionById, updateQuestion, deleteQuestion } = require('../controllers/questionController');
+const { createQuestion, getAllQuestions, getQuestionsByUserId, getQuestionById, updateQuestion, deleteQuestion } = require('../controllers/questions/questionController');
+const { getAllDefaultQuestions } = require('../controllers/questions/defaultQuestionController');
+
+// Get all default questions
+router.get('/defaultQuestions', getAllDefaultQuestions);
 
 // Create a new question
 router.post('/create', authenticate, createQuestion);

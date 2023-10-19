@@ -83,3 +83,112 @@
 {"level":"info","message":"Server is running on port 5000","service":"user-service"}
 {"level":"info","message":"Connection has been established successfully.","service":"user-service"}
 {"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"error","message":"SyntaxError: Unexpected token } in JSON at position 62\n    at JSON.parse (<anonymous>)\n    at parse (C:\\Users\\wtwen\\development\\portfolio\\interviewPrepperV2\\backend\\node_modules\\body-parser\\lib\\types\\json.js:92:19)\n    at C:\\Users\\wtwen\\development\\portfolio\\interviewPrepperV2\\backend\\node_modules\\body-parser\\lib\\read.js:128:18\n    at AsyncResource.runInAsyncScope (node:async_hooks:203:9)\n    at invokeCallback (C:\\Users\\wtwen\\development\\portfolio\\interviewPrepperV2\\backend\\node_modules\\raw-body\\index.js:238:16)\n    at done (C:\\Users\\wtwen\\development\\portfolio\\interviewPrepperV2\\backend\\node_modules\\raw-body\\index.js:227:7)\n    at IncomingMessage.onEnd (C:\\Users\\wtwen\\development\\portfolio\\interviewPrepperV2\\backend\\node_modules\\raw-body\\index.js:287:7)\n    at IncomingMessage.emit (node:events:513:28)\n    at endReadableNT (node:internal/streams/readable:1359:12)\n    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)","service":"user-service"}
+{"level":"error","message":"SyntaxError: Unexpected token } in JSON at position 62\n    at JSON.parse (<anonymous>)\n    at parse (C:\\Users\\wtwen\\development\\portfolio\\interviewPrepperV2\\backend\\node_modules\\body-parser\\lib\\types\\json.js:92:19)\n    at C:\\Users\\wtwen\\development\\portfolio\\interviewPrepperV2\\backend\\node_modules\\body-parser\\lib\\read.js:128:18\n    at AsyncResource.runInAsyncScope (node:async_hooks:203:9)\n    at invokeCallback (C:\\Users\\wtwen\\development\\portfolio\\interviewPrepperV2\\backend\\node_modules\\raw-body\\index.js:238:16)\n    at done (C:\\Users\\wtwen\\development\\portfolio\\interviewPrepperV2\\backend\\node_modules\\raw-body\\index.js:227:7)\n    at IncomingMessage.onEnd (C:\\Users\\wtwen\\development\\portfolio\\interviewPrepperV2\\backend\\node_modules\\raw-body\\index.js:287:7)\n    at IncomingMessage.emit (node:events:513:28)\n    at endReadableNT (node:internal/streams/readable:1359:12)\n    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)","service":"user-service"}
+{"identifier":"admin","level":"info","message":"Attempting login with payload:","password":"admin","service":"user-service"}
+{"level":"info","message":"Looking for user with identifier:","service":"user-service"}
+{"level":"info","message":"User found. Checking password...","service":"user-service"}
+{"level":"info","message":"Password verified. Generating JWT...","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"error","message":"Error creating default answer:  Table 'interview_prepper.default_answers' doesn't exist","name":"SequelizeDatabaseError","original":{"code":"ER_NO_SUCH_TABLE","errno":1146,"parameters":["Test",1,3],"sql":"INSERT INTO `default_answers` (`id`,`answer_text`,`default_question_id`,`user_id`) VALUES (DEFAULT,?,?,?);","sqlMessage":"Table 'interview_prepper.default_answers' doesn't exist","sqlState":"42S02"},"parameters":["Test",1,3],"parent":{"code":"ER_NO_SUCH_TABLE","errno":1146,"parameters":["Test",1,3],"sql":"INSERT INTO `default_answers` (`id`,`answer_text`,`default_question_id`,`user_id`) VALUES (DEFAULT,?,?,?);","sqlMessage":"Table 'interview_prepper.default_answers' doesn't exist","sqlState":"42S02"},"service":"user-service","sql":"INSERT INTO `default_answers` (`id`,`answer_text`,`default_question_id`,`user_id`) VALUES (DEFAULT,?,?,?);","stack":"Error\n    at Query.run (C:\\Users\\wtwen\\development\\portfolio\\interviewPrepperV2\\backend\\node_modules\\sequelize\\lib\\dialects\\mysql\\query.js:52:25)\n    at C:\\Users\\wtwen\\development\\portfolio\\interviewPrepperV2\\backend\\node_modules\\sequelize\\lib\\sequelize.js:315:28\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async MySQLQueryInterface.insert (C:\\Users\\wtwen\\development\\portfolio\\interviewPrepperV2\\backend\\node_modules\\sequelize\\lib\\dialects\\abstract\\query-interface.js:308:21)\n    at async model.save (C:\\Users\\wtwen\\development\\portfolio\\interviewPrepperV2\\backend\\node_modules\\sequelize\\lib\\model.js:2490:35)\n    at async DefaultAnswers.create (C:\\Users\\wtwen\\development\\portfolio\\interviewPrepperV2\\backend\\node_modules\\sequelize\\lib\\model.js:1362:12)\n    at async createDefaultAnswer (C:\\Users\\wtwen\\development\\portfolio\\interviewPrepperV2\\backend\\controllers\\answers\\defaultAnswerController.js:15:24)"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
