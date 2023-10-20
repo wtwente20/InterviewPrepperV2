@@ -1,5 +1,5 @@
 const DefaultQuestion = require("../../models/defaultQuestion");
-
+const logger = require("../../config/logger");
 
 // Fetch all default questions
 const getAllDefaultQuestions = async (req, res) => {
