@@ -1,4 +1,4 @@
-const { createDefaultAnswerValidation } = require('../../validators/answerValidator');
+const { createAnswerValidation, updateAnswerValidation } = require('../../validators/answerValidator');
 
 const logger = require('../../config/logger');
 const DefaultAnswer = require('../../models/defaultAnswer');
@@ -7,11 +7,18 @@ const DefaultAnswer = require('../../models/defaultAnswer');
 const createDefaultAnswer = async (req, res) => {
     try {
         const { answer_text, default_question_id } = req.body;
-        const user_id = req.userId;
+        const user_id = req.user.id;
+        logger.info("Extracted user_id:", user_id);
 
+        logger.info("Request Body: ", req.body);
         // validate default answer entry
-        const { error } = createDefaultAnswerValidation(req.body);
-        if (error) return res.status(400).send({ message: error.details[0].message });
+
+        const { error } = createAnswerValidation(req.body);
+        if (error) {
+          console.log("Validation error: ", error.details);
+          return res.status(400).send({ message: error.details[0].message });
+      }
+      
         
         //create answer
         const answer = await DefaultAnswer.create({
@@ -55,7 +62,7 @@ const getDefaultAnswersByUserId = async (req, res) => {
 //update default answer
 const updateDefaultAnswer = async (req, res) => {
   try {
-    const { error } = updateDefaultAnswerValidation(req.body);
+    const { error } = updateAnswerValidation(req.body);
     if (error) return res.status(400).send({ message: error.details[0].message });
 
     const defaultAnswer = await DefaultAnswer.findByPk(req.params.id);

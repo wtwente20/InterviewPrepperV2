@@ -5,11 +5,13 @@ const questionRoutes = require("./routes/questionRoutes");
 const userRoutes = require("./routes/userRoutes");
 const answerRoutes = require("./routes/answerRoutes");
 const logger = require("./config/logger");
+const morgan = require('morgan');
 require("dotenv").config();
 
 const app = express();
 
 app.use(bodyParser.json());
+app.use(morgan('dev'));
 
 // Test DB Connection
 const assertDatabaseConnection = async () => {
