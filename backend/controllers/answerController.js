@@ -1,9 +1,9 @@
-const Answer = require("../../models/answer");
-const logger = require("../../config/logger");
+const Answer = require("../models/answer");
+const logger = require("../config/logger");
 const {
   createAnswerValidation,
   updateAnswerValidation,
-} = require("../../validators/answerValidator");
+} = require("../validators/answerValidator");
 
 //create answer
 const createAnswer = async (req, res) => {

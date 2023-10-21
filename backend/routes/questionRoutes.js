@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const { authenticate } = require('../middlewares/auth');
-const { createQuestion, getAllQuestions, getQuestionsByUserId, getQuestionById, updateQuestion, deleteQuestion } = require('../controllers/questions/questionController');
+const { createQuestion, getAllQuestions, getQuestionsByUserId, getQuestionById, updateQuestion, deleteQuestion } = require('../controllers/questionController');
 
 // Create a new question
 router.post('/create', authenticate, createQuestion);

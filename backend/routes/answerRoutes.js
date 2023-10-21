@@ -9,7 +9,7 @@ const {
   updateAnswer,
   getAnswersByUserId,
   getAnswerByQuestionId,
-} = require("../controllers/answers/answerController");
+} = require("../controllers/answerController");
 const router = express.Router();
 
 //post a new answer

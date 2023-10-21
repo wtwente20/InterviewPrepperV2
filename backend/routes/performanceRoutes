@@ -1,8 +1,7 @@
 const express = require("express");
 const { authenticate } = require("../middlewares/auth");
 const {
-  createPerformance, getPerformances, getPerformance, updatePerformance, deletePerformance,
-  // Add other imported functions here
+  createPerformance, getPerformances, getPerformance, updatePerformance, deletePerformance
 } = require("../controllers/performanceController");
 const router = express.Router();
 
@@ -20,5 +19,11 @@ router.put('/:id', authenticate, updatePerformance);
 
 //delete
 router.delete('/:id', authenticate, deletePerformance);
+
+//logging middleware
+router.use((req, res, next) => {
+  console.log(req.method, req.path);
+  next();
+});
 
 module.exports = router;

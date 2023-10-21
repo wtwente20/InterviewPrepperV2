@@ -1,5 +1,5 @@
-const Question = require('../../models/question');
-const { validateQuestion } = require('../../validators/questionValidator');
+const Question = require('../models/question');
+const { validateQuestion } = require('../validators/questionValidator');
 
 
 //Create new question
