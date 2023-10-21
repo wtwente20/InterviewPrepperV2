@@ -25,6 +25,11 @@ const Question = sequelize.define('Questions', {
       model: 'Categories',
       key: 'id'
     }
+  },
+  is_default: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+    defaultValue: false
   }
 }, {
     tableName: 'questions',

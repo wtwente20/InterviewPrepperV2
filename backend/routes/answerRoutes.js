@@ -4,13 +4,6 @@ const {
   checkAnswerOwnerOrAdmin
 } = require("../middlewares/auth");
 const {
-  createDefaultAnswer,
-  getDefaultAnswerById,
-  getDefaultAnswersByUserId,
-  updateDefaultAnswer,
-  deleteDefaultAnswer,
-} = require("../controllers/answers/defaultAnswerController");
-const {
   createAnswer,
   deleteAnswer,
   updateAnswer,
@@ -33,31 +26,6 @@ router.put("/:id", authenticate, checkAnswerOwnerOrAdmin, updateAnswer);
 
 //delete an answer
 router.delete("/:id", authenticate, checkAnswerOwnerOrAdmin, deleteAnswer);
-
-// Answer a default question
-router.post("/default", authenticate, createDefaultAnswer);
-
-// Get a specific default answer by question id
-router.get("/default/:id", authenticate, getDefaultAnswerById);
-
-// Get all default answers by user id
-router.get("/default/user/:userId", authenticate, getDefaultAnswersByUserId);
-
-//update a default answer
-router.put(
-  "/default/:id",
-  authenticate,
-  checkAnswerOwnerOrAdmin,
-  updateDefaultAnswer
-);
-
-//delete default answer
-router.delete(
-  "/default/:id",
-  authenticate,
-  checkAnswerOwnerOrAdmin,
-  deleteDefaultAnswer
-);
 
 //logging middleware
 router.use((req, res, next) => {

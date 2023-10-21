@@ -1,4 +1,3 @@
-const DefaultAnswer = require('../models/defaultAnswer');
 const Answer = require('../models/answer')
 const jwt = require("jsonwebtoken");
 const logger = require('../config/logger');
@@ -49,22 +48,10 @@ const requireAdmin = (req, res, next) => {
 
 const checkAnswerOwnerOrAdmin = async (req, res, next) => {
   try {
-    let resource;
-
-    const defaultAnswer = await DefaultAnswer.findByPk(req.params.id);
     const answer = await Answer.findByPk(req.params.id);
 
     logger.info('Default Answer:', defaultAnswer);
     logger.info('Answer:', answer);
-    
-    // Check if it's a default answer or a regular answer
-    if (defaultAnswer) {
-      resource = defaultAnswer;
-    } else if (answer) {
-      resource = answer;
-    } else {
-      return res.status(404).json({ message: "Answer not found." });
-    }
 
     logger.info('Resource User ID:', resource.user_id);
     logger.info('Request User ID:', req.userId);

@@ -21,10 +21,10 @@ const createQuestion = async (req, res) => {
   }
 };
 
-//Get all questions
+//Get all questions, minus defaults
 const getAllQuestions = async (req, res) => {
   try {
-      const questions = await Question.findAll();
+      const questions = await Question.findAll({ where: { is_default: false } });
       res.status(200).json(questions);
   } catch (error) {
       logger.error("Error fetching all questions: ", error);
@@ -32,11 +32,11 @@ const getAllQuestions = async (req, res) => {
   }
 };
 
-//Fetch by user id
+//Fetch by user id, minus defaults
 const getQuestionsByUserId = async (req, res) => {
   try {
       const userId = req.params.userId; // assuming you'll pass userId as a route parameter
-      const questions = await Question.findAll({ where: { user_id: userId } });
+      const questions = await Question.findAll({ where: { user_id: userId, is_default: false } });
       if (questions.length === 0) {
           return res.status(404).send({ message: "No questions found for this user." });
       }
@@ -47,12 +47,11 @@ const getQuestionsByUserId = async (req, res) => {
   }
 };
 
-//Fetch by question id
+//Fetch by question id, minus defaults
 const getQuestionById = async (req, res) => {
   try {
     const questionId = req.params.id;
-
-    const question = await Question.findByPk(questionId);
+    const question = await Question.findOne({ where: { id: questionId, is_default: false } });
 
     if (!question) {
       return res.status(404).send({ message: 'Question not found.' });
@@ -64,6 +63,35 @@ const getQuestionById = async (req, res) => {
     res.status(500).send({ message: 'Server error while fetching question.' });
   }
 };
+
+//fetch all default questions
+const getAllDefaultQuestions = async (req, res) => {
+  try {
+    const defaultQuestions = await Question.findAll({ where: { is_default: true } });
+    res.status(200).json(defaultQuestions);
+  } catch (error) {
+    logger.error("Error fetching all default questions: ", error);
+    res.status(500).send({ message: "Server error fetching all default questions." });
+  }
+};
+
+//get default question by id
+const getDefaultQuestionById = async (req, res) => {
+  try {
+    const questionId = req.params.id;
+    const defaultQuestion = await Question.findOne({ where: { id: questionId, is_default: true } });
+
+    if (!defaultQuestion) {
+      return res.status(404).send({ message: 'Default question not found.' });
+    }
+
+    res.status(200).send(defaultQuestion);
+  } catch (error) {
+    logger.error('Error retrieving default question by ID: ', error);
+    res.status(500).send({ message: 'Server error while fetching default question.' });
+  }
+};
+
 
 //Update a question by id
 const updateQuestion = async (req, res) => {

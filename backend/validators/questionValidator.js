@@ -5,7 +5,7 @@ const validateQuestion = (data) => {
     question_text: Joi.string().required(),
     user_id: Joi.number().integer().optional(),
     category_id: Joi.number().integer().optional()
-  });
+  }).without('is_default');
 
   return schema.validate(data);
 };

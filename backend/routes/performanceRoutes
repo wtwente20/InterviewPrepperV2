@@ -1,0 +1,24 @@
+const express = require("express");
+const { authenticate } = require("../middlewares/auth");
+const {
+  createPerformance, getPerformances, getPerformance, updatePerformance, deletePerformance,
+  // Add other imported functions here
+} = require("../controllers/performanceController");
+const router = express.Router();
+
+//create
+router.post("/", authenticate, createPerformance);
+
+// read all
+router.get('/', authenticate, getPerformances);
+
+//read one
+router.get('/:id', authenticate, getPerformance);
+
+//update
+router.put('/:id', authenticate, updatePerformance);
+
+//delete
+router.delete('/:id', authenticate, deletePerformance);
+
+module.exports = router;
