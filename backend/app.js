@@ -10,9 +10,13 @@ const questionCollectionRoutes = require("./routes/questionCollectionRoutes");
 const collectionQuestionRoutes = require("./routes/collectionQuestionRoutes");
 const categoryRoutes = require("./routes/categoryRoutes");
 const resourceRoutes = require("./routes/resourceRoutes");
+const conversationRoutes = require("./routes/conversationRoutes");
+const conversationUserRoutes = require("./routes/conversationUserRoutes");
+const messageRoutes = require("./routes/messageRoutes");
 const logger = require("./config/logger");
 const morgan = require('morgan');
 require("dotenv").config();
+require('./models/associations');
 
 const app = express();
 
@@ -39,6 +43,9 @@ app.use("/questionCollections", questionCollectionRoutes);
 app.use("/collectionQuestions", collectionQuestionRoutes);
 app.use("/categories", categoryRoutes);
 app.use("/resources", resourceRoutes);
+app.use("/conversations", conversationRoutes);
+app.use("/conversationUsers", conversationUserRoutes);
+app.use("/messages", messageRoutes);
 
 app.use((err, req, res, next) => {
   logger.error(err.stack);

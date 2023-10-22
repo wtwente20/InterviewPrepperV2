@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 const { Op } = require("sequelize");
 const logger = require("../config/logger");
-const { validateLogin, validateChangePassword } = require("../validators/userValidator");
+const { validateLogin, validateChangePassword, validateRegister } = require("../validators/userValidator");
 
 const JWT_SECRET = process.env.JWT_SECRET;
 const JWT_EXPIRATION_TIME = process.env.JWT_EXPIRATION_TIME;
