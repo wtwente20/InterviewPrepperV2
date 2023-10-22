@@ -9,6 +9,7 @@ const performanceRoutes = require('./routes/performanceRoutes');
 const questionCollectionRoutes = require("./routes/questionCollectionRoutes");
 const collectionQuestionRoutes = require("./routes/collectionQuestionRoutes");
 const categoryRoutes = require("./routes/categoryRoutes");
+const resourceRoutes = require("./routes/resourceRoutes");
 const logger = require("./config/logger");
 const morgan = require('morgan');
 require("dotenv").config();
@@ -36,7 +37,8 @@ app.use("/interviews", interviewRoutes);
 app.use("/performances", performanceRoutes);
 app.use("/questionCollections", questionCollectionRoutes);
 app.use("/collectionQuestions", collectionQuestionRoutes);
-app.use("/categories", categoryRoutes)
+app.use("/categories", categoryRoutes);
+app.use("/resources", resourceRoutes);
 
 app.use((err, req, res, next) => {
   logger.error(err.stack);
