@@ -29,15 +29,15 @@ const createUserCategory = async (req, res) => {
 //get all user categories by user id
 const getUserCategoriesByUserId = async (req, res) => {
   try {
-    const { userId } = req.params;
+    const { user_id } = req.params;
 
     // id validate
-    const { error } = idValidation({ id: userId });
+    const { error } = idValidation({ id: user_id });
     if (error) return res.status(400).send({ message: error.details[0].message });
 
     //await
     const userCategories = await UserCategory.findAll({
-      where: { user_id: userId },
+      where: { user_id: user_id },
     });
 
     //get

@@ -16,6 +16,8 @@ const messageRoutes = require("./routes/messageRoutes");
 const userCategoryRoutes = require("./routes/userCategoryRoutes");
 const userResourceRoutes = require("./routes/userResourceRoutes");
 const reactionRoutes = require("./routes/reactionRoutes");
+const shareRoutes = require("./routes/shareRoutes");
+const feedbackRoutes = require("./routes/feedbackRoutes");
 const logger = require("./config/logger");
 const morgan = require('morgan');
 require("dotenv").config();
@@ -52,6 +54,8 @@ app.use("/messages", messageRoutes);
 app.use("/userCategories", userCategoryRoutes);
 app.use("/userResources", userResourceRoutes);
 app.use("/reactions", reactionRoutes);
+app.use("/shares", shareRoutes);
+app.use("/feedbacks", feedbackRoutes);
 
 app.use((err, req, res, next) => {
   logger.error(err.stack);
