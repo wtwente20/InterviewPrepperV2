@@ -18,6 +18,7 @@ const userResourceRoutes = require("./routes/userResourceRoutes");
 const reactionRoutes = require("./routes/reactionRoutes");
 const shareRoutes = require("./routes/shareRoutes");
 const feedbackRoutes = require("./routes/feedbackRoutes");
+const privacySettingRoutes = require("./routes/privacySettingRoutes");
 const logger = require("./config/logger");
 const morgan = require('morgan');
 require("dotenv").config();
@@ -56,6 +57,7 @@ app.use("/userResources", userResourceRoutes);
 app.use("/reactions", reactionRoutes);
 app.use("/shares", shareRoutes);
 app.use("/feedbacks", feedbackRoutes);
+app.use("/privacySettings", privacySettingRoutes);
 
 app.use((err, req, res, next) => {
   logger.error(err.stack);

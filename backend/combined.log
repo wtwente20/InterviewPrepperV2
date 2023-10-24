@@ -285,3 +285,71 @@
 {"level":"info","message":"Server is running on port 5000","service":"user-service"}
 {"level":"info","message":"Connection has been established successfully.","service":"user-service"}
 {"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Received Token Header:","service":"user-service"}
+{"level":"info","message":"Extracted Token:","service":"user-service"}
+{"email":"test1@example.com","exp":1698106620,"iat":1698103020,"level":"info","message":"Decoded User:","role":"user","service":"user-service","userId":2,"username":"test1"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Received Token Header:","service":"user-service"}
+{"level":"info","message":"Extracted Token:","service":"user-service"}
+{"email":"test1@example.com","exp":1698106620,"iat":1698103020,"level":"info","message":"Decoded User:","role":"user","service":"user-service","userId":2,"username":"test1"}
+{"level":"info","message":"User ID: ","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Received Token Header:","service":"user-service"}
+{"level":"info","message":"Extracted Token:","service":"user-service"}
+{"email":"test1@example.com","exp":1698106620,"iat":1698103020,"level":"info","message":"Decoded User:","role":"user","service":"user-service","userId":2,"username":"test1"}
+{"level":"info","message":"User ID: ","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"error","message":"Error in /register route: PrivacySettings is not defined","service":"user-service","stack":"ReferenceError: PrivacySettings is not defined\n    at registerUser (C:\\Users\\wtwen\\development\\portfolio\\interviewPrepperV2\\backend\\controllers\\userController.js:50:5)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"identifier":"deleteme4","level":"info","message":"Attempting login with payload:","password":"password","service":"user-service"}
+{"level":"info","message":"Looking for user with identifier:","service":"user-service"}
+{"level":"info","message":"User found. Checking password...","service":"user-service"}
+{"level":"info","message":"Password verified. Generating JWT...","service":"user-service"}
+{"level":"info","message":"Received Token Header:","service":"user-service"}
+{"level":"info","message":"Extracted Token:","service":"user-service"}
+{"email":"delete4@example.com","exp":1698109719,"iat":1698106119,"level":"info","message":"Decoded User:","role":"user","service":"user-service","userId":7,"username":"deleteme4"}
+{"level":"info","message":"User ID: ","service":"user-service"}
+{"level":"info","message":"Received Token Header:","service":"user-service"}
+{"level":"info","message":"Extracted Token:","service":"user-service"}
+{"email":"delete4@example.com","exp":1698109719,"iat":1698106119,"level":"info","message":"Decoded User:","role":"user","service":"user-service","userId":7,"username":"deleteme4"}

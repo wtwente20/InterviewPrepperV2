@@ -3,7 +3,12 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 const { Op } = require("sequelize");
 const logger = require("../config/logger");
-const { validateLogin, validateChangePassword, validateRegister } = require("../validators/userValidator");
+const {
+  validateLogin,
+  validateChangePassword,
+  validateRegister,
+} = require("../validators/userValidator");
+const PrivacySetting = require("../models/privacySetting");
 
 const JWT_SECRET = process.env.JWT_SECRET;
 const JWT_EXPIRATION_TIME = process.env.JWT_EXPIRATION_TIME;
@@ -15,7 +20,9 @@ const registerUser = async (req, res) => {
 
     const validation = validateRegister(req.body);
     if (validation.error) {
-      return res.status(400).send({ message: validation.error.details[0].message });
+      return res
+        .status(400)
+        .send({ message: validation.error.details[0].message });
     }
 
     // Make sure user doesn't already exist
@@ -38,6 +45,22 @@ const registerUser = async (req, res) => {
       email,
       password,
       status,
+    });
+
+    // Create default privacy settings for the new user
+    await PrivacySetting.create({
+      user_id: newUser.id,
+      show_email: "PRIVATE",
+      show_name: "PRIVATE",
+      show_city: "PRIVATE",
+      show_state_province: "PRIVATE",
+      show_country: "PRIVATE",
+      show_current_occupation: "PRIVATE",
+      show_goal_occupation: "PRIVATE",
+      show_profile_picture: "PRIVATE",
+      show_resume: "PRIVATE",
+      show_status: "PRIVATE",
+      show_category: "PRIVATE",
     });
 
     res.status(201).send({
