@@ -1,16 +1,19 @@
-const express = require('express');
-const { createUserReaction, getUserReactionsByItemId, deleteUserReaction } = require('../controllers/userReactionController');
+const express = require("express");
+const {
+  createUserReaction,
+  getUserReactions,
+  deleteUserReaction,
+} = require("../controllers/userReactionController");
+const { authenticate } = require("../middlewares/auth");
 const router = express.Router();
 
-//routes need to be tested, waiting for shares and feedbacks to be finished
-
 //create user reaction
-router.post('/', createUserReaction);
+router.post("/", authenticate, createUserReaction);
 
 //get user reactions by item id
-router.get('/:itemId/:itemType', getUserReactionsByItemId);
+router.get("/:itemType/:itemId", authenticate, getUserReactions);
 
 //delete user reaction
-router.delete('/:userReactionId', deleteUserReaction);
+router.delete("/:reactionId", authenticate, deleteUserReaction);
 
 module.exports = router;
