@@ -5,8 +5,6 @@ const {
 } = require("../controllers/shareController");
 const router = express.Router();
 
-// tested but needs more, such as connections for shared item and text for share text
-
 //create
 router.post("/", authenticate, createShare);
 

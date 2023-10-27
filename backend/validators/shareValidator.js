@@ -6,6 +6,7 @@ const createShareValidation = (data) => {
     user_id: Joi.number().integer(),
     share_type: Joi.string().required(),
     shared_item_id: Joi.number().integer().required(),
+    share_content: Joi.string().allow(''),
     visibility: Joi.string().valid('PUBLIC', 'FRIENDS', 'PRIVATE').required(),
   });
   return schema.validate(data);

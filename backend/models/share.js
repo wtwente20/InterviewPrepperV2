@@ -24,6 +24,10 @@ const Share = sequelize.define('Share', {
     type: DataTypes.INTEGER,
     allowNull: false
   },
+  share_content: {
+    type: DataTypes.TEXT,
+    allowNull: true
+  },
   timestamp: {
     type: DataTypes.DATE,
     defaultValue: DataTypes.NOW
