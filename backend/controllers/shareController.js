@@ -20,7 +20,7 @@ const createShare = async (req, res) => {
 
     const shareData = {
       ...req.body,
-      user_id
+      user_id,
     };
 
     // Validate shared item existence

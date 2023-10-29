@@ -23,11 +23,15 @@ const privacySettingRoutes = require("./routes/privacySettingRoutes");
 const friendRoutes = require("./routes/friendRoutes");
 const logger = require("./config/logger");
 const morgan = require('morgan');
+const cors = require('cors');
 require("dotenv").config();
 require('./models/associations');
 
 const app = express();
 
+app.use(cors({
+  origin: 'http://localhost:3000',
+}));
 app.use(bodyParser.json());
 app.use(morgan('dev'));
 
