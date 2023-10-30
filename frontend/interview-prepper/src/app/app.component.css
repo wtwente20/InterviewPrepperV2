@@ -1,0 +1,33 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.mat-toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000; /* Ensure it stays on top */
+  height: 64px;
+}
+
+.mat-sidenav-container {
+  height: 100vh;
+  margin-top: 64px;
+}
+
+
+.mat-sidenav-content {
+  padding-top: 0; /* Adjust 64px to your toolbar's height */
+  min-height: 100vh;
+}
+
+.content {
+  margin-top: 64px; /* Adjust according to your toolbar height */
+}
+
+.spacer {
+  flex: 1 1 auto;
+}

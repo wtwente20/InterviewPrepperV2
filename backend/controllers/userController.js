@@ -7,6 +7,7 @@ const {
   validateLogin,
   validateChangePassword,
   validateRegister,
+  validateUpdateDetails
 } = require("../validators/userValidator");
 const PrivacySetting = require("../models/privacySetting");
 
@@ -157,7 +158,7 @@ const loginUser = async (req, res) => {
 const deactivateUser = async (req, res) => {
   logger.info("UserID in Deactivate Route:", req.userId);
   try {
-    const userId = req.userId; // needs to be retrieved from the JWT
+    const userId = req.user.id; // needs to be retrieved from the JWT
 
     await User.update({ isActive: false }, { where: { id: userId } });
 
@@ -171,7 +172,7 @@ const deactivateUser = async (req, res) => {
 // Hard delete
 const deleteUser = async (req, res) => {
   try {
-    const userId = req.userId;
+    const userId = req.user.id;
 
     await User.destroy({ where: { id: userId } });
 
@@ -213,12 +214,12 @@ const restoreUser = async (req, res) => {
 // Update user details
 const updateUserDetails = async (req, res) => {
   try {
-    const userId = req.userId;
+    const userId = req.user.id;
 
     // Validate user input
-    const { error } = validateUpdateDetails(req.body);
-    if (error)
-      return res.status(400).send({ message: error.details[0].message });
+    // const { error } = validateUpdateDetails(req.body);
+    // if (error)
+    //   return res.status(400).send({ message: error.details[0].message });
 
     // Updatable fields
     const updatableFields = [
@@ -235,16 +236,19 @@ const updateUserDetails = async (req, res) => {
 
     // Loop through the updatable fields and add them to the updates object if they exist in the request body
     for (let field of updatableFields) {
-      if (req.body[field]) {
+      if (req.body[field] !== undefined) {
         updates[field] = req.body[field];
       }
     }
+    
 
     // Expect user to update fields
     await User.update(updates, { where: { id: userId } });
 
     // All good status
-    res.status(200).send({ message: "User details updated successfully!" });
+    const updatedUser = await User.update(updates, { where: { id: userId }, returning: true });
+    res.status(200).send({ message: "User details updated successfully!", user: updatedUser });
+
   } catch (error) {
     logger.error("Error updating user details: ", error);
     res
@@ -256,7 +260,7 @@ const updateUserDetails = async (req, res) => {
 // Fetch user details
 const getUserDetails = async (req, res) => {
   try {
-    const userId = req.userId;
+    const userId = req.user.id;
 
     const user = await User.findByPk(userId, {
       attributes: [

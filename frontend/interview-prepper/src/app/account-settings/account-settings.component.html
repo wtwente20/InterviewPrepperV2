@@ -1,1 +1,145 @@
-<p>account-settings works!</p>
+<div class="account-settings-container">
+  <h1>Account Settings</h1>
+
+  <div *ngIf="!isEditMode">
+    <div class="form-group">
+      <label>Username: </label>
+      <span>{{ userDetails.username }}</span>
+    </div>
+    
+    <div class="form-group">
+      <label>Email: </label>
+      <span>{{ userDetails.email }}</span>
+    </div>
+    
+    <div class="form-group">
+      <label>Name: </label>
+      <span>{{ userDetails.name }}</span>
+    </div>
+    
+    <div class="form-group">
+      <label>City: </label>
+      <span>{{ userDetails.city }}</span>
+    </div>
+
+    <div class="form-group">
+      <label>State/Province: </label>
+      <span>{{ userDetails.state_province }}</span>
+    </div>
+
+    <div class="form-group">
+      <label>Country: </label>
+      <span>{{ userDetails.country }}</span>
+    </div>
+
+    <div class="form-group">
+      <label>Current Occupation: </label>
+      <span>{{ userDetails.current_occupation }}</span>
+    </div>
+
+    <div class="form-group">
+      <label>Goal Occupation: </label>
+      <span>{{ userDetails.name }}</span>
+    </div>
+
+    <div class="form-group">
+      <label>Resume: </label>
+      <span>{{ userDetails.resume }}</span>
+    </div>
+
+    <button (click)="toggleEditMode()">Edit Details</button>
+  </div>
+
+  <div *ngIf="isEditMode">
+    <form *ngIf="userDetails" (ngSubmit)="updateDetails(userDetails)">
+      <div class="form-group">
+        <label>Username: </label>
+        <span>{{ userDetails.username }}</span>
+      </div>
+
+      <div class="form-group">
+        <label>Email: </label>
+        <span>{{ userDetails.email }}</span>
+      </div>
+
+      <div class="form-group">
+        <label for="name">Name: </label>
+        <input
+          type="text"
+          id="name"
+          [(ngModel)]="userDetails.name"
+          name="name"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="city">City: </label>
+        <input
+          type="text"
+          id="city"
+          [(ngModel)]="userDetails.city"
+          name="city"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="state_province">State/Province: </label>
+        <input
+          type="text"
+          id="state_province"
+          [(ngModel)]="userDetails.state_province"
+          name="state_province"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="country">Country: </label>
+        <input
+          type="text"
+          id="country"
+          [(ngModel)]="userDetails.country"
+          name="country"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="current_occupation">Current Occupation: </label>
+        <input
+          type="text"
+          id="current_occupation"
+          [(ngModel)]="userDetails.current_occupation"
+          name="current_occupation"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="goal_occupation">Goal Occupation: </label>
+        <input
+          type="text"
+          id="goal_occupation"
+          [(ngModel)]="userDetails.goal_occupation"
+          name="goal_occupation"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="resume">Resume: </label>
+        <input
+          type="text"
+          id="resume"
+          [(ngModel)]="userDetails.resume"
+          name="resume"
+        />
+      </div>
+
+      <button type="submit">Save Changes</button>
+      <br>
+    </form>
+  </div>
+
+  <button (click)="deactivateAccount()">Deactivate Account</button>
+  <br>
+  <button (click)="deleteAccount()">Delete Account</button>
+  <br>
+  <a routerLink="/change-password">Change Password</a>
+</div>

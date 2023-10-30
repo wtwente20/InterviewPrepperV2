@@ -35,15 +35,15 @@ const validateChangePassword = (data) => {
 // Update user details validator
 const validateUpdateDetails = (data) => {
   const schema = Joi.object({
-    name: Joi.string().alphanum().min(3).max(50),
-    city: Joi.string().max(50),
-    state_province: Joi.string().max(50),
-    country: Joi.string().max(50),
-    profile_picture: Joi.string().uri(),
-    current_occupation: Joi.string().max(100),
-    goal_occupation: Joi.string().max(100),
+    name: Joi.string().alphanum().min(3).max(50).optional(),
+    city: Joi.string().max(50).optional(),
+    state_province: Joi.string().max(50).optional(),
+    country: Joi.string().max(50).optional(),
+    profile_picture: Joi.string().uri().optional(),
+    current_occupation: Joi.string().max(100).optional(),
+    goal_occupation: Joi.string().max(100).optional(),
     //Set to a uri so they are linked to Google docs
-    resume: Joi.string().uri()
+    resume: Joi.string().uri().optional()
   });
 
   return schema.validate(data);

@@ -28,6 +28,25 @@ export class UserService {
     return this.http.put(`${this.apiUrl}/users/change-password`, body, { headers });
   }
 
+  deactivateUser(): Observable<any> {
+    return this.http.post(`${this.apiUrl}/users/deactivate`, {});
+  }
+
+  deleteUser(): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/users/delete`);
+  }
+
+  updateUserDetails(details: any): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = { Authorization: `Bearer ${token}` };
+    return this.http.patch(`${this.apiUrl}/users/details`, details, { headers });
+  }
+  
+
+  getUserDetails(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/users/details`);
+  }
+
   logout() {
     localStorage.removeItem('token');
     this.router.navigate(['/login']);

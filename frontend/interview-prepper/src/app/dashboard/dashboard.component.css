@@ -16,7 +16,8 @@
 
 .content {
   max-width: 600px;
-  margin: 16px;
+  margin: 16px auto; /* Center the content horizontally */
+  padding-top: 16px; /* Add padding at the top */
 }
 
 button {
