@@ -216,7 +216,7 @@ const updateUserDetails = async (req, res) => {
     const userId = req.userId;
 
     // Validate user input
-    const { error } = validateUpdateUserDetails(req.body);
+    const { error } = validateUpdateDetails(req.body);
     if (error)
       return res.status(400).send({ message: error.details[0].message });
 
@@ -290,7 +290,7 @@ const getUserDetails = async (req, res) => {
 // Change user password
 const changePassword = async (req, res) => {
   try {
-    const userId = req.user.id;
+    const userId = req.user.id; // had to change for middleware connection
     const { oldPassword, newPassword } = req.body;
 
     // Validate user input

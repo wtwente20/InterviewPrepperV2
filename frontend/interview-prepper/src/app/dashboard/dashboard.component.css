@@ -1,0 +1,24 @@
+.sidenav-container {
+  height: 100vh;
+}
+
+.sidenav {
+  width: 250px;
+}
+
+.sidenav-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.content {
+  max-width: 600px;
+  margin: 16px;
+}
+
+button {
+  margin-top: 16px;
+}
