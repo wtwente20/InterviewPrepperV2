@@ -1,0 +1,86 @@
+<div class="register-container">
+  <h2>Register</h2>
+
+  <!-- Error Message Display -->
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <form (ngSubmit)="register()" #registerForm="ngForm">
+    <div class="form-group">
+      <label for="username">Username:</label>
+      <input
+        type="text"
+        id="username"
+        [(ngModel)]="username"
+        name="username"
+        required
+        minlength="3"
+        maxlength="30"
+        pattern="[a-zA-Z0-9]+"
+        #usernameRef="ngModel"
+      />
+      <div *ngIf="usernameRef.touched">
+        <div *ngIf="usernameRef.errors?.['required']" class="validation-error">Username is required.</div>
+        <div *ngIf="usernameRef.errors?.['minlength']" class="validation-error">Username must be at least 3 characters long.</div>
+        <div *ngIf="usernameRef.errors?.['maxlength']" class="validation-error">Username cannot be more than 30 characters long.</div>
+        <div *ngIf="usernameRef.errors?.['pattern']" class="validation-error">Username can only contain alphanumeric characters.</div>
+      </div>
+    </div>
+    <br>
+
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input
+        type="email"
+        id="email"
+        [(ngModel)]="email"
+        name="email"
+        required
+        email
+        #emailRef="ngModel"
+      />
+      <div *ngIf="emailRef.touched">
+        <div *ngIf="emailRef.errors?.['required']" class="validation-error">Email is required.</div>
+        <div *ngIf="emailRef.errors?.['email']" class="validation-error">Please enter a valid email address.</div>
+      </div>
+    </div>
+    <br>
+
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input
+        type="password"
+        id="password"
+        [(ngModel)]="password"
+        name="password"
+        required
+        pattern="^[a-zA-Z0-9]{3,30}$"
+        #passwordRef="ngModel"
+      />
+      <div *ngIf="passwordRef.touched">
+        <div *ngIf="passwordRef.errors?.['required']" class="validation-error">Password is required.</div>
+        <div *ngIf="passwordRef.errors?.['pattern']" class="validation-error">Password can only contain alphanumeric characters and must be 3-30 characters long.</div>
+      </div>
+    </div>
+    <br>
+
+    <div class="form-group">
+      <label>Status:</label>
+      <div>
+        <input type="radio" id="mentor" name="status" [(ngModel)]="status" value="Mentor" required #statusRef="ngModel" />
+        <label for="mentor">Mentor</label>
+      </div>
+      <div>
+        <input type="radio" id="learner" name="status" [(ngModel)]="status" value="Learner" required />
+        <label for="learner">Learner</label>
+      </div>
+      <div *ngIf="statusRef.touched && statusRef.errors?.['required']" class="validation-error">Status is required.</div>
+    </div>
+    <br>
+
+    <button type="submit" [disabled]="registerForm.invalid">Register</button>
+  </form>
+
+  <p>Already have an account? <a routerLink="/login">Login here</a></p>
+</div>

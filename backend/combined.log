@@ -353,3 +353,21 @@
 {"level":"info","message":"Received Token Header:","service":"user-service"}
 {"level":"info","message":"Extracted Token:","service":"user-service"}
 {"email":"delete4@example.com","exp":1698109719,"iat":1698106119,"level":"info","message":"Decoded User:","role":"user","service":"user-service","userId":7,"username":"deleteme4"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"identifier":"admin","level":"info","message":"Attempting login with payload:","password":"admin","service":"user-service"}
+{"level":"info","message":"Looking for user with identifier:","service":"user-service"}
+{"level":"info","message":"User found. Checking password...","service":"user-service"}
+{"level":"info","message":"Password verified. Generating JWT...","service":"user-service"}
+{"identifier":"admin","level":"info","message":"Attempting login with payload:","password":"admin","service":"user-service"}
+{"level":"info","message":"Looking for user with identifier:","service":"user-service"}
+{"level":"info","message":"User found. Checking password...","service":"user-service"}
+{"level":"info","message":"Password verified. Generating JWT...","service":"user-service"}
+{"identifier":"admin","level":"info","message":"Attempting login with payload:","password":"admin","service":"user-service"}
+{"level":"info","message":"Looking for user with identifier:","service":"user-service"}
+{"level":"info","message":"User found. Checking password...","service":"user-service"}
+{"level":"info","message":"Password verified. Generating JWT...","service":"user-service"}
