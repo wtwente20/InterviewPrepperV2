@@ -13,8 +13,19 @@ export class UserService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
+  registerUser(username: string, email: string, password: string, status: string) {
+    return this.http.post(`${this.apiUrl}/users/register`, { username, email, password, status });
+  }
+
   loginUser(identifier: string, password: string): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(`${this.apiUrl}/users/login`, { identifier, password });
+  }
+
+  changePassword(oldPassword: string, newPassword: string): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = { Authorization: `Bearer ${token}` };
+    const body = { oldPassword, newPassword };
+    return this.http.put(`${this.apiUrl}/users/change-password`, body, { headers });
   }
 
   logout() {

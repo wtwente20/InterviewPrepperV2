@@ -290,7 +290,7 @@ const getUserDetails = async (req, res) => {
 // Change user password
 const changePassword = async (req, res) => {
   try {
-    const userId = req.userId;
+    const userId = req.user.id;
     const { oldPassword, newPassword } = req.body;
 
     // Validate user input

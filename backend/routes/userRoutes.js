@@ -24,7 +24,7 @@ router.patch("/details", authenticate, updateUserDetails);
 router.get("/details", authenticate, getUserDetails);
 
 // Change user password
-router.get("/changePassword", authenticate, changePassword);
+router.put("/change-password", authenticate, changePassword);
 
 //                                              //
 //  Set above functions that need admin access  //

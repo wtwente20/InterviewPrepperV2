@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { jwtDecode } from 'jwt-decode';
 import { LoginResponse } from '../models/login-response.model';
 import { UserService } from '../user.service';
 
@@ -26,11 +27,22 @@ export class LoginComponent implements OnInit {
 
     this.userService.loginUser(this.identifier, this.password).subscribe({
       next: (response: LoginResponse) => {
-        this.errorMessage = ''; // Clear error message on success
         const token = response.token;
         if (token) {
-          localStorage.setItem('token', token);
-          this.router.navigate(['/dashboard']);
+          try {
+            console.log('Token:', token);
+            const decodedToken: any = jwtDecode(token);
+            console.log('Decoded Token:', decodedToken);
+            if (decodedToken && decodedToken.username) {
+              localStorage.setItem('token', token);
+              this.router.navigate(['/dashboard']);
+            } else {
+              this.errorMessage = 'Invalid token structure';
+            }
+          } catch (error) {
+            this.errorMessage = 'Failed to decode token';
+            console.error('Token decoding failed', error);
+          }
         } else {
           this.errorMessage = 'Token not found in response';
         }
