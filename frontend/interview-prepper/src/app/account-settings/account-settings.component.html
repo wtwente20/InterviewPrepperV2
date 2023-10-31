@@ -4,47 +4,47 @@
   <div *ngIf="!isEditMode">
     <div class="form-group">
       <label>Username: </label>
-      <span>{{ userDetails.username }}</span>
+      <span>{{ userDetails?.username }}</span>
     </div>
     
     <div class="form-group">
       <label>Email: </label>
-      <span>{{ userDetails.email }}</span>
+      <span>{{ userDetails?.email }}</span>
     </div>
     
     <div class="form-group">
       <label>Name: </label>
-      <span>{{ userDetails.name }}</span>
+      <span>{{ userDetails?.name }}</span>
     </div>
     
     <div class="form-group">
       <label>City: </label>
-      <span>{{ userDetails.city }}</span>
+      <span>{{ userDetails?.city }}</span>
     </div>
 
     <div class="form-group">
       <label>State/Province: </label>
-      <span>{{ userDetails.state_province }}</span>
+      <span>{{ userDetails?.state_province }}</span>
     </div>
 
     <div class="form-group">
       <label>Country: </label>
-      <span>{{ userDetails.country }}</span>
+      <span>{{ userDetails?.country }}</span>
     </div>
 
     <div class="form-group">
       <label>Current Occupation: </label>
-      <span>{{ userDetails.current_occupation }}</span>
+      <span>{{ userDetails?.current_occupation }}</span>
     </div>
 
     <div class="form-group">
       <label>Goal Occupation: </label>
-      <span>{{ userDetails.name }}</span>
+      <span>{{ userDetails?.goal_occupation }}</span>
     </div>
 
     <div class="form-group">
       <label>Resume: </label>
-      <span>{{ userDetails.resume }}</span>
+      <span>{{ userDetails?.resume }}</span>
     </div>
 
     <button (click)="toggleEditMode()">Edit Details</button>
@@ -54,12 +54,12 @@
     <form *ngIf="userDetails" (ngSubmit)="updateDetails(userDetails)">
       <div class="form-group">
         <label>Username: </label>
-        <span>{{ userDetails.username }}</span>
+        <span>{{ userDetails?.username }}</span>
       </div>
 
       <div class="form-group">
         <label>Email: </label>
-        <span>{{ userDetails.email }}</span>
+        <span>{{ userDetails?.email }}</span>
       </div>
 
       <div class="form-group">
@@ -137,9 +137,10 @@
     </form>
   </div>
 
-  <button (click)="deactivateAccount()">Deactivate Account</button>
-  <br>
-  <button (click)="deleteAccount()">Delete Account</button>
-  <br>
+  <button class="red-button" (click)="deactivateAccount()">Deactivate Account</button>
+<br>
+<button class="red-button" (click)="deleteAccount()">Delete Account</button>
+<br>
+
   <a routerLink="/change-password">Change Password</a>
 </div>

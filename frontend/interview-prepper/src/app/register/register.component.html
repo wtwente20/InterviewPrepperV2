@@ -65,7 +65,7 @@
     </div>
     <br>
 
-    <div class="form-group">
+    <div class="form-group radio-group">
       <label>Status:</label>
       <div>
         <input type="radio" id="mentor" name="status" [(ngModel)]="status" value="Mentor" required #statusRef="ngModel" />
@@ -77,6 +77,7 @@
       </div>
       <div *ngIf="statusRef.touched && statusRef.errors?.['required']" class="validation-error">Status is required.</div>
     </div>
+    
     <br>
 
     <button type="submit" [disabled]="registerForm.invalid">Register</button>

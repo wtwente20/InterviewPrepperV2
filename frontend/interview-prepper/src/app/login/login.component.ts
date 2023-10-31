@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
 import { LoginResponse } from '../models/login-response.model';
-import { UserService } from '../user.service';
+import { AuthService } from '../services/auth-service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,7 @@ export class LoginComponent implements OnInit {
   password = '';
   errorMessage = '';
 
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private userService: UserService, private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -30,11 +31,12 @@ export class LoginComponent implements OnInit {
         const token = response.token;
         if (token) {
           try {
-            console.log('Token:', token);
+            // console.log('Token:', token);
             const decodedToken: any = jwtDecode(token);
-            console.log('Decoded Token:', decodedToken);
+            // console.log('Decoded Token:', decodedToken);
             if (decodedToken && decodedToken.username) {
               localStorage.setItem('token', token);
+              this.authService.login(response.token);
               this.router.navigate(['/dashboard']);
             } else {
               this.errorMessage = 'Invalid token structure';

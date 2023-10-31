@@ -1,15 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { environment } from '../environments/environment';
-import { LoginResponse } from './models/login-response.model';
+import { Observable, tap } from 'rxjs';
+import { environment } from '../../environments/environment';
+import { LoginResponse } from '../models/login-response.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
   private apiUrl = environment.apiUrl;
+  private isActive: boolean = true;
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -29,11 +30,19 @@ export class UserService {
   }
 
   deactivateUser(): Observable<any> {
-    return this.http.post(`${this.apiUrl}/users/deactivate`, {});
+    return this.http.post(`${this.apiUrl}/users/deactivate`, {}).pipe(
+      tap(() => this.isActive = false)
+    );
   }
 
   deleteUser(): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/users/delete`);
+    return this.http.delete(`${this.apiUrl}/users/delete`).pipe(
+      tap(()=> this.isActive = false)
+    );
+  }
+
+  getIsActive(): boolean {
+    return this.isActive;
   }
 
   updateUserDetails(details: any): Observable<any> {
