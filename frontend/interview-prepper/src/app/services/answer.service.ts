@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { Answer } from '../models/question.model';
 
 @Injectable({
   providedIn: 'root'
@@ -21,12 +22,12 @@ export class AnswerService {
     return this.http.post(`${this.apiUrl}`, body, { headers: this.getHeaders() });
   }
 
-  getAnswerByQuestionId(questionId: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/question/${questionId}`, { headers: this.getHeaders() });
+  getAnswersByUserId(userId: number): Observable<Answer[]> {
+    return this.http.get<Answer[]>(`${this.apiUrl}/user/${userId}`, { headers: this.getHeaders() });
   }
 
-  getAnswersByUserId(userId: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/user/${userId}`, { headers: this.getHeaders() });
+  getAnswersByQuestionIdAndUserId(questionId: number, userId: number): Observable<Answer[]> {
+    return this.http.get<Answer[]>(`${this.apiUrl}/question/${userId}/${questionId}`, { headers: this.getHeaders() });
   }
 
   updateAnswer(answerId: number, updatedContent: string): Observable<any> {

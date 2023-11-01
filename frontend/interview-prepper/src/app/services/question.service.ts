@@ -46,7 +46,8 @@ export class QuestionService {
     return this.http.put(`${this.apiUrl}/${id}`, question, { headers: this.getHeaders() });
   }
 
-  deleteQuestion(id: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${id}`, { headers: this.getHeaders() });
+  deleteQuestion(questionId: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${questionId}`);
   }
+  
 }

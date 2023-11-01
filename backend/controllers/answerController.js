@@ -34,19 +34,17 @@ const createAnswer = async (req, res) => {
 //get answer by question id
 const getAnswerByQuestionId = async (req, res) => {
   try {
-    const answer = await Answer.findOne({
+    const answers = await Answer.findAll({
       where: { question_id: req.params.id },
     });
-    if (!answer) {
-      return res.status(404).json({ message: "Answer not found." });
-    }
-    res.json(answer);
+    res.json(answers);
   } catch (error) {
     res
       .status(500)
-      .json({ message: "Error retrieving answer.", error: error.message });
+      .json({ message: "Error retrieving answers.", error: error.message });
   }
 };
+
 
 //get all answers by user id
 const getAnswersByUserId = async (req, res) => {
@@ -61,6 +59,26 @@ const getAnswersByUserId = async (req, res) => {
       .json({ message: "Error retrieving answers.", error: error.message });
   }
 };
+
+//get answers by question and user id
+const getAnswersByQuestionIdAndUserId = async (req, res) => {
+  const questionId = req.params.questionId;
+  const userId = req.user.id;
+
+  try {
+    const answers = await Answer.findAll({
+      where: {
+        question_id: questionId,
+        user_id: userId
+      }
+    });
+    res.json(answers);
+  } catch (error) {
+    console.error('Error retrieving answers:', error);
+    res.status(500).json({ message: "Error retrieving answers.", error: error.message });
+  }
+};
+
 
 //update answer
 const updateAnswer = async (req, res) => {
@@ -102,6 +120,7 @@ module.exports = {
   createAnswer,
   getAnswerByQuestionId,
   getAnswersByUserId,
+  getAnswersByQuestionIdAndUserId,
   updateAnswer,
   deleteAnswer,
 };

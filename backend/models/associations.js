@@ -5,6 +5,8 @@ const Feedback = require('./feedback');
 const PrivacySetting = require('./privacySetting');
 const ConversationUser = require('./conversationUser');
 const Friend = require('./friend');
+const Question = require('./question');
+const Answer = require('./answer');
 
 //define associations with an alias
 Conversation.belongsToMany(User, { through: ConversationUser, foreignKey: 'conversation_id', otherKey: 'user_id', as: 'users' });
@@ -34,3 +36,8 @@ Friend.belongsTo(User, { foreignKey: 'friend_id', as: 'friendUser' });
 
 User.hasMany(Friend, { foreignKey: 'user_id', as: 'friendship' });
 User.hasMany(Friend, { foreignKey: 'friend_id', as: 'userFriendship' });
+
+//questions
+Question.hasMany(Answer, { foreignKey: 'question_id' });
+Answer.belongsTo(Question, { foreignKey: 'question_id' });
+

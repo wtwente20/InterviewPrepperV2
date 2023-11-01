@@ -1,23 +1,87 @@
-<div>
+<div class="container">
   <h2>Default Questions</h2>
-  <div *ngFor="let defaultQuestion of defaultQuestions">
-    {{ defaultQuestion.question_text }}
+  <div *ngFor="let question of defaultQuestions" class="question-section">
+    <div class="question-text">
+      <strong>{{ question.question_text }}</strong>
+    </div>
+
+    <div class="answer-section">
+      <div *ngFor="let answer of question.answers; let i = index" class="answer-text">
+        <ng-container *ngIf="editingAnswer?.questionId !== question.id || editingAnswer?.answerId !== answer.id; else editAnswerTemplate">
+          {{i + 1}}. {{ answer.answer_text }}
+          <button (click)="editAnswer(answer, question)" class="icon-button edit-button">
+            <i class="fas fa-pencil-alt"></i>
+          </button>
+          <button (click)="deleteAnswer(answer, question)" class="icon-button delete-button">
+            <i class="fas fa-times"></i>
+          </button>
+        </ng-container>
+        <ng-template #editAnswerTemplate>
+          <textarea *ngIf="editingAnswer" [(ngModel)]="editingAnswer.text"></textarea>
+          <button (click)="submitAnswerEdit(question)" class="btn btn-success">Submit Edit</button>
+          <button (click)="cancelEdit()" class="btn btn-secondary">Cancel</button>
+        </ng-template>
+      </div>
+    </div>
+
+    <div class="button-group">
+      <button (click)="showAnswerInput(question)" class="add-answer-button btn btn-success">Add New Answer</button>
+    </div>
+
+    <div *ngIf="question.showAnswerInput" class="answer-input">
+      <textarea [(ngModel)]="question.newAnswerText"></textarea>
+      <button (click)="createAnswer(question)" class="btn btn-success">Create Answer</button>
+    </div>
   </div>
 </div>
 
-<div>
+
+
+
+<div class="container">
   <h2>Your Questions</h2>
   <ng-container *ngIf="questions.length; else noQuestionsTemplate">
-    <div *ngFor="let question of questions">
-      {{ question.question_text }}
-      <button (click)="editQuestion(question.id)">Update</button>
-      <button (click)="deleteQuestion(question.id)">Delete</button>
+    <div *ngFor="let question of questions" class="question-section question-container">
+      <div class="question-text">
+        <strong>{{ question.question_text }}</strong>
+        <button (click)="editQuestion(question.id)" class="icon-button edit-button">
+          <i class="fas fa-pencil-alt"></i>
+        </button>
+        <button (click)="deleteQuestion(question)" class="icon-button delete-button">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div *ngIf="question.showAnswerInput" class="answer-input">
+        <textarea [(ngModel)]="question.newAnswerText"></textarea>
+        <button (click)="createAnswer(question)" class="btn btn-success">Create Answer</button>
+      </div>
+      <div class="answer-section answers-section">
+        <div *ngFor="let answer of question.answers; let i = index" class="answer">
+          <ng-container *ngIf="editingAnswer?.questionId !== question.id || editingAnswer?.answerId !== answer.id; else editAnswerTemplate">
+            {{i + 1}}. {{ answer.answer_text }}
+            <button (click)="editAnswer(answer, question)" class="icon-button edit-button">
+              <i class="fas fa-pencil-alt"></i>
+            </button>
+            <button (click)="deleteAnswer(answer, question)" class="icon-button delete-button">
+              <i class="fas fa-times"></i>
+            </button>
+          </ng-container>
+          <ng-template #editAnswerTemplate>
+            <div class="answer-input">
+              <textarea *ngIf="editingAnswer" [(ngModel)]="editingAnswer.text"></textarea>
+              <button (click)="submitAnswerEdit(question)" class="btn btn-success">Submit Edit</button>
+              <button (click)="cancelEdit()" class="btn btn-secondary">Cancel</button>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+      <div class="button-group">
+        <button (click)="showAnswerInput(question)" class="btn btn-success">Add New Answer</button>
+      </div>
     </div>
   </ng-container>
-  <!-- Template when there are no questions -->
   <ng-template #noQuestionsTemplate>
     <p>No questions available.</p>
   </ng-template>
-  <button (click)="createQuestion()">Create Question</button>
+  <button (click)="createQuestion()" class="add-answer-button btn btn-success">Create Question</button>
 </div>
-

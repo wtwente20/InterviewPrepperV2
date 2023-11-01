@@ -1,0 +1,37 @@
+<div class="container">
+  <h2>Edit Question</h2>
+  <form [formGroup]="editQuestionForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="questionText">Question Text:</label>
+      <textarea
+        id="questionText"
+        formControlName="question_text"
+        class="form-control"
+        rows="4"
+        cols="50"
+      ></textarea>
+      <div *ngIf="editQuestionForm.get('question_text')?.invalid && (editQuestionForm.get('question_text')?.dirty || editQuestionForm.get('question_text')?.touched)" class="alert alert-danger">
+        <div *ngIf="editQuestionForm.get('question_text')?.errors?.['required']">Question text is required.</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="category">Category</label>
+      <select formControlName="category_id" id="category" class="form-control">
+        <option value="" disabled>Select a category</option>
+        <option *ngFor="let category of categories" [value]="category.id">
+          {{ category.name }}
+        </option>
+      </select>
+      <div *ngIf="editQuestionForm.get('category_id')?.invalid && (editQuestionForm.get('category_id')?.dirty || editQuestionForm.get('category_id')?.touched)" class="alert alert-danger">
+        <div *ngIf="editQuestionForm.get('category_id')?.errors?.['required']">Please select a category.</div>
+      </div>
+    </div>
+    <button
+      type="submit"
+      class="btn btn-primary"
+      [disabled]="editQuestionForm.invalid"
+    >
+      Update Question
+    </button>
+  </form>
+</div>

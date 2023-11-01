@@ -22,6 +22,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { QuestionsComponent } from './questions/questions.component';
 import { RegisterComponent } from './register/register.component';
+import { EditQuestionComponent } from './edit-question/edit-question.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { RegisterComponent } from './register/register.component';
     AccountSettingsComponent,
     ConfirmationDialogComponent,
     QuestionsComponent,
-    CreateQuestionComponent
+    CreateQuestionComponent,
+    EditQuestionComponent
   ],
   imports: [
     BrowserModule,

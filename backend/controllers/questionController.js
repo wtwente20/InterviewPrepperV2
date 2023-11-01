@@ -1,5 +1,6 @@
 const logger = require('../config/logger');
 const Question = require('../models/question');
+const Answer = require('../models/answer')
 const { validateQuestion } = require('../validators/questionValidator');
 
 
@@ -40,15 +41,13 @@ const getQuestionsByUserId = async (req, res) => {
   try {
       const userId = req.user.id;
       const questions = await Question.findAll({ where: { user_id: userId, is_default: false } });
-      if (questions.length === 0) {
-          return res.status(404).send({ message: "No questions found for this user." });
-      }
       res.status(200).json(questions);
   } catch (error) {
       logger.error(`Error fetching questions for user ${userId}: `, error);
       res.status(500).send({ message: "Server error fetching questions for user." });
   }
 };
+
 
 //Fetch by question id, minus defaults
 const getQuestionById = async (req, res) => {
@@ -126,22 +125,25 @@ const updateQuestion = async (req, res) => {
 // Delete a question
 const deleteQuestion = async (req, res) => {
   try {
-      const questionId = req.params.id;
+    const questionId = req.params.id;
 
-      // Find the question by its ID
-      const question = await Question.findByPk(questionId);
-      if (!question) {
-          return res.status(404).send({ message: 'Question not found.' });
-      }
+    // First, delete all answers associated with this question
+    await Answer.destroy({ where: { question_id: questionId } });
 
-      // Delete the question
-      await question.destroy();
+    // Find the question by its ID
+    const question = await Question.findByPk(questionId);
+    if (!question) {
+      return res.status(404).send({ message: 'Question not found.' });
+    }
 
-      // Send a successful response
-      res.status(200).send({ message: 'Question deleted successfully.' });
+    // Delete the question
+    await question.destroy();
+
+    // Send a successful response
+    res.status(200).send({ message: 'Question deleted successfully.' });
   } catch (error) {
-      logger.error('Error deleting question:', error);
-      res.status(500).send({ message: 'Failed to delete question.' });
+    logger.error('Error deleting question:', error);
+    res.status(500).send({ message: 'Failed to delete question.' });
   }
 };
 
