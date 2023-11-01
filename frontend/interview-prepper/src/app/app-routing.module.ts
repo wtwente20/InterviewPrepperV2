@@ -2,9 +2,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { CreateQuestionComponent } from './create-question/create-question.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ActiveUserGuard } from './guards/active-user.guard';
 import { LoginComponent } from './login/login.component';
+import { QuestionsComponent } from './questions/questions.component';
 import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
@@ -13,6 +15,8 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'change-password', component: ChangePasswordComponent, canActivate: [ActiveUserGuard] },
   { path: 'account-settings', component: AccountSettingsComponent, canActivate: [ActiveUserGuard] },
+  { path: 'questions', component: QuestionsComponent, canActivate: [ActiveUserGuard] },
+  { path: 'questions/create', component: CreateQuestionComponent },
   // Add other routes as needed
   { path: '', redirectTo: '/login', pathMatch: 'full' }, // Redirect empty path to /login
 ];

@@ -16,10 +16,10 @@ const router = express.Router();
 router.post("/", authenticate, createAnswer);
 
 //get a specific answer by question id
-router.get("/question/:id", authenticate, getAnswerByQuestionId);
+router.get("/question/:id", getAnswerByQuestionId);
 
 //get all answers by user id
-router.get("/user/:userId", authenticate, getAnswersByUserId);
+router.get("/user/:userId", getAnswersByUserId);
 
 //update an answer
 router.put("/:id", authenticate, checkAnswerOwnerOrAdmin, updateAnswer);

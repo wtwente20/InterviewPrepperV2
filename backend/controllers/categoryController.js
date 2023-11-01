@@ -5,7 +5,7 @@ const Category = require('../models/category');
 const getCategories = async (req, res) => {
   try {
     const categories = await Category.findAll();
-    return res.json(categories);
+    res.status(200).send(categories);
   } catch (error) {
     logger.error("Error getting categories: ", error);
     return res.status(500).json({ message: error.message });

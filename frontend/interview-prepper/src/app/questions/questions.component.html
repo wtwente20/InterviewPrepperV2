@@ -1,0 +1,23 @@
+<div>
+  <h2>Default Questions</h2>
+  <div *ngFor="let defaultQuestion of defaultQuestions">
+    {{ defaultQuestion.question_text }}
+  </div>
+</div>
+
+<div>
+  <h2>Your Questions</h2>
+  <ng-container *ngIf="questions.length; else noQuestionsTemplate">
+    <div *ngFor="let question of questions">
+      {{ question.question_text }}
+      <button (click)="editQuestion(question.id)">Update</button>
+      <button (click)="deleteQuestion(question.id)">Delete</button>
+    </div>
+  </ng-container>
+  <!-- Template when there are no questions -->
+  <ng-template #noQuestionsTemplate>
+    <p>No questions available.</p>
+  </ng-template>
+  <button (click)="createQuestion()">Create Question</button>
+</div>
+

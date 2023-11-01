@@ -1,3 +1,4 @@
+const logger = require('../config/logger');
 const Question = require('../models/question');
 const { validateQuestion } = require('../validators/questionValidator');
 
@@ -10,16 +11,18 @@ const createQuestion = async (req, res) => {
 
     const questionData = {
       question_text: req.body.question_text,
-      user_id: req.userId,  // Assuming you've decoded the JWT token and set it to req.userId
+      user_id: req.user.id,
       category_id: req.body.category_id
     };
 
     const newQuestion = await Question.create(questionData);
     res.status(201).send(newQuestion);
   } catch (error) {
+    logger.error('Error creating new question:', error);
     return res.status(500).send({ message: "Server Error!" });
   }
 };
+
 
 //Get all questions, minus defaults
 const getAllQuestions = async (req, res) => {
@@ -35,7 +38,7 @@ const getAllQuestions = async (req, res) => {
 //Fetch by user id, minus defaults
 const getQuestionsByUserId = async (req, res) => {
   try {
-      const userId = req.params.userId; // assuming you'll pass userId as a route parameter
+      const userId = req.user.id;
       const questions = await Question.findAll({ where: { user_id: userId, is_default: false } });
       if (questions.length === 0) {
           return res.status(404).send({ message: "No questions found for this user." });
@@ -67,13 +70,17 @@ const getQuestionById = async (req, res) => {
 //fetch all default questions
 const getAllDefaultQuestions = async (req, res) => {
   try {
+    console.log("getAllDefaultQuestions called");
     const defaultQuestions = await Question.findAll({ where: { is_default: true } });
+    console.log("Default Questions:", defaultQuestions);
     res.status(200).json(defaultQuestions);
   } catch (error) {
-    logger.error("Error fetching all default questions: ", error);
+    console.error("Error fetching all default questions:", error);
     res.status(500).send({ message: "Server error fetching all default questions." });
   }
 };
+
+
 
 //get default question by id
 const getDefaultQuestionById = async (req, res) => {
@@ -145,6 +152,8 @@ module.exports = {
   getAllQuestions,
   getQuestionsByUserId,
   getQuestionById,
+  getDefaultQuestionById,
+  getAllDefaultQuestions,
   updateQuestion,
   deleteQuestion
 };
