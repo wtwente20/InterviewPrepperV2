@@ -257,6 +257,27 @@ const updateUserDetails = async (req, res) => {
   }
 };
 
+// Get user ID from username
+const getUserIdByUsername = async (req, res) => {
+  console.log('Getting user ID for username:', req.params.username);
+  try {
+    const username = req.params.username;
+
+    const user = await User.findOne({ where: { username } });
+
+    if (!user) {
+      return res.status(404).send({ message: "User not found!" });
+    }
+
+    res.status(200).send({ userId: user.id });
+  } catch (error) {
+    logger.error("Error fetching user ID:", error);
+    res.status(500).send({ message: "Server error while fetching user ID" });
+  }
+};
+
+
+
 // Fetch user details
 const getUserDetails = async (req, res) => {
   try {
@@ -333,5 +354,6 @@ module.exports = {
   restoreUser,
   updateUserDetails,
   getUserDetails,
+  getUserIdByUsername,
   changePassword,
 };

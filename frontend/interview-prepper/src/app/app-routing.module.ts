@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { ChatComponent } from './chat/chat.component';
 import { CreateQuestionComponent } from './create-question/create-question.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EditQuestionComponent } from './edit-question/edit-question.component';
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'questions', component: QuestionsComponent, canActivate: [ActiveUserGuard] },
   { path: 'questions/create', component: CreateQuestionComponent },
   { path: 'questions/edit/:id', component: EditQuestionComponent },
+  { path: 'chat', component: ChatComponent },
   // Add other routes as needed
   { path: '', redirectTo: '/login', pathMatch: 'full' }, // Redirect empty path to /login
 ];

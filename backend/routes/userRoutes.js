@@ -1,6 +1,6 @@
 const express = require("express");
 const { authenticate, requireAdmin } = require('../middlewares/auth');
-const { registerUser, loginUser, deactivateUser, deleteUser, fetchDeactivatedUser, restoreUser, updateUserDetails, getUserDetails, changePassword } = require("../controllers/userController");
+const { registerUser, loginUser, deactivateUser, deleteUser, fetchDeactivatedUser, restoreUser, updateUserDetails, getUserDetails, changePassword, getUsernameById, getUserIdByUsername } = require("../controllers/userController");
 const router = express.Router();
 
 
@@ -19,6 +19,9 @@ router.delete("/delete", authenticate, deleteUser)
 
 // Set user details
 router.patch("/details", authenticate, updateUserDetails);
+
+// get user ID from username
+router.get("/username/:username", getUserIdByUsername);
 
 // Get user details
 router.get("/details", authenticate, getUserDetails);

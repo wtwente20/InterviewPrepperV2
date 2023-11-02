@@ -1,7 +1,13 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { jwtDecode } from 'jwt-decode';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { User } from '../models/user.model';
+
+interface UserIdResponse {
+  userId: number;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +15,7 @@ import { User } from '../models/user.model';
 export class AuthService {
   private currentUserSubject = new BehaviorSubject<User | null>(null);
 
-  constructor() {
+  constructor(private http: HttpClient) {
     this.initializeCurrentUser();
   }
 
@@ -63,5 +69,10 @@ export class AuthService {
 
   getCurrentUser(): Observable<User | null> {
     return this.currentUserSubject.asObservable();
+  }
+
+  getUserIdFromUsername(username: string): Observable<UserIdResponse> {
+    const apiUrl = `${environment.apiUrl}/users/username/${username}`;
+    return this.http.get<UserIdResponse>(apiUrl);
   }
 }

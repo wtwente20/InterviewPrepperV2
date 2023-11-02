@@ -40,6 +40,7 @@ const getConversationsByUserId = async (req, res) => {
     const conversations = await Conversation.findAll({
       include: [{
         model: User,
+        as: 'users',
         attributes: ['username'], // only include the username field
         through: { attributes: [] }, // exclude all fields from the join table
         where: { id: userId } // filter to only include conversations for the specific user

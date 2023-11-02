@@ -23,6 +23,7 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
 import { QuestionsComponent } from './questions/questions.component';
 import { RegisterComponent } from './register/register.component';
 import { EditQuestionComponent } from './edit-question/edit-question.component';
+import { ChatComponent } from './chat/chat.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { EditQuestionComponent } from './edit-question/edit-question.component';
     ConfirmationDialogComponent,
     QuestionsComponent,
     CreateQuestionComponent,
-    EditQuestionComponent
+    EditQuestionComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,

@@ -2,9 +2,15 @@
   <mat-sidenav #sidenav class="sidenav" mode="side" position="start">
     <mat-nav-list>
       <a mat-list-item (click)="sidenav.toggle()">Close Menu</a>
-      <a mat-list-item routerLink="/dashboard" (click)="sidenav.toggle()">Dashboard</a>
-      <a mat-list-item routerLink="/questions" (click)="sidenav.toggle()">Questions</a>
-      <a mat-list-item routerLink="/account-settings" (click)="sidenav.toggle()">Account Settings</a>
+      <a mat-list-item routerLink="/dashboard" (click)="sidenav.toggle()"
+        >Dashboard</a
+      >
+      <a mat-list-item routerLink="/questions" (click)="sidenav.toggle()"
+        >Questions</a
+      >
+      <a mat-list-item routerLink="/account-settings" (click)="sidenav.toggle()"
+        >Account Settings</a
+      >
     </mat-nav-list>
   </mat-sidenav>
 
@@ -15,7 +21,13 @@
       </button>
       <span>InterviewPrepper</span>
       <span class="spacer"></span>
-      <span *ngIf="username">Welcome, {{ username }}  </span>
+      <span *ngIf="username">Welcome, {{ username }}</span>
+      <div class="messages-icon" *ngIf="isLoggedIn()" (click)="openChat()">
+        <i class="fa fa-comments" (click)="toggleMessages()"></i>
+        <span class="message-count" *ngIf="messageCount > 0">{{
+          messageCount
+        }}</span>
+      </div>
       <button *ngIf="username" mat-button (click)="logout()">Logout</button>
     </mat-toolbar>
 

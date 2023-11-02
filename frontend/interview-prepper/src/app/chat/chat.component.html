@@ -1,0 +1,40 @@
+<div class="chat-container">
+  <div class="conversations">
+    <div
+      *ngFor="let conversation of conversations"
+      (click)="selectConversation(conversation.id)"
+      [class.active]="selectedConversationId === conversation.id"
+    >
+      {{ conversation.name }}
+    </div>
+  </div>
+
+  <div class="new-conversation">
+    <input [(ngModel)]="recipientUsername" placeholder="Recipient's username" />
+    <textarea
+      [(ngModel)]="newMessageContent"
+      placeholder="Type a message..."
+    ></textarea>
+    <button (click)="startNewConversationAndSendMessage()">Send</button>
+  </div>
+
+  <div *ngIf="selectedConversationId !== null" class="messages">
+    <div *ngFor="let message of messages" class="message">
+      {{ message.content }}
+    </div>
+    <div class="input-container">
+      <textarea
+        [(ngModel)]="newMessageContent"
+        placeholder="Type a message..."
+      ></textarea>
+      <button (click)="sendMessage()">Send</button>
+    </div>
+  </div>
+  <div *ngIf="conversations.length === 0">
+    Please start a conversation to see messages.
+  </div>
+
+  <div *ngIf="selectedConversationId === null" class="no-conversation-selected">
+    Please select a conversation
+  </div>
+</div>

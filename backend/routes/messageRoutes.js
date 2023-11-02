@@ -14,7 +14,7 @@ const router = express.Router();
 router.post("/", authenticate, createMessage);
 
 //get all messages for a specific conversation
-router.get("/conversation/:conversationId", authenticate, getMessagesByConversationId);
+router.get("/conversations/:conversationId", authenticate, getMessagesByConversationId);
 
 //get all messages for a specific user
 router.get("/user/:userId", authenticate, getMessagesByUserId);
