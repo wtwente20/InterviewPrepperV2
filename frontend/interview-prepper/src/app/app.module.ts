@@ -24,6 +24,8 @@ import { QuestionsComponent } from './questions/questions.component';
 import { RegisterComponent } from './register/register.component';
 import { EditQuestionComponent } from './edit-question/edit-question.component';
 import { ChatComponent } from './chat/chat.component';
+import { ConversationListComponent } from './conversation-list/conversation-list.component';
+import { MessageListComponent } from './message-list/message-list.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { ChatComponent } from './chat/chat.component';
     QuestionsComponent,
     CreateQuestionComponent,
     EditQuestionComponent,
-    ChatComponent
+    ChatComponent,
+    ConversationListComponent,
+    MessageListComponent
   ],
   imports: [
     BrowserModule,

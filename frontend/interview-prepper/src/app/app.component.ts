@@ -2,11 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSidenav } from '@angular/material/sidenav';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { ChatComponent } from './chat/chat.component';
-import { AuthService } from './services/auth-service';
+import { AuthService } from './services/auth.service';
 import { UserService } from './services/user.service';
+
 
 
 @Component({
@@ -23,7 +24,7 @@ export class AppComponent implements OnInit, OnDestroy {
   private apiUrl = `${environment.apiUrl}/messages`;
   userId!: number;
 
-  constructor(public dialog: MatDialog, private http: HttpClient, private userService: UserService, private authService: AuthService) { }
+  constructor(public dialog: MatDialog, private http: HttpClient, private userService: UserService, private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     this.subscription.add(
@@ -66,7 +67,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   openChat(): void {
-    this.dialog.open(ChatComponent);
+    this.router.navigate(['/chat']);
   }
 }
 

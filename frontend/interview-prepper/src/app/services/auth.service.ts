@@ -71,6 +71,15 @@ export class AuthService {
     return this.currentUserSubject.asObservable();
   }
 
+  getCurrentUserId(): number | null {
+    const user = localStorage.getItem('currentUser');
+    if (user) {
+      const currentUser = JSON.parse(user);
+      return currentUser.id;
+    }
+    return null;
+  }
+
   getUserIdFromUsername(username: string): Observable<UserIdResponse> {
     const apiUrl = `${environment.apiUrl}/users/username/${username}`;
     return this.http.get<UserIdResponse>(apiUrl);

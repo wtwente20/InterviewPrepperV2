@@ -16,10 +16,6 @@ const Conversation = sequelize.define('Conversation', {
       key: 'id',
     },
   },
-  title: {
-    type: DataTypes.STRING(255),
-    allowNull: false,
-  },
   created_at: {
     type: DataTypes.DATE,
     defaultValue: DataTypes.NOW,
@@ -28,9 +24,21 @@ const Conversation = sequelize.define('Conversation', {
     type: DataTypes.DATE,
     defaultValue: DataTypes.NOW,
   },
+  sender_name: {
+    type: DataTypes.STRING(255),
+    allowNull: false,  // Assuming it can be null, adjust as per your requirement
+  },
+  last_message_content: {
+    type: DataTypes.TEXT,
+    allowNull: true,  // Assuming it can be null, adjust as per your requirement
+  },
+  unread_count: {
+    type: DataTypes.INTEGER,
+    defaultValue: 0,
+  }
 }, {
   tableName: 'Conversations',
-  timestamps: false,
+  timestamps: true,
   freezeTableName: true,
 });
 

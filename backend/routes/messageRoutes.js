@@ -6,9 +6,17 @@ const {
   getMessageById,
   updateMessage,
   deleteMessage,
-  getMessagesByUserId
+  getMessagesByUserId,
+  markMessageAsRead,
+  getMessageReadStatus
 } = require("../controllers/messageController");
 const router = express.Router();
+
+// Logging middleware
+router.use((req, res, next) => {
+  console.log(req.method, req.path);
+  next();
+});
 
 //create message
 router.post("/", authenticate, createMessage);
@@ -22,16 +30,16 @@ router.get("/user/:userId", authenticate, getMessagesByUserId);
 //get message by id
 router.get("/:messageId", authenticate, getMessageById);
 
+// Mark message as read
+router.patch("/:messageId/read", authenticate, markMessageAsRead);
+
+// Get message read status
+router.get("/:messageId/read-status", authenticate, getMessageReadStatus);
+
 //update message
 router.put("/:messageId", authenticate, updateMessage);
 
 //delete message
 router.delete("/:messageId", authenticate, deleteMessage);
-
-// Logging middleware
-router.use((req, res, next) => {
-  console.log(req.method, req.path);
-  next();
-});
 
 module.exports = router;

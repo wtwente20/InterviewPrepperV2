@@ -1,45 +1,22 @@
 .chat-container {
   display: flex;
-  flex-direction: column;
-  max-height: 500px;
-  overflow-y: auto;
+  height: 100%;
 }
 
-.message {
-  margin-bottom: 10px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+.conversation-list {
+  height: calc(100vh - 60px); /* Adjust 60px to your header/sidebar height */
+  overflow-y: auto; /* Enable scrolling if the list is too long */
+  border-right: 1px solid #ccc; /* Optional: add a border between the list and messages */
+  width: 25%; /* Ensure this is working as expected */
 }
 
-.input-container {
-  display: flex;
-  flex-direction: column;
-  margin-top: 10px;
-
-textarea {
-    margin-bottom: 10px;
-  }
+.message-list {
+  flex-grow: 1; /* Take up the remaining space */
+  height: calc(100vh - 60px); /* Adjust 60px to your header/sidebar height */
+  overflow-y: auto; /* Enable scrolling if content overflows */
 }
 
-.messages-icon {
-  position: relative;
-  margin-left: 10px;
-  cursor: pointer;
-}
-
-.message-count {
-  position: absolute;
-  top: -5px;
-  right: -10px;
-  background-color: red;
-  color: white;
-  border-radius: 50%;
-  padding: 0 5px;
-  font-size: 12px;
-  height: 20px;
-  width: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+/* Temporarily added to visually verify sizes */
+.chat-container { background-color: rgba(255, 0, 0, 0.2); }
+.conversation-list { background-color: rgba(0, 255, 0, 0.2); }
+.message-list { background-color: rgba(0, 0, 255, 0.2); }

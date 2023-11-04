@@ -22,12 +22,13 @@
       <span>InterviewPrepper</span>
       <span class="spacer"></span>
       <span *ngIf="username">Welcome, {{ username }}</span>
-      <div class="messages-icon" *ngIf="isLoggedIn()" (click)="openChat()">
-        <i class="fa fa-comments" (click)="toggleMessages()"></i>
+      <!-- <div class="messages-icon" *ngIf="isLoggedIn()" (click)="openChat()">
+        <i class="fa fa-comments"></i>
         <span class="message-count" *ngIf="messageCount > 0">{{
           messageCount
         }}</span>
-      </div>
+      </div> -->
+
       <button *ngIf="username" mat-button (click)="logout()">Logout</button>
     </mat-toolbar>
 

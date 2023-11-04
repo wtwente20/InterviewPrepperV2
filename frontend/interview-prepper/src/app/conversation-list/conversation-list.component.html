@@ -1,0 +1,25 @@
+<div class="conversations-list">
+  <ul>
+    <ng-container *ngFor="let conversation of conversations">
+      <!-- This ng-container will loop through each conversation without rendering an extra element -->
+      <li
+        [class.selected]="conversation.id === selectedConversationId"
+        (click)="selectConversation(conversation)"
+        *ngIf="conversation.participants && conversation.participants.length > 0"
+      >
+        {{ conversation.participants[0].username }}
+      </li>
+    </ng-container>
+  </ul>
+<!-- Create conversation button and form -->
+<button (click)="showCreateConversationForm = !showCreateConversationForm">
+  Create Conversation
+</button>
+<div *ngIf="showCreateConversationForm">
+  <input type="text" [(ngModel)]="recipientUsername" placeholder="Recipient username">
+  <input type="text" [(ngModel)]="messageContent" placeholder="Message content">
+  <button (click)="createNewConversation()">Send</button>
+</div>
+
+</div>
+

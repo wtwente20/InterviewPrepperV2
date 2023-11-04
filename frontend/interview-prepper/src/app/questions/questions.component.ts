@@ -4,7 +4,7 @@ import { Observable, forkJoin, of } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
 import { Answer, Question } from '../models/question.model';
 import { AnswerService } from '../services/answer.service';
-import { AuthService } from '../services/auth-service';
+import { AuthService } from '../services/auth.service';
 import { QuestionService } from '../services/question.service';
 
 

@@ -1,0 +1,14 @@
+.conversations-list ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.conversations-list li {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.conversations-list li.selected {
+  background-color: #f0f0f0;
+}

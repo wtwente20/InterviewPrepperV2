@@ -1,0 +1,34 @@
+<div *ngIf="hasSelectedConversation; else noConversation">
+  <div class="messages-list">
+    <!-- Show messages here -->
+    <div *ngFor="let message of messages" class="message" [class.mine]="message.sender_id === conversation?.created_by">
+      <div class="message-content">{{ message.content }}</div>
+      <div class="message-timestamp">{{ message.updated_at | date:'shortTime' }}</div>
+    </div>
+
+    <!-- New Message button -->
+    <button (click)="toggleNewMessageInput()">New Message</button>
+
+    <!-- Conditional input fields for new message -->
+    <div *ngIf="showNewMessageInput">
+      <!-- Input to specify the recipient -->
+      <input type="text" [(ngModel)]="recipientUsername" placeholder="Enter recipient username..." />
+
+      <!-- Input to write a new message -->
+      <div class="message-input">
+        <input type="text" [(ngModel)]="newMessageContent" (keyup.enter)="sendMessage()" placeholder="Write a message..." />
+        <button (click)="sendMessage()">Send</button>
+      </div>
+    </div>
+
+    <div *ngIf="messages && messages.length === 0" class="empty-state">
+      No messages yet. Start the conversation!
+    </div>
+  </div>
+</div>
+
+<ng-template #noConversation>
+  <div class="no-conversation">
+    Click on a conversation to start messaging.
+  </div>
+</ng-template>
