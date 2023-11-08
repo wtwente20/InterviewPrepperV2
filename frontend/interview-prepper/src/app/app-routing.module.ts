@@ -7,6 +7,7 @@ import { CreateQuestionComponent } from './create-question/create-question.compo
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EditQuestionComponent } from './edit-question/edit-question.component';
 import { ActiveUserGuard } from './guards/active-user.guard';
+import { InterviewCalendarComponent } from './interview-calendar/interview-calendar.component';
 import { LoginComponent } from './login/login.component';
 import { QuestionsComponent } from './questions/questions.component';
 import { RegisterComponent } from './register/register.component';
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'questions/create', component: CreateQuestionComponent },
   { path: 'questions/edit/:id', component: EditQuestionComponent },
   { path: 'chat', component: ChatComponent },
+  { path: 'interviews', component: InterviewCalendarComponent},
   // Add other routes as needed
   { path: '', redirectTo: '/login', pathMatch: 'full' }, // Redirect empty path to /login
 ];

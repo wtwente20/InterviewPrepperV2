@@ -384,3 +384,30 @@
 {"level":"info","message":"Received Token Header:","service":"user-service"}
 {"level":"info","message":"Extracted Token:","service":"user-service"}
 {"email":"admiin@example.com","exp":1698801433,"iat":1698797833,"level":"info","message":"Decoded User:","role":"admin","service":"user-service","userId":3,"username":"admin"}
+{"level":"info","message":"Server is running on port 5000","service":"user-service"}
+{"level":"info","message":"Connection has been established successfully.","service":"user-service"}
+{"level":"info","message":"Database connected!","service":"user-service"}
+{"level":"info","message":"Received Token Header:","service":"user-service"}
+{"level":"info","message":"Extracted Token:","service":"user-service"}
+{"email":"harrypotter@harrypotter.com","exp":1699409609,"iat":1699406009,"level":"info","message":"Decoded User:","role":"user","service":"user-service","userId":8,"username":"harrypotter"}
+{"level":"info","message":"Received Token Header:","service":"user-service"}
+{"level":"info","message":"Extracted Token:","service":"user-service"}
+{"email":"harrypotter@harrypotter.com","exp":1699409609,"iat":1699406009,"level":"info","message":"Decoded User:","role":"user","service":"user-service","userId":8,"username":"harrypotter"}
+{"level":"info","message":"Received Token Header:","service":"user-service"}
+{"level":"info","message":"Extracted Token:","service":"user-service"}
+{"email":"harrypotter@harrypotter.com","exp":1699409609,"iat":1699406009,"level":"info","message":"Decoded User:","role":"user","service":"user-service","userId":8,"username":"harrypotter"}
+{"level":"info","message":"Received Token Header:","service":"user-service"}
+{"level":"info","message":"Extracted Token:","service":"user-service"}
+{"email":"harrypotter@harrypotter.com","exp":1699409609,"iat":1699406009,"level":"info","message":"Decoded User:","role":"user","service":"user-service","userId":8,"username":"harrypotter"}
+{"level":"info","message":"Received Token Header:","service":"user-service"}
+{"level":"info","message":"Extracted Token:","service":"user-service"}
+{"email":"harrypotter@harrypotter.com","exp":1699409609,"iat":1699406009,"level":"info","message":"Decoded User:","role":"user","service":"user-service","userId":8,"username":"harrypotter"}
+{"level":"info","message":"Received Token Header:","service":"user-service"}
+{"level":"info","message":"Extracted Token:","service":"user-service"}
+{"email":"harrypotter@harrypotter.com","exp":1699409609,"iat":1699406009,"level":"info","message":"Decoded User:","role":"user","service":"user-service","userId":8,"username":"harrypotter"}
+{"level":"info","message":"Received Token Header:","service":"user-service"}
+{"level":"info","message":"Extracted Token:","service":"user-service"}
+{"email":"harrypotter@harrypotter.com","exp":1699409609,"iat":1699406009,"level":"info","message":"Decoded User:","role":"user","service":"user-service","userId":8,"username":"harrypotter"}
+{"level":"info","message":"Received Token Header:","service":"user-service"}
+{"level":"info","message":"Extracted Token:","service":"user-service"}
+{"email":"harrypotter@harrypotter.com","exp":1699409609,"iat":1699406009,"level":"info","message":"Decoded User:","role":"user","service":"user-service","userId":8,"username":"harrypotter"}

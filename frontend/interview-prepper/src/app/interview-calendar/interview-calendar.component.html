@@ -1,0 +1,31 @@
+<div class="cal-container">
+  <button (click)="showCreateInterviewSidebar = true">Add Interview</button>
+
+  <mwl-calendar-month-view
+    [viewDate]="viewDate"
+    [events]="events"
+    (eventClicked)="openEditSidebar($event)"
+    [eventTitleTemplate]="customEventTitleTemplate"
+  >
+  </mwl-calendar-month-view>
+
+  <ng-template #customEventTitleTemplate let-event="event">
+    <div class="custom-event">
+      <div class="custom-event-title">{{ event.title }}</div>
+      <div class="custom-event-time">{{ event.start | date : "h:mm a" }}</div>
+    </div>
+  </ng-template>
+
+  <!-- Sidebar for creating interviews -->
+  <div class="sidebar-container" [class.active]="showCreateInterviewSidebar">
+    <app-create-interview (closeSidebar)="closeCreateInterviewSidebar()"></app-create-interview>
+  </div>
+
+  <!-- Sidebar for editing interviews -->
+  <div class="sidebar-container" [class.active]="showEditInterviewSidebar">
+    <app-edit-interview
+      [interview]="selectedEvent"
+      (close)="closeEditInterviewSidebar()"
+    ></app-edit-interview>
+  </div>
+</div>

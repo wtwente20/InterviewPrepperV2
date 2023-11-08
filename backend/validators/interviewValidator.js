@@ -31,9 +31,10 @@ const updateInterviewValidation = (data) => {
     position_name: Joi.string().min(1),
     user_id: Joi.number().integer().greater(0)   // optional since it might be taken from authenticated user
   })
-  .min(1);  // at least one field should be provided for update
+  .min(1)
+  .options({ allowUnknown: true });
 
-  return schema.validate(data);
+  return schema.validate(data, { allowUnknown: true });
 };
 
 module.exports = {

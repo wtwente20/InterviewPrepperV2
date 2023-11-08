@@ -14,18 +14,23 @@ import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { ChatComponent } from './chat/chat.component';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
+import { ConversationListComponent } from './conversation-list/conversation-list.component';
 import { CreateQuestionComponent } from './create-question/create-question.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { EditQuestionComponent } from './edit-question/edit-question.component';
 import { TokenInterceptor } from './interceptors/token.interceptor';
+import { InterviewCalendarComponent } from './interview-calendar/interview-calendar.component';
+import { MessageListComponent } from './message-list/message-list.component';
 import { QuestionsComponent } from './questions/questions.component';
 import { RegisterComponent } from './register/register.component';
-import { EditQuestionComponent } from './edit-question/edit-question.component';
-import { ChatComponent } from './chat/chat.component';
-import { ConversationListComponent } from './conversation-list/conversation-list.component';
-import { MessageListComponent } from './message-list/message-list.component';
+import { CreateInterviewComponent } from './create-interview/create-interview.component';
+import { EditInterviewComponent } from './edit-interview/edit-interview.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +46,10 @@ import { MessageListComponent } from './message-list/message-list.component';
     EditQuestionComponent,
     ChatComponent,
     ConversationListComponent,
-    MessageListComponent
+    MessageListComponent,
+    InterviewCalendarComponent,
+    CreateInterviewComponent,
+    EditInterviewComponent
   ],
   imports: [
     BrowserModule,
@@ -56,6 +64,10 @@ import { MessageListComponent } from './message-list/message-list.component';
     MatButtonModule,
     MatToolbarModule,
     BrowserAnimationsModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    })
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },

@@ -34,7 +34,7 @@ const Interview = sequelize.define('Interviews', {
   }
 }, {
     tableName: 'interviews',
-    timestamps: false
+    timestamps: true
 });
 
 module.exports = Interview;

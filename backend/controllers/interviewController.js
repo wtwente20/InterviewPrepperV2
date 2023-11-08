@@ -79,11 +79,18 @@ const getInterwiewById = async (req, res) => {
 //update interview
 const updateInterview = async (req, res) => {
   try {
+
+    //log the request body
+    logger.info("Updating interview with body: ", req.body);
+
     //update validator
     const { error } = updateInterviewValidation(req.body);
     if (error) {
+      logger.error("Validation error: ", error.details[0].message);
       return res.status(400).json({ message: error.details[0].message });
     }
+
+  
 
     // await update
     const interview = await Interview.findOne({ where: { id: req.params.id, user_id: req.user.id } });

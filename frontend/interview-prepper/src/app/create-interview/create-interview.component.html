@@ -1,0 +1,28 @@
+<div class="sidebar-header">
+  <h5 class="sidebar-title">Create Interview</h5>
+  <button type="button" class="close" aria-label="Close" (click)="cancelCreate()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="sidebar-body">
+  <form [formGroup]="interviewForm" (ngSubmit)="createInterview()">
+    <div class="form-group">
+      <label for="interview_date">Interview Date:</label>
+      <input formControlName="interview_date" type="date" class="form-control" id="interview_date">
+    </div>
+    <div class="form-group">
+      <label for="interview_time">Interview Time:</label>
+      <input formControlName="interview_time" type="time" class="form-control" id="interview_time">
+    </div>
+    <div class="form-group">
+      <label for="position_name">Position Name:</label>
+      <input formControlName="position_name" type="text" class="form-control" id="position_name">
+    </div>
+    <div class="form-group">
+      <label for="company_name">Company Name:</label>
+      <input formControlName="company_name" type="text" class="form-control" id="company_name">
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="!interviewForm.valid">Create</button>
+    <button type="button" class="btn btn-secondary" (click)="cancelCreate()">Cancel</button>
+  </form>
+</div>
