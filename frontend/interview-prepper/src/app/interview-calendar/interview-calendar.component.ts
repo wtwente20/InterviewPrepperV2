@@ -28,18 +28,18 @@ export class InterviewCalendarComponent implements OnInit {
       next: (interviews: Interview[]) => {
         this.events = interviews.map((interview: Interview) => {
           const interviewDateTime = new Date(interview.interview_date + 'T' + interview.interview_time);
-          const formattedTime = interviewDateTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
-          //remove leading zero from hours if it exists
-          const timeParts = formattedTime.split(':');
-          const hours = timeParts[0].replace(/^0/, '');
+          //calculate the end time as five minutes after the start time
+          const endDateTime = new Date(interviewDateTime);
+          endDateTime.setMinutes(endDateTime.getMinutes() + 5);
 
-          //recreate the formatted time with modified hours
-          const modifiedFormattedTime = `${hours}:${timeParts[1]}`;
+          //format the start and end times
+          const formattedStartTime = interviewDateTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
           return {
             start: interviewDateTime,
-            title: `${interview.position_name} at ${interview.company_name}, ${modifiedFormattedTime}`,
+            end: endDateTime,
+            title: `${interview.position_name} at ${interview.company_name}, ${formattedStartTime}`,
             allDay: false,
             meta: {
               interviewId: interview.id,
