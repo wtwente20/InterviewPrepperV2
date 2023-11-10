@@ -8,6 +8,8 @@ const Friend = require("./friend");
 const Question = require("./question");
 const Answer = require("./answer");
 const Message = require("./message");
+const Interview = require("./interview");
+const Performance = require("./performance");
 
 // User <--> Conversation (Many-to-Many)
 Conversation.belongsToMany(User, {
@@ -104,4 +106,20 @@ Conversation.belongsTo(User, {
   as: "creator",
   onDelete: "CASCADE",
 });
+
+// User --> Interview (One-to-Many)
+User.hasMany(Interview, {
+  foreignKey: "user_id",
+  as: "interviews",
+  onDelete: "CASCADE",
+});
+Interview.belongsTo(User, { foreignKey: "user_id", as: "user" });
+
+// Interview --> Performance (One-to-One)
+Interview.hasOne(Performance, {
+  foreignKey: "interview_id",
+  as: "performance",
+  onDelete: "SET NULL",
+});
+Performance.belongsTo(Interview, { foreignKey: "interview_id", as: "interview" });
 

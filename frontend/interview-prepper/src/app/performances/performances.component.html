@@ -1,0 +1,38 @@
+<div class="container">
+  <!-- Section for pending performance reviews -->
+  <div class="pending-reviews">
+    <h2>Performance Reviews Ready to be Completed</h2>
+    <p *ngIf="pendingReviews.length === 0">No pending reviews.</p>
+    <ul *ngIf="pendingReviews.length > 0">
+      <li *ngFor="let interview of pendingReviews">
+        <div>
+          <h3>{{ interview.position_name }} at {{ interview.company_name }}</h3>
+          <p>Date: {{ interview.interview_date | date:'mediumDate' }}</p>
+          <!-- Add a button to navigate to the performance review form -->
+          <button (click)="startReview(interview)">Start Review</button>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Section for completed performance reviews -->
+  <div class="completed-reviews">
+    <h2>Previous Performance Reviews</h2>
+    <p *ngIf="completedReviews.length === 0">No completed reviews.</p>
+    <ul *ngIf="completedReviews.length > 0">
+      <li *ngFor="let performance of completedReviews">
+        <div>
+          <h3>Review for Interview ID: {{ performance.interview_id }}</h3>
+          <p>Confidence Rating: {{ performance.confidence_rating }}/5</p>
+          <p>Technical Rating: {{ performance.technical_rating }}/5</p>
+          <p>Behavioral Rating: {{ performance.behavioral_rating }}/5</p>
+          <p>Overall Feeling: {{ performance.overall_feeling }}/5</p>
+          <p>Summary: {{ performance.summary }}</p>
+          <!-- Add buttons to edit or delete a review -->
+          <button (click)="editReview(performance)">Edit</button>
+          <button (click)="deleteReview(performance)">Delete</button>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

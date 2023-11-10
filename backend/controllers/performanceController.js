@@ -1,3 +1,4 @@
+const Interview = require('../models/interview');
 const Performance = require('../models/performance');
 const { performanceIdValidation, createPerformanceValidation, updatePerformanceValidation } = require('../validators/performanceValidator');
 
@@ -19,10 +20,19 @@ const createPerformance = async (req, res) => {
 //get all performances
 const getPerformances = async (req, res) => {
   try {
-    const performances = await Performance.findAll();
+    const userId = req.user.id;
+    const performances = await Performance.findAll({
+      include: [{
+        model: Interview,
+        as: 'interview',
+        where: { user_id: userId },
+        required: true
+      }]
+    });
     return res.json(performances);
   } catch (error) {
-    return res.status(500).json({ message: error.message });
+    console.error(error);
+    res.status(500).json({ message: 'An error occurred while fetching performances.' });
   }
 };
 
@@ -39,6 +49,22 @@ const getPerformance = async (req, res) => {
     if (!performance) {
       return res.status(404).json({ message: 'Performance not found' });
     }
+    return res.json(performance);
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
+
+// Get performance by interview_id
+const getPerformanceByInterviewId = async (req, res) => {
+  try {
+    const { interview_id } = req.params;
+    const performance = await Performance.findOne({ where: { interview_id } });
+
+    if (!performance) {
+      return res.status(404).json({ message: 'Performance not found for the given interview' });
+    }
+
     return res.json(performance);
   } catch (error) {
     return res.status(500).json({ message: error.message });
@@ -90,6 +116,7 @@ module.exports = {
   createPerformance,
   getPerformances,
   getPerformance,
+  getPerformanceByInterviewId,
   updatePerformance,
   deletePerformance
 };

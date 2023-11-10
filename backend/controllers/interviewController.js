@@ -5,6 +5,8 @@ const {
   interviewIdValidation,
   updateInterviewValidation,
 } = require("../validators/interviewValidator");
+const { Op } = require("sequelize");
+const Performance = require("../models/performance");
 
 //create interview
 const createInterview = async (req, res) => {
@@ -50,6 +52,30 @@ const getInterviewsByUserId = async (req, res) => {
   } catch (error) {
     logger.error("Error getting interviews in controller: ", error);
     res.status(400).json({ message: error.message });
+  }
+};
+
+const getInterviewsWithoutPerformance = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const interviews = await Interview.findAll({
+      where: {
+        user_id: userId,
+        interview_date: { [Op.lt]: new Date() }
+      },
+      include: [{
+        model: Performance,
+        as: 'performance',
+        required: false
+      }]
+    });
+
+    const pendingInterviews = interviews.filter(interview => !interview.Performance);
+
+    return res.json(pendingInterviews);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'An error occurred while fetching interviews without performance.' });
   }
 };
 
@@ -127,6 +153,7 @@ const deleteInterview = async (req, res) => {
 module.exports = {
   createInterview,
   getInterviewsByUserId,
+  getInterviewsWithoutPerformance,
   getInterwiewById,
   updateInterview,
   deleteInterview
