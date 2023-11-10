@@ -28,18 +28,23 @@ export class InterviewCalendarComponent implements OnInit {
       next: (interviews: Interview[]) => {
         this.events = interviews.map((interview: Interview) => {
           const interviewDateTime = new Date(interview.interview_date + 'T' + interview.interview_time);
-
+  
           //calculate the end time as five minutes after the start time
           const endDateTime = new Date(interviewDateTime);
           endDateTime.setMinutes(endDateTime.getMinutes() + 5);
-
-          //format the start and end times
+  
+          //format the start time
           const formattedStartTime = interviewDateTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-
+  
+          //remove leading zero from hours if it exists
+          const timeParts = formattedStartTime.split(':');
+          const hours = timeParts[0].replace(/^0/, '');
+          const modifiedFormattedTime = `${hours}:${timeParts[1]}`;
+  
           return {
             start: interviewDateTime,
             end: endDateTime,
-            title: `${interview.position_name} at ${interview.company_name}, ${formattedStartTime}`,
+            title: `${interview.position_name} at ${interview.company_name}, ${modifiedFormattedTime}`,
             allDay: false,
             meta: {
               interviewId: interview.id,
@@ -53,6 +58,7 @@ export class InterviewCalendarComponent implements OnInit {
       }
     });
   }
+  
 
   openEditSidebar(eventData: { event: CalendarEvent }): void {
     this.selectedEvent = eventData.event.meta.interview;
