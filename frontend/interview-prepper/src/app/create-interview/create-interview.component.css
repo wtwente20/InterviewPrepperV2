@@ -16,6 +16,10 @@
 }
 
 /* Button Styles */
+button {
+  margin: 10px;
+}
+
 .btn-secondary, .btn-primary {
   color: #fff;
   border: none;

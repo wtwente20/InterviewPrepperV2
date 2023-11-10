@@ -29,7 +29,6 @@ export class InterviewService {
   }
 
   updateInterview(id: number, interviewData: any): Observable<any> {
-    console.log('Sending update with data: ', interviewData);
     return this.http.put(`${this.apiUrl}/${id}`, interviewData, { headers: this.getHeaders() });
   }
 

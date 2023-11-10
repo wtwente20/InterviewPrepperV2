@@ -18,14 +18,21 @@
 
   <!-- Sidebar for creating interviews -->
   <div class="sidebar-container" [class.active]="showCreateInterviewSidebar">
-    <app-create-interview (closeSidebar)="closeCreateInterviewSidebar()"></app-create-interview>
+    <app-create-interview
+      (closeSidebar)="closeCreateInterviewSidebar()"
+      (refreshCalendarRequest)="refreshCalendar()"
+    ></app-create-interview>
   </div>
 
   <!-- Sidebar for editing interviews -->
   <div class="sidebar-container" [class.active]="showEditInterviewSidebar">
     <app-edit-interview
+      *ngIf="selectedEvent"
+      [interviewId]="selectedEvent.id"
       [interview]="selectedEvent"
-      (close)="closeEditInterviewSidebar()"
+      (closeSidebar)="closeEditInterviewSidebar()"
+      (deleteInterviewRequest)="deleteInterview($event)"
+      (refreshCalendarRequest)="refreshCalendar()"
     ></app-edit-interview>
   </div>
 </div>

@@ -1,5 +1,5 @@
 export interface Interview {
-  id?: number;
+  id: number;
   interview_date: string;
   interview_time: string;
   position_name: string;

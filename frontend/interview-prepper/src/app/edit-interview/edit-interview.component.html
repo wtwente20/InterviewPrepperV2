@@ -5,14 +5,7 @@
   </button>
 </div>
 <div class="sidebar-body">
-  <div *ngIf="!isEditable && interview">
-    <p><strong>Interview Date:</strong> {{ interview.interview_date | date: 'longDate' }}</p>
-    <p><strong>Interview Time:</strong> {{ interview.interview_time }}</p>
-    <p><strong>Position Name:</strong> {{ interview.position_name }}</p>
-    <p><strong>Company Name:</strong> {{ interview.company_name }}</p>
-    <button type="button" class="btn btn-secondary" (click)="toggleEdit()">Update</button>
-  </div>
-  <form *ngIf="isEditable" [formGroup]="interviewForm" (ngSubmit)="updateInterview()">
+  <form [formGroup]="interviewForm" (ngSubmit)="updateInterview()">
     <div class="form-group">
       <label for="interview_date">Interview Date:</label>
       <input formControlName="interview_date" type="date" class="form-control" id="interview_date">
@@ -29,7 +22,9 @@
       <label for="company_name">Company Name:</label>
       <input formControlName="company_name" type="text" class="form-control" id="company_name">
     </div>
-    <button type="submit" class="btn btn-primary" [disabled]="!interviewForm.valid">Save</button>
-    <button type="button" class="close" aria-label="Close" (click)="cancelEdit()">Cancel</button>
+    <button type="submit" class="btn btn-primary" [disabled]="!interviewForm.valid">Save Changes</button>
+    <button type="button" class="btn btn-secondary" (click)="cancelEdit()">Cancel</button>
+    <br>
+    <button type="button" class="btn btn-danger" (click)="deleteInterview()">Delete Interview</button>
   </form>
 </div>

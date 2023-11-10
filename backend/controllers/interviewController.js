@@ -84,11 +84,11 @@ const updateInterview = async (req, res) => {
     logger.info("Updating interview with body: ", req.body);
 
     //update validator
-    const { error } = updateInterviewValidation(req.body);
-    if (error) {
-      logger.error("Validation error: ", error.details[0].message);
-      return res.status(400).json({ message: error.details[0].message });
-    }
+    // const { error } = updateInterviewValidation(req.body);
+    // if (error) {
+    //   logger.error("Validation error: ", error.details[0].message);
+    //   return res.status(400).json({ message: error.details[0].message });
+    // }
 
   
 

@@ -9,7 +9,8 @@ import { InterviewService } from '../services/interview.service';
   styleUrls: ['./create-interview.component.css']
 })
 export class CreateInterviewComponent {
-  @Output() closeSidebar = new EventEmitter<void>(); // Emit to close the sidebar
+  @Output() closeSidebar = new EventEmitter<void>();
+  @Output() refreshCalendarRequest = new EventEmitter<void>();
   interviewForm: FormGroup = this.fb.group({
     interview_date: ['', Validators.required],
     interview_time: ['', Validators.required],
@@ -27,7 +28,8 @@ export class CreateInterviewComponent {
       const interviewData: Interview = this.interviewForm.value;
       this.interviewService.createInterview(interviewData).subscribe({
         next: (interview) => {
-          this.closeSidebar.emit(); // Close the sidebar upon successful creation
+          this.closeSidebar.emit();
+          this.refreshCalendarRequest.emit();
         },
         error: (error) => console.error('Error creating interview', error)
       });

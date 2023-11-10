@@ -1,74 +1,93 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Interview } from '../models/interview.model';
 import { InterviewService } from '../services/interview.service';
-
 @Component({
   selector: 'app-edit-interview',
   templateUrl: './edit-interview.component.html',
   styleUrls: ['./edit-interview.component.css']
 })
-export class EditInterviewComponent implements OnChanges {
-  private _interview: Interview | null = null;
-  isEditable: boolean = false;
-  @Output() close = new EventEmitter<void>();
-
-  @Input() set interview(value: Interview | null) {
-    this._interview = value;
-    if (value) {
-      this.patchFormValue();
-    }
-  }
-
-  get interview(): Interview | null {
-    return this._interview;
-  }
-
-  interviewForm: FormGroup = this.fb.group({
-    interview_date: ['', Validators.required],
-    interview_time: ['', Validators.required],
-    position_name: ['', Validators.required],
-    company_name: ['', Validators.required]
-  });
+export class EditInterviewComponent implements OnInit {
+  @Input() interviewId!: number;
+  @Output() closeSidebar = new EventEmitter<void>();
+  @Output() refreshCalendarRequest = new EventEmitter<void>();
+  interviewForm: FormGroup;
+  @Input() interview!: Interview | null;
 
   constructor(
     private fb: FormBuilder,
     private interviewService: InterviewService
-  ) { }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['interview'] && changes['interview'].currentValue) {
-      this._interview = changes['interview'].currentValue;
-      this.patchFormValue();
-    }
+  ) {
+    this.interviewForm = this.fb.group({
+      interview_date: ['', Validators.required],
+      interview_time: ['', Validators.required],
+      position_name: ['', Validators.required],
+      company_name: ['', Validators.required],
+    });
   }
 
-  private patchFormValue(): void {
-    if (this._interview) {
-      this.interviewForm.patchValue(this._interview);
-    }
+  ngOnInit(): void {
+    // Load interview details when component initializes
+    this.loadInterviewDetails();
   }
 
-  toggleEdit(): void {
-    this.isEditable = !this.isEditable;
+  loadInterviewDetails(): void {
+    this.interviewService.getInterviewById(this.interviewId).subscribe({
+      next: (interview: Interview) => {
+        this.interview = interview;
+        this.populateFormWithInterviewData();
+      },
+      error: (error) => {
+        console.error('Error loading interview details', error);
+      }
+    });
+  }
+
+  populateFormWithInterviewData(): void {
+    if (this.interview) {
+      this.interviewForm.patchValue({
+        interview_date: this.interview.interview_date,
+        interview_time: this.interview.interview_time,
+        position_name: this.interview.position_name,
+        company_name: this.interview.company_name,
+      });
+    }
   }
 
   updateInterview(): void {
-    if (this.interviewForm.valid && this.interview && this.interview.id !== undefined) {
-      const updatedInterview: Interview = {
-        ...this.interview,
-        ...this.interviewForm.value
-      };
-      this.interviewService.updateInterview(this.interview.id, updatedInterview).subscribe({
-        next: () => this.close.emit(), // Change to emit close event
-        error: (error) => console.error('Error updating interview', error)
+    if (this.interviewForm.valid && this.interview) {
+      const updatedInterviewData: Interview = this.interviewForm.value;
+      this.interviewService.updateInterview(this.interviewId, updatedInterviewData).subscribe({
+        next: (updatedInterview: Interview) => {
+          this.closeSidebar.emit();
+          this.refreshCalendarRequest.emit(); // Refresh the calendar after updating an interview
+        },
+        error: (error) => {
+          console.error('Error updating interview', error);
+        }
       });
-    } else {
-      console.error('Form is invalid or interview data is null');
+    }
+  }
+
+  deleteInterview(): void {
+    if (this.interview && this.interview.id) {
+      if (confirm('Are you sure you want to delete this interview?')) {
+        this.interviewService.deleteInterview(this.interview.id).subscribe({
+          next: () => {
+            // Handle successful deletion, e.g., show a success message
+            this.closeSidebar.emit();
+            this.refreshCalendarRequest.emit();
+          },
+          error: (error) => {
+            console.error('Error during interview deletion', error);
+            // Handle errors, e.g., display an error message to the user
+          }
+        });
+      }
     }
   }
 
   cancelEdit(): void {
-    this.close.emit();
+    this.closeSidebar.emit();
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
 import { CalendarEvent } from 'angular-calendar';
 import { Interview } from '../models/interview.model';
 import { InterviewService } from '../services/interview.service';
@@ -15,6 +15,7 @@ export class InterviewCalendarComponent implements OnInit {
   showCreateInterviewSidebar: boolean = false;
   showEditInterviewSidebar: boolean = false;
   selectedEvent: Interview | null = null;
+  @Output() refreshCalendarEvent = new EventEmitter();
 
   constructor(private interviewService: InterviewService) { }
 
@@ -27,12 +28,22 @@ export class InterviewCalendarComponent implements OnInit {
       next: (interviews: Interview[]) => {
         this.events = interviews.map((interview: Interview) => {
           const interviewDateTime = new Date(interview.interview_date + 'T' + interview.interview_time);
+          const formattedTime = interviewDateTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+          //remove leading zero from hours if it exists
+          const timeParts = formattedTime.split(':');
+          const hours = timeParts[0].replace(/^0/, '');
+
+          //recreate the formatted time with modified hours
+          const modifiedFormattedTime = `${hours}:${timeParts[1]}`;
+
           return {
             start: interviewDateTime,
-            title: `${interview.position_name} at ${interview.company_name}`,
+            title: `${interview.position_name} at ${interview.company_name}, ${modifiedFormattedTime}`,
             allDay: false,
             meta: {
-              interviewId: interview.id
+              interviewId: interview.id,
+              interview: interview,
             }
           };
         });
@@ -48,13 +59,18 @@ export class InterviewCalendarComponent implements OnInit {
     this.showEditInterviewSidebar = true;
   }
 
-  deleteInterview(eventId: number): void {
+  deleteInterview(event: any): void {
+    const eventId = event as number;
     if (confirm('Are you sure you want to delete this interview?')) {
       this.interviewService.deleteInterview(eventId).subscribe({
         next: () => this.loadInterviews(),
         error: (error) => console.error('Error during interview deletion', error)
       });
     }
+  }
+
+  refreshCalendar(): void {
+    this.loadInterviews();
   }
 
   closeCreateInterviewSidebar(): void {
