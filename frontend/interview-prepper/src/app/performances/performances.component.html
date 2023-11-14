@@ -7,9 +7,92 @@
       <li *ngFor="let interview of pendingReviews">
         <div>
           <h3>{{ interview.position_name }} at {{ interview.company_name }}</h3>
-          <p>Date: {{ interview.interview_date | date:'mediumDate' }}</p>
+          <p>Date: {{ interview.interview_date | date : "mediumDate" }}</p>
           <!-- Add a button to navigate to the performance review form -->
           <button (click)="startReview(interview)">Start Review</button>
+          <div *ngIf="activeInterviewId === interview.id">
+            <form [formGroup]="performanceForm">
+              <p>Fields marked with an asterisk (*) are required.</p>
+              <div class="form-group">
+                <label for="confidence_rating">Confidence Rating (1-5)*</label>
+                <input
+                  formControlName="confidence_rating"
+                  type="number"
+                  id="confidence_rating"
+                  placeholder="Confidence Rating"
+                  min="1"
+                  max="5"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="technical_rating">Technical Rating (1-5)*</label>
+                <input
+                  formControlName="technical_rating"
+                  type="number"
+                  id="technical_rating"
+                  placeholder="Technical Rating"
+                  min="1"
+                  max="5"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="behavioral_rating">Behavioral Rating (1-5)*</label>
+                <input
+                  formControlName="behavioral_rating"
+                  type="number"
+                  id="behavioral_rating"
+                  placeholder="Behavioral Rating"
+                  min="1"
+                  max="5"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="overall_feeling">Overall Feeling (1-5)</label>
+                <input
+                  formControlName="overall_feeling"
+                  type="number"
+                  id="overall_feeling"
+                  placeholder="Overall Feeling"
+                  min="1"
+                  max="5"
+                />
+              </div>
+              <div class="form-group">
+                <label for="summary">Summary</label>
+                <textarea
+                  formControlName="summary"
+                  id="summary"
+                  placeholder="Summary"
+                ></textarea>
+              </div>
+              <div class="form-group">
+                <label for="struggled_question_id">Struggled Question ID</label>
+                <input
+                  formControlName="struggled_question_id"
+                  type="number"
+                  id="struggled_question_id"
+                  placeholder="Struggled Question ID"
+                />
+              </div>
+              <div class="form-group">
+                <label for="well_answered_question_id"
+                  >Well Answered Question ID</label
+                >
+                <input
+                  formControlName="well_answered_question_id"
+                  type="number"
+                  id="well_answered_question_id"
+                  placeholder="Well Answered Question ID"
+                />
+              </div>
+              <!-- Submit and Cancel buttons -->
+              <button (click)="submitReview()">Submit Review</button>
+              <button (click)="cancelReview()">Cancel</button>
+            </form>
+          </div>
         </div>
       </li>
     </ul>
@@ -22,15 +105,114 @@
     <ul *ngIf="completedReviews.length > 0">
       <li *ngFor="let performance of completedReviews">
         <div>
-          <h3>Review for Interview ID: {{ performance.interview_id }}</h3>
+          <h3>
+            Review for {{ performance.interview?.position_name }} at
+            {{ performance.interview?.company_name }},
+            {{ performance.interview?.interview_date | date : "mediumDate" }}
+          </h3>
+
           <p>Confidence Rating: {{ performance.confidence_rating }}/5</p>
           <p>Technical Rating: {{ performance.technical_rating }}/5</p>
           <p>Behavioral Rating: {{ performance.behavioral_rating }}/5</p>
-          <p>Overall Feeling: {{ performance.overall_feeling }}/5</p>
-          <p>Summary: {{ performance.summary }}</p>
-          <!-- Add buttons to edit or delete a review -->
+          <p *ngIf="performance.overall_feeling != null">
+            Overall Feeling: {{ performance.overall_feeling }}/5
+          </p>
+          <p *ngIf="performance.summary != null">
+            Summary: {{ performance.summary }}
+          </p>
+          <p *ngIf="performance.struggledQuestion">
+            Struggled with: {{ performance.struggledQuestion.question_text }}
+          </p>
+          <p *ngIf="performance.wellAnsweredQuestion">
+            Answered well: {{ performance.wellAnsweredQuestion.question_text }}
+          </p>
+
           <button (click)="editReview(performance)">Edit</button>
           <button (click)="deleteReview(performance)">Delete</button>
+
+          <div *ngIf="activePerformanceId === performance.id">
+            <form [formGroup]="performanceForm">
+              <p>Fields marked with an asterisk (*) are required.</p>
+              <div class="form-group">
+                <label for="confidence_rating">Confidence Rating (1-5)*</label>
+                <input
+                  formControlName="confidence_rating"
+                  type="number"
+                  id="confidence_rating"
+                  placeholder="Confidence Rating"
+                  min="1"
+                  max="5"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="technical_rating">Technical Rating (1-5)*</label>
+                <input
+                  formControlName="technical_rating"
+                  type="number"
+                  id="technical_rating"
+                  placeholder="Technical Rating"
+                  min="1"
+                  max="5"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="behavioral_rating">Behavioral Rating (1-5)*</label>
+                <input
+                  formControlName="behavioral_rating"
+                  type="number"
+                  id="behavioral_rating"
+                  placeholder="Behavioral Rating"
+                  min="1"
+                  max="5"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="overall_feeling">Overall Feeling (1-5)</label>
+                <input
+                  formControlName="overall_feeling"
+                  type="number"
+                  id="overall_feeling"
+                  placeholder="Overall Feeling"
+                  min="1"
+                  max="5"
+                />
+              </div>
+              <div class="form-group">
+                <label for="summary">Summary</label>
+                <textarea
+                  formControlName="summary"
+                  id="summary"
+                  placeholder="Summary"
+                ></textarea>
+              </div>
+              <div class="form-group">
+                <label for="struggled_question_id">Struggled Question ID</label>
+                <input
+                  formControlName="struggled_question_id"
+                  type="number"
+                  id="struggled_question_id"
+                  placeholder="Struggled Question ID"
+                />
+              </div>
+              <div class="form-group">
+                <label for="well_answered_question_id"
+                  >Well Answered Question ID</label
+                >
+                <input
+                  formControlName="well_answered_question_id"
+                  type="number"
+                  id="well_answered_question_id"
+                  placeholder="Well Answered Question ID"
+                />
+              </div>
+              <!-- Submit and Cancel buttons -->
+              <button (click)="updateReview()">Update Review</button>
+              <button (click)="cancelReview()">Cancel</button>
+            </form>
+          </div>
         </div>
       </li>
     </ul>

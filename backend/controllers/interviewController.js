@@ -61,6 +61,7 @@ const getInterviewsWithoutPerformance = async (req, res) => {
     const interviews = await Interview.findAll({
       where: {
         user_id: userId,
+        '$performance.id$': null,
         interview_date: { [Op.lt]: new Date() }
       },
       include: [{

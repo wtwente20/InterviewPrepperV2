@@ -21,16 +21,17 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 import { ChatComponent } from './chat/chat.component';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 import { ConversationListComponent } from './conversation-list/conversation-list.component';
+import { CreateInterviewComponent } from './create-interview/create-interview.component';
 import { CreateQuestionComponent } from './create-question/create-question.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { EditInterviewComponent } from './edit-interview/edit-interview.component';
 import { EditQuestionComponent } from './edit-question/edit-question.component';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { InterviewCalendarComponent } from './interview-calendar/interview-calendar.component';
 import { MessageListComponent } from './message-list/message-list.component';
+import { PerformancesComponent } from './performances/performances.component';
 import { QuestionsComponent } from './questions/questions.component';
 import { RegisterComponent } from './register/register.component';
-import { CreateInterviewComponent } from './create-interview/create-interview.component';
-import { EditInterviewComponent } from './edit-interview/edit-interview.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { EditInterviewComponent } from './edit-interview/edit-interview.componen
     MessageListComponent,
     InterviewCalendarComponent,
     CreateInterviewComponent,
-    EditInterviewComponent
+    EditInterviewComponent,
+    PerformancesComponent,
   ],
   imports: [
     BrowserModule,

@@ -123,3 +123,5 @@ Interview.hasOne(Performance, {
 });
 Performance.belongsTo(Interview, { foreignKey: "interview_id", as: "interview" });
 
+Performance.belongsTo(Question, { foreignKey: 'struggled_question_id', as: 'struggledQuestion' });
+Performance.belongsTo(Question, { foreignKey: 'well_answered_question_id', as: 'wellAnsweredQuestion' });
