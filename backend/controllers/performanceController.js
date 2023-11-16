@@ -1,3 +1,4 @@
+const Answer = require("../models/answer");
 const Interview = require("../models/interview");
 const Performance = require("../models/performance");
 const Question = require("../models/question");
@@ -40,9 +41,19 @@ const getPerformances = async (req, res) => {
           attributes: ["question_text"],
         },
         {
+          model: Answer,
+          as: "struggledAnswer",
+          attributes: ["answer_text"],
+        },
+        {
           model: Question,
           as: "wellAnsweredQuestion",
           attributes: ["question_text"],
+        },
+        {
+          model: Answer,
+          as: "wellAnsweredAnswer",
+          attributes: ["answer_text"],
         },
       ],
     });
@@ -70,6 +81,8 @@ const getPerformance = async (req, res) => {
         {
           model: Interview,
           as: "interview",
+          where: { user_id: userId },
+          required: true,
         },
         {
           model: Question,
@@ -77,9 +90,19 @@ const getPerformance = async (req, res) => {
           attributes: ["question_text"],
         },
         {
+          model: Answer,
+          as: "struggledAnswer",
+          attributes: ["answer_text"],
+        },
+        {
           model: Question,
           as: "wellAnsweredQuestion",
           attributes: ["question_text"],
+        },
+        {
+          model: Answer,
+          as: "wellAnsweredAnswer",
+          attributes: ["answer_text"],
         },
       ],
     });

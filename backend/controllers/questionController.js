@@ -98,6 +98,17 @@ const getDefaultQuestionById = async (req, res) => {
   }
 };
 
+//fetch all questions, including defaults
+const getAllQuestionsIncludingDefaults = async (req, res) => {
+  try {
+    const questions = await Question.findAll();
+    res.status(200).json(questions);
+  } catch (error) {
+    logger.error("Error fetching all questions including defaults: ", error);
+    res.status(500).send({ message: "Server error fetching all questions including defaults." });
+  }
+};
+
 
 //Update a question by id
 const updateQuestion = async (req, res) => {
@@ -156,6 +167,7 @@ module.exports = {
   getQuestionById,
   getDefaultQuestionById,
   getAllDefaultQuestions,
+  getAllQuestionsIncludingDefaults,
   updateQuestion,
   deleteQuestion
 };

@@ -1,5 +1,5 @@
 import { Interview } from "./interview.model";
-import { Question } from "./question.model";
+import { Answer, Question } from "./question.model";
 
 export interface Performance {
   id: number;
@@ -13,5 +13,9 @@ export interface Performance {
   well_answered_question_id?: number;
   struggledQuestion?: Question;
   wellAnsweredQuestion?: Question;
+  struggled_answer_id?: number;
+  well_answered_answer_id?: number;
+  struggledAnswer?: Answer;
+  wellAnsweredAnswer?: Answer;
   interview?: Interview;
 }

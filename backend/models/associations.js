@@ -123,5 +123,14 @@ Interview.hasOne(Performance, {
 });
 Performance.belongsTo(Interview, { foreignKey: "interview_id", as: "interview" });
 
+// Performance <--> Answer (Many-to-One)
+Performance.belongsTo(Answer, { foreignKey: 'struggled_answer_id', as: 'struggledAnswer' });
+Performance.belongsTo(Answer, { foreignKey: 'well_answered_answer_id', as: 'wellAnsweredAnswer' });
+
+// Answer --> Performance (One-to-Many)
+Answer.hasMany(Performance, { foreignKey: 'struggled_answer_id', as: 'struggledPerformances' });
+Answer.hasMany(Performance, { foreignKey: 'well_answered_answer_id', as: 'wellAnsweredPerformances' });
+
+
 Performance.belongsTo(Question, { foreignKey: 'struggled_question_id', as: 'struggledQuestion' });
 Performance.belongsTo(Question, { foreignKey: 'well_answered_question_id', as: 'wellAnsweredQuestion' });

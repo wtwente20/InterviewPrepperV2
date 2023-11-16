@@ -68,26 +68,66 @@
                   placeholder="Summary"
                 ></textarea>
               </div>
-              <div class="form-group">
-                <label for="struggled_question_id">Struggled Question ID</label>
-                <input
-                  formControlName="struggled_question_id"
-                  type="number"
-                  id="struggled_question_id"
-                  placeholder="Struggled Question ID"
-                />
+              <div *ngIf="!loadingQuestions; else loading">
+                <div class="form-group">
+                  <label for="struggled_question">Struggled Question</label>
+                  <select
+                    formControlName="struggled_question"
+                    id="struggled_question"
+                  >
+                    <option value="">Select a question</option>
+                    <option
+                      *ngFor="let question of questions"
+                      [value]="question.id"
+                    >
+                      {{ question.question_text }}
+                    </option>
+                  </select>
+                </div>
               </div>
               <div class="form-group">
-                <label for="well_answered_question_id"
-                  >Well Answered Question ID</label
+                <label for="struggled_answer"
+                  >Answer for Struggled Question</label
                 >
-                <input
-                  formControlName="well_answered_question_id"
-                  type="number"
-                  id="well_answered_question_id"
-                  placeholder="Well Answered Question ID"
-                />
+                <textarea
+                  formControlName="struggled_answer"
+                  id="struggled_answer"
+                  placeholder="Enter your answer for the struggled question"
+                ></textarea>
               </div>
+              <div *ngIf="!loadingQuestions; else loading">
+                <div class="form-group">
+                  <label for="well_answered_question"
+                    >Well Answered Question</label
+                  >
+                  <select
+                    formControlName="well_answered_question"
+                    id="well_answered_question"
+                  >
+                    <option value="">Select a question</option>
+                    <option
+                      *ngFor="let question of questions"
+                      [value]="question.id"
+                    >
+                      {{ question.question_text }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="well_answered_answer"
+                  >Answer for Well Answered Question</label
+                >
+                <textarea
+                  formControlName="well_answered_answer"
+                  id="well_answered_answer"
+                  placeholder="Enter your answer for the well answered question"
+                ></textarea>
+              </div>
+
+              <ng-template #loading>
+                <p>Loading questions...</p>
+              </ng-template>
               <!-- Submit and Cancel buttons -->
               <button (click)="submitReview()">Submit Review</button>
               <button (click)="cancelReview()">Cancel</button>
@@ -123,8 +163,14 @@
           <p *ngIf="performance.struggledQuestion">
             Struggled with: {{ performance.struggledQuestion.question_text }}
           </p>
+          <p *ngIf="performance.struggledAnswer">
+            Answer: {{ performance.struggledAnswer.answer_text }}
+          </p>
           <p *ngIf="performance.wellAnsweredQuestion">
             Answered well: {{ performance.wellAnsweredQuestion.question_text }}
+          </p>
+          <p *ngIf="performance.wellAnsweredAnswer">
+            Answer: {{ performance.wellAnsweredAnswer.answer_text }}
           </p>
 
           <button (click)="editReview(performance)">Edit</button>
@@ -188,26 +234,66 @@
                   placeholder="Summary"
                 ></textarea>
               </div>
-              <div class="form-group">
-                <label for="struggled_question_id">Struggled Question ID</label>
-                <input
-                  formControlName="struggled_question_id"
-                  type="number"
-                  id="struggled_question_id"
-                  placeholder="Struggled Question ID"
-                />
-              </div>
-              <div class="form-group">
-                <label for="well_answered_question_id"
-                  >Well Answered Question ID</label
+              <div *ngIf="!loadingQuestions; else loading" class="form-group">
+                <label for="struggled_question">Struggled Question</label>
+                <select
+                  formControlName="struggled_question"
+                  id="struggled_question"
                 >
-                <input
-                  formControlName="well_answered_question_id"
-                  type="number"
-                  id="well_answered_question_id"
-                  placeholder="Well Answered Question ID"
-                />
+                  <option value="">Select a question</option>
+                  <option
+                    *ngFor="let question of questions"
+                    [ngValue]="question.id"
+                  >
+                    {{ question.question_text }}
+                  </option>
+                </select>
               </div>
+
+              <div class="form-group">
+                <label for="struggled_answer"
+                  >Answer for Struggled Question</label
+                >
+                <textarea
+                  formControlName="struggled_answer"
+                  id="struggled_answer"
+                  placeholder="Enter your answer for the struggled question"
+                ></textarea>
+              </div>
+
+              <div *ngIf="!loadingQuestions; else loading" class="form-group">
+                <label for="well_answered_question"
+                  >Well Answered Question</label
+                >
+                <select
+                  formControlName="well_answered_question"
+                  id="well_answered_question"
+                >
+                  <option value="">Select a question</option>
+                  <option
+                    *ngFor="let question of questions"
+                    [ngValue]="question.id"
+                  >
+                    {{ question.question_text }}
+                  </option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="well_answered_answer"
+                  >Answer for Well Answered Question</label
+                >
+                <textarea
+                  formControlName="well_answered_answer"
+                  id="well_answered_answer"
+                  placeholder="Enter your answer for the well answered question"
+                ></textarea>
+              </div>
+
+              <ng-template #loading>
+                <p>Loading questions...</p>
+              </ng-template>
+
               <!-- Submit and Cancel buttons -->
               <button (click)="updateReview()">Update Review</button>
               <button (click)="cancelReview()">Cancel</button>

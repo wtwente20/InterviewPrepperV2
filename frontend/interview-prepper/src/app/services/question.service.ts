@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { Question } from '../models/question.model';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,7 @@ export class QuestionService {
   // Methods to interact with questions
 
   getQuestions(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/`);
+    return this.http.get(`${this.apiUrl}/`, { headers: this.getHeaders() });
   }
 
   getQuestionById(id: number): Observable<any> {
@@ -33,6 +34,11 @@ export class QuestionService {
   getAllDefaultQuestions(): Observable<any> {
     return this.http.get(`${this.apiUrl}/default`);
   }
+
+  getAllQuestionsIncludingDefaults(): Observable<Question[]> {
+    return this.http.get<Question[]>(`${this.apiUrl}/all-including-defaults`, { headers: this.getHeaders() });
+  }
+  
 
   getDefaultQuestionById(id: number): Observable<any> {
     return this.http.get(`${this.apiUrl}/default/${id}`);

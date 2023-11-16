@@ -11,22 +11,26 @@ const {
   deleteQuestion,
   getAllDefaultQuestions,
   getDefaultQuestionById,
+  getAllQuestionsIncludingDefaults,
 } = require("../controllers/questionController");
 
 // Create a new question
 router.post("/create", authenticate, createQuestion);
 
-// Retrieve all questions
-router.get("/", getAllQuestions);
-
-// Retrieve question by user id
-router.get("/user/:userId", authenticate, getQuestionsByUserId);
+//Retrieve all questions for user, including defaults
+router.get("/all-including-defaults", authenticate, getAllQuestionsIncludingDefaults);
 
 // Retrieve all default questions
 router.get("/default", getAllDefaultQuestions);
 
 // Retrieve a specific default question by ID
 router.get("/default/:id", getDefaultQuestionById);
+
+// Retrieve all questions
+router.get("/", authenticate, getAllQuestions);
+
+// Retrieve question by user id
+router.get("/user/:userId", authenticate, getQuestionsByUserId);
 
 // Retrieve a specific question by ID
 router.get("/:id", getQuestionById);
