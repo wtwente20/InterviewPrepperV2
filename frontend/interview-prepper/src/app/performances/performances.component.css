@@ -1,39 +1,104 @@
-.performance-form .form-group {
-  display: flex;
-  flex-direction: column;
+.container {
+  margin: 0 auto;
+  background-color: #f7f7f7;
+  overflow-y: auto;
+}
+
+/* .pending-reviews,
+.completed-reviews {
+  margin-bottom: 30px;
+} */
+
+h2 {
+  color: #333;
   margin-bottom: 15px;
 }
 
-.performance-form .form-buttons {
-  display: flex;
-  justify-content: flex-start; /* not set in stone */
-  gap: 10px;
+ul {
+  list-style: none;
+  padding: 0;
 }
 
-label {
+/* li {
+  margin-bottom: 15px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+} */
+
+/* .performance-form .form-group {
+  margin-bottom: 15px;
+  padding-right: 15px;
+  max-height: calc(100vh - 64px); /* 80% of the viewport height */
+  /* overflow: hidden; /* Enable vertical scrolling if content overflows */
+/* }
+
+
+.performance-form .form-group label {
   font-weight: bold;
+  margin-bottom: 5px;
 }
 
-.performance-form label:after {
-  content: "*";
-  color: #ff0000;
-  margin-left: 3px;
+.performance-form input[type="number"],
+.performance-form textarea,
+.performance-form select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
-.performance-form label.required:after {
-  content: "*";
-  color: #ff0000;
-  margin-left: 3px;
+.performance-form textarea {
+  resize: vertical;
 }
 
-.performance-form .form-group {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 15px;
+/* General button styling */
+button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  color: white;
 }
 
+/* Primary button styling */
+button:not(.delete-button) {
+  background-color: #28a745;
+}
+
+button:not(.delete-button):hover {
+  background-color: #218838;
+}
+
+/* Delete button styling */
+button.delete-button {
+  background-color: #dc3545;
+}
+
+button.delete-button:hover {
+  background-color: #c82333;
+}
+
+button:disabled {
+  background-color: #6c757d;
+}
+
+/* Button layout inside forms */
 .performance-form .form-buttons {
   display: flex;
-  justify-content: flex-start;
   gap: 10px;
+  margin-top: 15px;
+}
+
+.performance-form .form-buttons button {
+  flex: 1;
+}
+
+
+
+.form-container {
+  max-height: calc(100vh - 64px);
+  overflow-y: auto;
 }

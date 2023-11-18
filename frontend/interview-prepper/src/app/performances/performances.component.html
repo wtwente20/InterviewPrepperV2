@@ -10,52 +10,52 @@
           <p>Date: {{ interview.interview_date | date : "mediumDate" }}</p>
           <!-- Add a button to navigate to the performance review form -->
           <button (click)="startReview(interview)">Start Review</button>
-          <div *ngIf="activeInterviewId === interview.id">
+          <div class="form-container" *ngIf="activeInterviewId === interview.id">
             <form [formGroup]="performanceForm">
               <p>Fields marked with an asterisk (*) are required.</p>
               <div class="form-group">
-                <label for="confidence_rating">Confidence Rating (1-5)*</label>
+                <label for="confidence_rating">Confidence Rating*</label>
                 <input
                   formControlName="confidence_rating"
                   type="number"
                   id="confidence_rating"
-                  placeholder="Confidence Rating"
+                  placeholder="1-5"
                   min="1"
                   max="5"
                   required
                 />
               </div>
               <div class="form-group">
-                <label for="technical_rating">Technical Rating (1-5)*</label>
+                <label for="technical_rating">Technical Rating*</label>
                 <input
                   formControlName="technical_rating"
                   type="number"
                   id="technical_rating"
-                  placeholder="Technical Rating"
+                  placeholder="1-5"
                   min="1"
                   max="5"
                   required
                 />
               </div>
               <div class="form-group">
-                <label for="behavioral_rating">Behavioral Rating (1-5)*</label>
+                <label for="behavioral_rating">Behavioral Rating*</label>
                 <input
                   formControlName="behavioral_rating"
                   type="number"
                   id="behavioral_rating"
-                  placeholder="Behavioral Rating"
+                  placeholder="1-5"
                   min="1"
                   max="5"
                   required
                 />
               </div>
               <div class="form-group">
-                <label for="overall_feeling">Overall Feeling (1-5)</label>
+                <label for="overall_feeling">Overall Feeling</label>
                 <input
                   formControlName="overall_feeling"
                   type="number"
                   id="overall_feeling"
-                  placeholder="Overall Feeling"
+                  placeholder="1-5"
                   min="1"
                   max="5"
                 />
@@ -68,23 +68,54 @@
                   placeholder="Summary"
                 ></textarea>
               </div>
-              <div *ngIf="!loadingQuestions; else loading">
-                <div class="form-group">
-                  <label for="struggled_question">Struggled Question</label>
-                  <select
-                    formControlName="struggled_question"
-                    id="struggled_question"
+              <div *ngIf="!loadingQuestions; else loading" class="form-group">
+                <label for="struggled_question">Struggled Question</label>
+                <select
+                  formControlName="struggled_question"
+                  id="struggled_question"
+                >
+                  <option value="">Select a question</option>
+                  <option
+                    *ngFor="let question of questions"
+                    [ngValue]="question.id"
                   >
-                    <option value="">Select a question</option>
+                    {{ question.question_text }}
+                  </option>
+                </select>
+                <button (click)="toggleAddQuestion()">Add New Question</button>
+              </div>
+
+              <!-- Add New Question Section -->
+              <div *ngIf="showAddQuestion" class="form-group">
+                <div class="form-group">
+                  <label for="newQuestionText">New Question:</label>
+                  <input
+                    type="text"
+                    id="newQuestionText"
+                    formControlName="newQuestionText"
+                    class="form-control"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="newQuestionCategory">Category:</label>
+                  <select
+                    id="newQuestionCategory"
+                    formControlName="newQuestionCategory"
+                    class="form-control"
+                  >
                     <option
-                      *ngFor="let question of questions"
-                      [value]="question.id"
+                      *ngFor="let category of categories"
+                      [value]="category.id"
                     >
-                      {{ question.question_text }}
+                      {{ category.name }}
                     </option>
                   </select>
                 </div>
+                <button class="btn btn-primary" (click)="addQuestion()">
+                  Add Question
+                </button>
               </div>
+
               <div class="form-group">
                 <label for="struggled_answer"
                   >Answer for Struggled Question</label
@@ -95,25 +126,26 @@
                   placeholder="Enter your answer for the struggled question"
                 ></textarea>
               </div>
-              <div *ngIf="!loadingQuestions; else loading">
-                <div class="form-group">
-                  <label for="well_answered_question"
-                    >Well Answered Question</label
+
+              <div *ngIf="!loadingQuestions; else loading" class="form-group">
+                <label for="well_answered_question"
+                  >Well Answered Question</label
+                >
+                <select
+                  formControlName="well_answered_question"
+                  id="well_answered_question"
+                >
+                  <option value="">Select a question</option>
+                  <option
+                    *ngFor="let question of questions"
+                    [ngValue]="question.id"
                   >
-                  <select
-                    formControlName="well_answered_question"
-                    id="well_answered_question"
-                  >
-                    <option value="">Select a question</option>
-                    <option
-                      *ngFor="let question of questions"
-                      [value]="question.id"
-                    >
-                      {{ question.question_text }}
-                    </option>
-                  </select>
-                </div>
+                    {{ question.question_text }}
+                  </option>
+                </select>
+                <button (click)="toggleAddQuestion()">Add New Question</button>
               </div>
+
               <div class="form-group">
                 <label for="well_answered_answer"
                   >Answer for Well Answered Question</label
@@ -129,8 +161,10 @@
                 <p>Loading questions...</p>
               </ng-template>
               <!-- Submit and Cancel buttons -->
-              <button (click)="submitReview()">Submit Review</button>
-              <button (click)="cancelReview()">Cancel</button>
+              <div class="form-buttons">
+                <button (click)="submitReview()">Submit Review</button>
+                <button (click)="cancelReview()">Cancel</button>
+              </div>
             </form>
           </div>
         </div>
@@ -173,55 +207,58 @@
             Answer: {{ performance.wellAnsweredAnswer.answer_text }}
           </p>
 
-          <button (click)="editReview(performance)">Edit</button>
-          <button (click)="deleteReview(performance)">Delete</button>
-
-          <div *ngIf="activePerformanceId === performance.id">
+          <div class="form-buttons">
+            <button (click)="editReview(performance)">Edit</button>
+            <button class="delete-button" (click)="deleteReview(performance)">
+              Delete
+            </button>
+          </div>
+          <div class="form-container" *ngIf="activePerformanceId === performance.id">
             <form [formGroup]="performanceForm">
               <p>Fields marked with an asterisk (*) are required.</p>
               <div class="form-group">
-                <label for="confidence_rating">Confidence Rating (1-5)*</label>
+                <label for="confidence_rating">Confidence Rating*</label>
                 <input
                   formControlName="confidence_rating"
                   type="number"
                   id="confidence_rating"
-                  placeholder="Confidence Rating"
+                  placeholder="1-5"
                   min="1"
                   max="5"
                   required
                 />
               </div>
               <div class="form-group">
-                <label for="technical_rating">Technical Rating (1-5)*</label>
+                <label for="technical_rating">Technical Rating*</label>
                 <input
                   formControlName="technical_rating"
                   type="number"
                   id="technical_rating"
-                  placeholder="Technical Rating"
+                  placeholder="1-5"
                   min="1"
                   max="5"
                   required
                 />
               </div>
               <div class="form-group">
-                <label for="behavioral_rating">Behavioral Rating (1-5)*</label>
+                <label for="behavioral_rating">Behavioral Rating*</label>
                 <input
                   formControlName="behavioral_rating"
                   type="number"
                   id="behavioral_rating"
-                  placeholder="Behavioral Rating"
+                  placeholder="1-5"
                   min="1"
                   max="5"
                   required
                 />
               </div>
               <div class="form-group">
-                <label for="overall_feeling">Overall Feeling (1-5)</label>
+                <label for="overall_feeling">Overall Feeling</label>
                 <input
                   formControlName="overall_feeling"
                   type="number"
                   id="overall_feeling"
-                  placeholder="Overall Feeling"
+                  placeholder="1-5"
                   min="1"
                   max="5"
                 />
@@ -248,6 +285,38 @@
                     {{ question.question_text }}
                   </option>
                 </select>
+                <button (click)="toggleAddQuestion()">Add New Question</button>
+              </div>
+
+              <!-- Add New Question Section -->
+              <div *ngIf="showAddQuestion" class="form-group">
+                <div class="form-group">
+                  <label for="newQuestionText">New Question:</label>
+                  <input
+                    type="text"
+                    id="newQuestionText"
+                    formControlName="newQuestionText"
+                    class="form-control"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="newQuestionCategory">Category:</label>
+                  <select
+                    id="newQuestionCategory"
+                    formControlName="newQuestionCategory"
+                    class="form-control"
+                  >
+                    <option
+                      *ngFor="let category of categories"
+                      [value]="category.id"
+                    >
+                      {{ category.name }}
+                    </option>
+                  </select>
+                </div>
+                <button class="btn btn-primary" (click)="addQuestion()">
+                  Add Question
+                </button>
               </div>
 
               <div class="form-group">
@@ -277,6 +346,7 @@
                     {{ question.question_text }}
                   </option>
                 </select>
+                <button (click)="toggleAddQuestion()">Add New Question</button>
               </div>
 
               <div class="form-group">
@@ -295,8 +365,10 @@
               </ng-template>
 
               <!-- Submit and Cancel buttons -->
-              <button (click)="updateReview()">Update Review</button>
-              <button (click)="cancelReview()">Cancel</button>
+              <div class="form_buttons">
+                <button (click)="updateReview()">Update Review</button>
+                <button (click)="cancelReview()">Cancel</button>
+              </div>
             </form>
           </div>
         </div>

@@ -3,11 +3,13 @@ import { PerformanceService } from '../services/performance.service';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Category } from '../models/category.model';
 import { Interview } from '../models/interview.model';
 import { Performance } from '../models/performance.model';
 import { Answer, Question } from '../models/question.model';
 import { AnswerService } from '../services/answer.service';
 import { AuthService } from '../services/auth.service';
+import { CategoryService } from '../services/category.service';
 import { QuestionService } from '../services/question.service';
 
 
@@ -29,10 +31,16 @@ export class PerformancesComponent implements OnInit {
   struggledAnswerId: number | null = null;
   wellAnsweredAnswerId: number | null = null;
 
+  showAddQuestion = false;
+  newQuestionText = '';
+  selectedCategoryId: number | null = null;
+  categories: Category[] = [];
+
   constructor(
     private performanceService: PerformanceService,
     private questionService: QuestionService,
     private answerService: AnswerService,
+    private categoryService: CategoryService,
     private authService: AuthService,
     private cdr: ChangeDetectorRef,
     private router: Router,
@@ -47,7 +55,9 @@ export class PerformancesComponent implements OnInit {
       struggled_question: [{ value: '', disabled: true }, Validators.required],
       struggled_answer: [{ value: '', disabled: true }, Validators.required],
       well_answered_question: [{ value: '', disabled: true }, Validators.required],
-      well_answered_answer: [{ value: '', disabled: true }, Validators.required]
+      well_answered_answer: [{ value: '', disabled: true }, Validators.required],
+      newQuestionText: ['', Validators.required],
+      newQuestionCategory: ['', Validators.required]
     });
   }
 
@@ -56,6 +66,7 @@ export class PerformancesComponent implements OnInit {
     this.loadCompletedReviews();
     this.loadQuestions();
     this.loadAnswers();
+    this.loadCategories();
   }
 
   loadPendingReviews() {
@@ -116,47 +127,49 @@ export class PerformancesComponent implements OnInit {
     }
   }
 
+  loadCategories() {
+    this.categoryService.getAllCategories().subscribe(
+      data => this.categories = data,
+      error => console.error('Error loading categories:', error)
+    );
+  }
+
   startReview(interview: Interview) {
     this.activeInterviewId = interview.id;
     this.activePerformanceId = null;
     this.performanceForm.reset();
   }
 
-  async editReview(performance: Performance) {
+  editReview(performance: Performance) {
     console.log('editReview method called with performance:', performance);
+
+    this.performanceForm.get('newQuestionText')?.clearValidators();
+    this.performanceForm.get('newQuestionText')?.updateValueAndValidity();
+    this.performanceForm.get('newQuestionCategory')?.clearValidators();
+    this.performanceForm.get('newQuestionCategory')?.updateValueAndValidity();
+
     this.activePerformanceId = performance.id;
     this.activeInterviewId = null;
     this.struggledAnswerId = performance.struggled_answer_id ?? null;
     this.wellAnsweredAnswerId = performance.well_answered_answer_id ?? null;
 
-    const userId = this.authService.getCurrentUserId();
-
-    // Fetch answers by question and user IDs
-    const [struggledAnswer, wellAnsweredAnswer] = await Promise.all([
-      typeof performance.struggled_question_id === 'number' && userId !== null
-        ? this.answerService.getAnswersByQuestionIdAndUserId(performance.struggled_question_id, userId).toPromise()
-        : null,
-      typeof performance.well_answered_question_id === 'number' && userId !== null
-        ? this.answerService.getAnswersByQuestionIdAndUserId(performance.well_answered_question_id, userId).toPromise()
-        : null,
-    ]);
-
-    console.log('Form Values before patch:', this.performanceForm.value);
-    this.performanceForm.setValue({
+    // Populate the form with existing performance data
+    this.performanceForm.patchValue({
       confidence_rating: performance.confidence_rating,
       technical_rating: performance.technical_rating,
       behavioral_rating: performance.behavioral_rating,
-      overall_feeling: performance.overall_feeling,
-      summary: performance.summary,
-      struggled_question: performance.struggled_question_id,
-      struggled_answer: struggledAnswer ? (struggledAnswer.length > 0 ? struggledAnswer[0].answer_text : '') : '',
-      well_answered_question: performance.well_answered_question_id,
-      well_answered_answer: wellAnsweredAnswer ? (wellAnsweredAnswer.length > 0 ? wellAnsweredAnswer[0].answer_text : '') : '',
+      overall_feeling: performance.overall_feeling ?? '',
+      summary: performance.summary ?? '',
+      struggled_question: performance.struggled_question_id ?? '',
+      well_answered_question: performance.well_answered_question_id ?? '',
+      // Assuming you want to populate these fields if answers exist
+      struggled_answer: performance.struggledAnswer?.answer_text ?? '',
+      well_answered_answer: performance.wellAnsweredAnswer?.answer_text ?? ''
     });
 
     console.log('Form Values after patch:', this.performanceForm.value);
-    this.cdr.detectChanges();
   }
+
 
 
   deleteReview(performance: Performance) {
@@ -172,6 +185,14 @@ export class PerformancesComponent implements OnInit {
   }
 
   async submitReview() {
+    // Debugging form validity
+    Object.keys(this.performanceForm.controls).forEach(key => {
+      const control = this.performanceForm.get(key);
+      if (control && control.errors) {
+        console.log('Control with errors:', key, control.errors);
+      }
+    });
+
     if (this.performanceForm.valid && this.activeInterviewId !== null) {
       try {
         const formValues = this.performanceForm.value;
@@ -213,38 +234,108 @@ export class PerformancesComponent implements OnInit {
   }
 
   async updateReview() {
+    console.log('Update review called');
+    // Debugging form validity
+    Object.keys(this.performanceForm.controls).forEach(key => {
+      const control = this.performanceForm.get(key);
+      if (control && control.errors) {
+        console.log('Control with errors:', key, control.errors);
+      }
+    });
+
     if (this.performanceForm.valid && this.activePerformanceId !== null) {
       try {
         const formValues = this.performanceForm.value;
 
-        // Update answers only if IDs are available
-        if (this.struggledAnswerId && this.wellAnsweredAnswerId) {
-          await this.answerService.updateAnswer(this.struggledAnswerId, formValues.struggled_answer).toPromise();
-          await this.answerService.updateAnswer(this.wellAnsweredAnswerId, formValues.well_answered_answer).toPromise();
-        } else {
-          console.error('Answer IDs are undefined');
-          return; // Exit the function if IDs are missing
+        // Update or create struggled answer
+        if (formValues.struggled_answer.trim()) {
+          if (this.struggledAnswerId) {
+            await this.answerService.updateAnswer(this.struggledAnswerId, formValues.struggled_answer).toPromise();
+          } else {
+            const newAnswer = await this.answerService.createAnswer(formValues.struggled_answer, formValues.struggled_question).toPromise();
+            this.struggledAnswerId = newAnswer.id;
+          }
         }
 
-        // Prepare updated performance data
+        // Update or create well answered answer
+        if (formValues.well_answered_answer.trim()) {
+          if (this.wellAnsweredAnswerId) {
+            await this.answerService.updateAnswer(this.wellAnsweredAnswerId, formValues.well_answered_answer).toPromise();
+          } else {
+            const newAnswer = await this.answerService.createAnswer(formValues.well_answered_answer, formValues.well_answered_question).toPromise();
+            this.wellAnsweredAnswerId = newAnswer.id;
+          }
+        }
+
         const updatedPerformanceData = {
           ...formValues,
           struggled_answer_id: this.struggledAnswerId,
           well_answered_answer_id: this.wellAnsweredAnswerId
         };
 
-        // Update performance
         const updatedPerformance = await this.performanceService.updatePerformance(this.activePerformanceId, updatedPerformanceData).toPromise();
         if (updatedPerformance) {
           const index = this.completedReviews.findIndex(p => p.id === updatedPerformance.id);
           if (index !== -1) {
             this.completedReviews[index] = updatedPerformance;
           }
-          this.activePerformanceId = null; // Reset after updating
+          this.activePerformanceId = null;
         }
       } catch (error) {
         console.error('Error updating performance or answers:', error);
       }
+    } else {
+      console.log('Form is invalid or active performance ID is null', {
+        isValid: this.performanceForm.valid,
+        activePerformanceId: this.activePerformanceId
+      });
     }
   }
+
+
+
+  addQuestion() {
+
+    // Re-add validators for new question fields
+    this.performanceForm.get('newQuestionText')?.setValidators([Validators.required]);
+    this.performanceForm.get('newQuestionCategory')?.setValidators([Validators.required]);
+    const newQuestionText = this.performanceForm.get('newQuestionText')?.value;
+    const selectedCategoryId = this.performanceForm.get('newQuestionCategory')?.value;
+
+    if (!newQuestionText || !selectedCategoryId) {
+      // Handle invalid input
+      return;
+    }
+
+    const newQuestion = {
+      question_text: newQuestionText,
+      category_id: selectedCategoryId
+    }
+
+    this.questionService.createQuestion(newQuestion).subscribe({
+      next: (question) => {
+        this.questions.push(question);
+        this.showAddQuestion = false;
+        this.newQuestionText = '';
+        this.selectedCategoryId = null;
+      },
+      error: (error) => console.error('Error creating new question:', error)
+    });
+  }
+
+  toggleAddQuestion() {
+    this.showAddQuestion = !this.showAddQuestion;
+  }
+
+  createAnswer(answerText: string, questionId: number) {
+    // Assuming this method creates an answer and returns its ID
+    this.answerService.createAnswer(answerText, questionId).subscribe({
+      next: (answer) => {
+        // Make sure you are storing the returned answer ID
+        this.struggledAnswerId = answer.id; // or this.wellAnsweredAnswerId for well-answered questions
+      },
+      error: (error) => console.error('Error creating answer:', error)
+    });
+  }
+
 }
