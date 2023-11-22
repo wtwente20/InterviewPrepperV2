@@ -1,8 +1,7 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PerformanceService } from '../services/performance.service';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { Category } from '../models/category.model';
 import { Interview } from '../models/interview.model';
 import { Performance } from '../models/performance.model';
@@ -42,8 +41,6 @@ export class PerformancesComponent implements OnInit {
     private answerService: AnswerService,
     private categoryService: CategoryService,
     private authService: AuthService,
-    private cdr: ChangeDetectorRef,
-    private router: Router,
     private fb: FormBuilder
   ) {
     this.performanceForm = this.fb.group({
@@ -56,8 +53,8 @@ export class PerformancesComponent implements OnInit {
       struggled_answer: [{ value: '', disabled: true }, Validators.required],
       well_answered_question: [{ value: '', disabled: true }, Validators.required],
       well_answered_answer: [{ value: '', disabled: true }, Validators.required],
-      newQuestionText: ['', Validators.required],
-      newQuestionCategory: ['', Validators.required]
+      newQuestionText: [''],
+      newQuestionCategory: ['']
     });
   }
 

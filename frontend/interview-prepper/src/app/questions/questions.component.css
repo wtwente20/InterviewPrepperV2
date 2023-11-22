@@ -24,6 +24,7 @@ p {
   max-width: 960px;
   margin: 20px auto;
   padding: 0 15px;
+  overflow-y: auto;
 }
 
 /* Question Section */

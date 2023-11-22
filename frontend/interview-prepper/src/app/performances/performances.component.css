@@ -1,5 +1,6 @@
 .container {
   margin: 0 auto;
+  margin-top: 20px;
   background-color: #f7f7f7;
   overflow-y: auto;
 }
@@ -19,12 +20,12 @@ ul {
   padding: 0;
 }
 
-/* li {
+li {
   margin-bottom: 15px;
-  padding: 15px;
+  /* padding: 15px;
   border: 1px solid #ddd;
-  border-radius: 5px;
-} */
+  border-radius: 5px; */
+}
 
 /* .performance-form .form-group {
   margin-bottom: 15px;

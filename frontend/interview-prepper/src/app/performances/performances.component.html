@@ -10,7 +10,10 @@
           <p>Date: {{ interview.interview_date | date : "mediumDate" }}</p>
           <!-- Add a button to navigate to the performance review form -->
           <button (click)="startReview(interview)">Start Review</button>
-          <div class="form-container" *ngIf="activeInterviewId === interview.id">
+          <div
+            class="form-container"
+            *ngIf="activeInterviewId === interview.id"
+          >
             <form [formGroup]="performanceForm">
               <p>Fields marked with an asterisk (*) are required.</p>
               <div class="form-group">
@@ -69,10 +72,11 @@
                 ></textarea>
               </div>
               <div *ngIf="!loadingQuestions; else loading" class="form-group">
-                <label for="struggled_question">Struggled Question</label>
+                <label for="struggled_question">Struggled Question*</label>
                 <select
                   formControlName="struggled_question"
                   id="struggled_question"
+                  required
                 >
                   <option value="">Select a question</option>
                   <option
@@ -94,6 +98,7 @@
                     id="newQuestionText"
                     formControlName="newQuestionText"
                     class="form-control"
+                    required
                   />
                 </div>
                 <div class="form-group">
@@ -102,6 +107,7 @@
                     id="newQuestionCategory"
                     formControlName="newQuestionCategory"
                     class="form-control"
+                    required
                   >
                     <option
                       *ngFor="let category of categories"
@@ -118,22 +124,24 @@
 
               <div class="form-group">
                 <label for="struggled_answer"
-                  >Answer for Struggled Question</label
+                  >Answer for Struggled Question*</label
                 >
                 <textarea
                   formControlName="struggled_answer"
                   id="struggled_answer"
                   placeholder="Enter your answer for the struggled question"
+                  required
                 ></textarea>
               </div>
 
               <div *ngIf="!loadingQuestions; else loading" class="form-group">
                 <label for="well_answered_question"
-                  >Well Answered Question</label
+                  >Well Answered Question*</label
                 >
                 <select
                   formControlName="well_answered_question"
                   id="well_answered_question"
+                  required
                 >
                   <option value="">Select a question</option>
                   <option
@@ -148,12 +156,13 @@
 
               <div class="form-group">
                 <label for="well_answered_answer"
-                  >Answer for Well Answered Question</label
+                  >Answer for Well Answered Question*</label
                 >
                 <textarea
                   formControlName="well_answered_answer"
                   id="well_answered_answer"
                   placeholder="Enter your answer for the well answered question"
+                  required
                 ></textarea>
               </div>
 
@@ -191,7 +200,7 @@
           <p *ngIf="performance.overall_feeling != null">
             Overall Feeling: {{ performance.overall_feeling }}/5
           </p>
-          <p *ngIf="performance.summary != null">
+          <p *ngIf="performance.summary != ''">
             Summary: {{ performance.summary }}
           </p>
           <p *ngIf="performance.struggledQuestion">
@@ -213,7 +222,10 @@
               Delete
             </button>
           </div>
-          <div class="form-container" *ngIf="activePerformanceId === performance.id">
+          <div
+            class="form-container"
+            *ngIf="activePerformanceId === performance.id"
+          >
             <form [formGroup]="performanceForm">
               <p>Fields marked with an asterisk (*) are required.</p>
               <div class="form-group">
@@ -272,7 +284,7 @@
                 ></textarea>
               </div>
               <div *ngIf="!loadingQuestions; else loading" class="form-group">
-                <label for="struggled_question">Struggled Question</label>
+                <label for="struggled_question">Struggled Question*</label>
                 <select
                   formControlName="struggled_question"
                   id="struggled_question"
@@ -321,7 +333,7 @@
 
               <div class="form-group">
                 <label for="struggled_answer"
-                  >Answer for Struggled Question</label
+                  >Answer for Struggled Question*</label
                 >
                 <textarea
                   formControlName="struggled_answer"
@@ -332,7 +344,7 @@
 
               <div *ngIf="!loadingQuestions; else loading" class="form-group">
                 <label for="well_answered_question"
-                  >Well Answered Question</label
+                  >Well Answered Question*</label
                 >
                 <select
                   formControlName="well_answered_question"
@@ -351,7 +363,7 @@
 
               <div class="form-group">
                 <label for="well_answered_answer"
-                  >Answer for Well Answered Question</label
+                  >Answer for Well Answered Question*</label
                 >
                 <textarea
                   formControlName="well_answered_answer"
