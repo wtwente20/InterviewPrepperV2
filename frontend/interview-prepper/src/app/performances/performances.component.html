@@ -200,7 +200,7 @@
           <p *ngIf="performance.overall_feeling != null">
             Overall Feeling: {{ performance.overall_feeling }}/5
           </p>
-          <p *ngIf="performance.summary != ''">
+          <p *ngIf="performance.summary != null">
             Summary: {{ performance.summary }}
           </p>
           <p *ngIf="performance.struggledQuestion">
