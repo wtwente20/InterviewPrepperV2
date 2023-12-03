@@ -3,6 +3,12 @@ const sequelize = require('../config/database');
 const Category = require("../models/category")
 
 const Resource = sequelize.define('Resource', {
+  id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+    allowNull: false,
+  },
   resource_name: {
     type: DataTypes.STRING,
     allowNull: false
