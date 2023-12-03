@@ -32,6 +32,7 @@ import { MessageListComponent } from './message-list/message-list.component';
 import { PerformancesComponent } from './performances/performances.component';
 import { QuestionsComponent } from './questions/questions.component';
 import { RegisterComponent } from './register/register.component';
+import { ResourcesComponent } from './resources/resources.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { RegisterComponent } from './register/register.component';
     CreateInterviewComponent,
     EditInterviewComponent,
     PerformancesComponent,
+    ResourcesComponent
   ],
   imports: [
     BrowserModule,

@@ -12,6 +12,7 @@ import { LoginComponent } from './login/login.component';
 import { PerformancesComponent } from './performances/performances.component';
 import { QuestionsComponent } from './questions/questions.component';
 import { RegisterComponent } from './register/register.component';
+import { ResourcesComponent } from './resources/resources.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'chat', component: ChatComponent },
   { path: 'interviews', component: InterviewCalendarComponent},
   { path: 'performances', component: PerformancesComponent},
+  { path: 'resources', component: ResourcesComponent },
   // Add other routes as needed
   { path: '', redirectTo: '/login', pathMatch: 'full' }, // Redirect empty path to /login
 ];

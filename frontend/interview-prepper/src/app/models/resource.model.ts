@@ -4,5 +4,6 @@ export interface Resource {
   resource_link: string;
   resource_type: string;
   description?: string;
+  category_id: number;
   // end of backend model structure
 }
