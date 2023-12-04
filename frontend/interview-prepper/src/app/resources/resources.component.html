@@ -1,63 +1,60 @@
 <div class="resources-container">
-  <!-- Display General Resources -->
+  <!-- General Resources Section -->
   <div class="general-resources">
     <h2>General Resources</h2>
     <ul>
       <li *ngFor="let resource of resources">
         {{ resource.resource_name }} -
         <a href="{{ resource.resource_link }}" target="_blank">Link</a>
-        <!-- Add more resource details as needed -->
       </li>
     </ul>
   </div>
 
-  <!-- User Resource Management -->
+  <!-- User Resource Management Section -->
   <div *ngIf="isAuthenticated" class="user-resources">
     <h2>Your Resources</h2>
-    <button (click)="showAddResourceForm = !showAddResourceForm">
-      Add New Resource
-    </button>
+    <button (click)="toggleAddResourceForm()">Add New Resource</button>
 
-    <!-- Form for Adding a New User Resource -->
+    <!-- Form for Adding New Resource -->
     <div *ngIf="showAddResourceForm">
-      <form
-        (ngSubmit)="createUserResource(newUserResourceForm.value)"
-        #newUserResourceForm="ngForm"
-      >
-        <input
-          type="text"
-          ngModel
-          name="resource_name"
-          placeholder="Resource Name"
-          required
-        />
-        <input
-          type="text"
-          ngModel
-          name="resource_link"
-          placeholder="Resource Link"
-          required
-        />
+      <form (ngSubmit)="createUserResource(newUserResourceForm.value)" #newUserResourceForm="ngForm">
+        <!-- Form Fields for Adding New Resource -->
+        <input type="text" ngModel name="resource_name" placeholder="Resource Name" required />
+        <input type="text" ngModel name="resource_link" placeholder="Resource Link" required />
         <select ngModel name="resource_type" required>
           <option value="" disabled selected>Select Resource Type</option>
           <option value="Technology">Technology</option>
           <option value="Financial">Financial</option>
           <option value="Medical">Medical</option>
         </select>
-        <textarea
-          ngModel
-          name="description"
-          placeholder="Description (Optional)"
-        ></textarea>
+        <textarea ngModel name="description" placeholder="Description (Optional)"></textarea>
         <button type="submit">Add Resource</button>
       </form>
     </div>
+
+    <!-- Edit Resource Form -->
+    <div *ngIf="editingResource">
+      <form (ngSubmit)="updateUserResource(editUserResourceForm.value)" #editUserResourceForm="ngForm">
+        <!-- Form Fields for Editing Resource -->
+        <input type="hidden" [(ngModel)]="editingResource.id" name="id" />
+        <input type="text" [(ngModel)]="editingResource.resource_name" name="resource_name" required />
+        <input type="text" [(ngModel)]="editingResource.resource_link" name="resource_link" required />
+        <select [(ngModel)]="editingResource.resource_type" name="resource_type" required>
+          <option value="Technology">Technology</option>
+          <option value="Financial">Financial</option>
+          <option value="Medical">Medical</option>
+        </select>
+        <textarea [(ngModel)]="editingResource.description" name="description"></textarea>
+        <button type="submit">Update Resource</button>
+        <button (click)="cancelEditing()">Cancel</button>
+      </form>
+    </div>
+
     <!-- List of User Resources -->
     <ul>
       <li *ngFor="let userResource of userResources">
         {{ userResource.resource_name }} -
         <a href="{{ userResource.resource_link }}" target="_blank">Link</a>
-        <!-- Buttons for Edit and Delete -->
         <button (click)="setEditingResource(userResource)">Edit</button>
         <button (click)="deleteUserResource(userResource.id)">Delete</button>
       </li>

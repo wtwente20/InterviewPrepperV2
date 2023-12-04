@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable, catchError, map, of } from 'rxjs';
 import { Resource } from '../models/resource.model';
 import { UserResource } from '../models/user-resource.model';
 import { AuthService } from '../services/auth.service';
@@ -26,18 +27,20 @@ export class ResourcesComponent implements OnInit {
   ngOnInit(): void {
     this.loadResources();
     this.checkAuthentication();
-    if (this.isAuthenticated) {
-      this.loadUserResources();
-    }
+  }
+
+  toggleAddResourceForm(): void {
+    this.showAddResourceForm = !this.showAddResourceForm;
   }
 
   checkAuthentication(): void {
-    const userId = this.getCurrentUserId();
-    this.isAuthenticated = userId !== null;
+    const token = localStorage.getItem('token');
+    this.isAuthenticated = token !== null && token !== '';
     if (this.isAuthenticated) {
       this.loadUserResources();
     }
   }
+  
 
   loadResources(): void {
     this.resourceService.getResources().subscribe(
@@ -51,23 +54,31 @@ export class ResourcesComponent implements OnInit {
   }
 
   loadUserResources(): void {
-    const userId = this.getCurrentUserId();
-    if (userId) {
-      this.userResourceService.getUserResourcesByUserId(userId).subscribe(
-        (userResources: UserResource[]) => {
-          this.userResources = userResources;
-        },
-        (error) => {
-          console.error('Error loading user resources:', error);
-        }
-      );
-    } else {
-      console.error('User ID is not available. User might not be logged in.');
-    }
+    this.getCurrentUserId().subscribe(userId => {
+      if (userId) {
+        this.userResourceService.getUserResourcesByUserId(userId).subscribe(
+          (userResources: UserResource[]) => {
+            this.userResources = userResources;
+          },
+          (error) => {
+            console.error('Error loading user resources:', error);
+          }
+        );
+      } else {
+        console.error('User ID is not available. User might not be logged in.');
+      }
+    });
   }
+  
 
-  getCurrentUserId(): number | null {
-    return this.authService.getCurrentUserId();
+  getCurrentUserId(): Observable<number | null> {
+    return this.authService.getCurrentUser().pipe(
+      map(user => user ? user.id : null),
+      catchError(error => {
+        console.error('Error getting current user:', error);
+        return of(null);
+      })
+    );
   }
 
   createUserResource(userResourceData: UserResource): void {
@@ -81,27 +92,42 @@ export class ResourcesComponent implements OnInit {
   }
 
   updateUserResource(updatedResourceData: UserResource): void {
+    console.log(updatedResourceData.id);
     this.userResourceService.updateUserResource(updatedResourceData.id, updatedResourceData).subscribe(
       (updatedResource: UserResource) => {
-        // Update the resource in your local list, or re-fetch the list if preferred
-        // Additional UI logic
+        // find the index of the resource in the list
+        const index = this.userResources.findIndex(resource => resource.id === updatedResource.id);
+        
+        // update the resource in the list if it's found
+        if (index !== -1) {
+          this.userResources[index] = updatedResource;
+        }
+  
+        // close the edit form here
+        this.cancelEditing();
+  
       },
       (error) => console.error('Error updating user resource:', error)
     );
   }
   
+  
   deleteUserResource(resourceId: number): void {
-    this.userResourceService.deleteUserResource(resourceId).subscribe(
-      () => {
-        this.userResources = this.userResources.filter(resource => resource.id !== resourceId);
-        // Additional UI logic
-      },
-      (error) => console.error('Error deleting user resource:', error)
-    );
+    if (confirm('Are you sure you want to delete this resource?')) {
+      this.userResourceService.deleteUserResource(resourceId).subscribe(
+        () => {
+          this.userResources = this.userResources.filter(resource => resource.id !== resourceId);
+          // Additional logic after deletion
+        },
+        (error) => console.error('Error deleting user resource:', error)
+      );
+    }
   }
+  
   
   setEditingResource(userResource: UserResource): void {
     this.editingResource = { ...userResource };
+    console.log(this.editingResource);
     // Additional logic for setting up the edit form
   }
 
