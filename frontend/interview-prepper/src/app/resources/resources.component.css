@@ -1,0 +1,106 @@
+.resources-container {
+  max-width: 960px;
+  margin: 20px auto;
+  padding: 15px;
+  background-color: rgb(139, 157, 175);
+}
+
+.resources-container h2 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.general-resources ul, .user-resources ul {
+  list-style: none;
+  padding: 0;
+}
+
+.general-resources li, .user-resources li {
+  background-color: #fff;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.general-resources a, .user-resources a {
+  color: #007bff;
+  margin-right: 10px;
+  text-align: left;
+}
+
+.user-resources button {
+  padding: 10px;
+  margin: 10px;
+  font-size: 0.8rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.user-resources button.edit-button {
+  background-color: #ffc107; /* Bootstrap warning color for edit */
+  color: #fff;
+}
+
+.user-resources button.delete-button {
+  background-color: #dc3545; /* Bootstrap danger color for delete */
+  color: #fff;
+}
+
+/* Form styling */
+.user-resources form {
+  margin-bottom: 20px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.user-resources form input, .user-resources form select, .user-resources form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.user-resources form button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.user-resources form button[type="submit"] {
+  background-color: #28a745; /* Bootstrap success color */
+  color: #fff;
+}
+
+.user-resources form button.cancel-button {
+  background-color: #6c757d; /* Bootstrap secondary color */
+  color: #fff;
+  margin-left: 10px;
+}
+
+/* Adjust for smaller screens */
+@media (max-width: 768px) {
+  .user-resources li {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .user-resources a {
+    margin: 0 0 10px 0;
+    width: 100%;
+  }
+
+  .user-resources button {
+    width: 100%;
+    margin: 5px 0;
+  }
+}

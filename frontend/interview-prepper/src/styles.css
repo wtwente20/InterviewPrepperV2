@@ -2,3 +2,16 @@
 /*
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } */
+
+input, textarea, select {
+  width: 10%; /* Full width */
+  padding: 10px 15px; /* Ample padding for comfort */
+  margin-bottom: 15px; /* Spacing between inputs */
+  border: 1px solid #ccc; /* Subtle border */
+  border-radius: 4px; /* Rounded corners */
+  box-sizing: border-box; /* Border-box to include padding in width */
+  font-size: 1rem; /* Readable font size */
+  color: #333; /* Dark font for readability */
+  background-color: #fff; /* White background */
+  transition: border-color 0.3s, box-shadow 0.3s; /* Smooth transition for interactions */
+}

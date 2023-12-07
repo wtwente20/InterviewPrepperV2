@@ -17,6 +17,7 @@ export class ResourcesComponent implements OnInit {
   public isAuthenticated: boolean = false;
   editingResource: UserResource | null = null;
   showAddResourceForm = false;
+  resourceTypes: string[] = ['YouTube', 'Book', 'Article', 'Other'];
 
   constructor(
     private resourceService: ResourceService,
@@ -81,15 +82,30 @@ export class ResourcesComponent implements OnInit {
     );
   }
 
+  getUserResourcesByType(type: string): UserResource[] {
+    return this.userResources.filter(resource => resource.resource_type === type);
+  }
+
+  getResourcesByType(type: string): Resource[] {
+    return this.resources.filter(resource => resource.resource_type === type);
+  }
+
+  getUniqueResourceTypes(resourcesArray: Array<Resource | UserResource>): string[] {
+    const types = new Set(resourcesArray.map(resource => resource.resource_type));
+    return Array.from(types);
+  }
+
   createUserResource(userResourceData: UserResource): void {
     this.userResourceService.createUserResource(userResourceData).subscribe(
       (newResource: UserResource) => {
         this.userResources.push(newResource);
-        // Handle any additional logic, like closing a modal or resetting a form
+        // Close the form after adding a new resource
+        this.showAddResourceForm = false;
       },
       (error) => console.error('Error creating user resource:', error)
     );
   }
+  
 
   updateUserResource(updatedResourceData: UserResource): void {
     console.log(updatedResourceData.id);

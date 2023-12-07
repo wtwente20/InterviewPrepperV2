@@ -2,12 +2,17 @@
   <!-- General Resources Section -->
   <div class="general-resources">
     <h2>General Resources</h2>
-    <ul>
-      <li *ngFor="let resource of resources">
-        {{ resource.resource_name }} -
-        <a href="{{ resource.resource_link }}" target="_blank">Link</a>
-      </li>
-    </ul>
+    <ng-container *ngFor="let type of getUniqueResourceTypes(resources)">
+      <ng-container *ngIf="getResourcesByType(type).length > 0">
+        <h3>{{ type }}</h3>
+        <ul>
+          <li *ngFor="let resource of getResourcesByType(type)">
+            {{ resource.resource_name }} -
+            <a href="{{ resource.resource_link }}" target="_blank">Link</a>
+          </li>
+        </ul>
+      </ng-container>
+    </ng-container>
   </div>
 
   <!-- User Resource Management Section -->
@@ -23,9 +28,10 @@
         <input type="text" ngModel name="resource_link" placeholder="Resource Link" required />
         <select ngModel name="resource_type" required>
           <option value="" disabled selected>Select Resource Type</option>
-          <option value="Technology">Technology</option>
-          <option value="Financial">Financial</option>
-          <option value="Medical">Medical</option>
+          <option value="YouTube">YouTube</option>
+          <option value="Book">Book</option>
+          <option value="Article">Article</option>
+          <option value="Other">Other</option>
         </select>
         <textarea ngModel name="description" placeholder="Description (Optional)"></textarea>
         <button type="submit">Add Resource</button>
@@ -37,13 +43,18 @@
       <form (ngSubmit)="updateUserResource(editUserResourceForm.value)" #editUserResourceForm="ngForm">
         <!-- Form Fields for Editing Resource -->
         <input type="hidden" [(ngModel)]="editingResource.id" name="id" />
+        <h4>Resource Name</h4>
         <input type="text" [(ngModel)]="editingResource.resource_name" name="resource_name" required />
+        <h4>Resource Link</h4>
         <input type="text" [(ngModel)]="editingResource.resource_link" name="resource_link" required />
+        <h4>Resource Type</h4>
         <select [(ngModel)]="editingResource.resource_type" name="resource_type" required>
-          <option value="Technology">Technology</option>
-          <option value="Financial">Financial</option>
-          <option value="Medical">Medical</option>
+          <option value="YouTube">YouTube</option>
+          <option value="Book">Book</option>
+          <option value="Article">Article</option>
+          <option value="Other">Other</option>
         </select>
+        <h4>Resource Description</h4>
         <textarea [(ngModel)]="editingResource.description" name="description"></textarea>
         <button type="submit">Update Resource</button>
         <button (click)="cancelEditing()">Cancel</button>
@@ -51,13 +62,18 @@
     </div>
 
     <!-- List of User Resources -->
-    <ul>
-      <li *ngFor="let userResource of userResources">
-        {{ userResource.resource_name }} -
-        <a href="{{ userResource.resource_link }}" target="_blank">Link</a>
-        <button (click)="setEditingResource(userResource)">Edit</button>
-        <button (click)="deleteUserResource(userResource.id)">Delete</button>
-      </li>
-    </ul>
+    <ng-container *ngFor="let type of getUniqueResourceTypes(userResources)">
+      <ng-container *ngIf="getUserResourcesByType(type).length > 0">
+        <h3>{{ type }}</h3>
+        <ul>
+          <li *ngFor="let userResource of getUserResourcesByType(type)">
+            {{ userResource.resource_name }} -
+            <a href="{{ userResource.resource_link }}" target="_blank">Link</a>
+            <button (click)="setEditingResource(userResource)">Edit</button>
+            <button (click)="deleteUserResource(userResource.id)">Delete</button>
+          </li>
+        </ul>
+      </ng-container>
+    </ng-container>
   </div>
 </div>

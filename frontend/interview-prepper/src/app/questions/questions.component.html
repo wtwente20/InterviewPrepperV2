@@ -40,6 +40,8 @@
 
 <div class="container">
   <h2>Your Questions</h2>
+  <button (click)="createQuestion()" class="add-answer-button btn btn-success">Create Question</button>
+  
   <ng-container *ngIf="questions.length; else noQuestionsTemplate">
     <div *ngFor="let question of questions" class="question-section question-container">
       <div class="question-text">
@@ -83,5 +85,4 @@
   <ng-template #noQuestionsTemplate>
     <p>No questions available.</p>
   </ng-template>
-  <button (click)="createQuestion()" class="add-answer-button btn btn-success">Create Question</button>
 </div>
