@@ -3,6 +3,7 @@
   margin: 20px auto;
   padding: 15px;
   background-color: rgb(139, 157, 175);
+  border-radius: 10px;
 }
 
 .resources-container h2 {

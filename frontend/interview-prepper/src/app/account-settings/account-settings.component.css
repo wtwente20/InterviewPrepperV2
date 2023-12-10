@@ -1,13 +1,16 @@
 .account-settings-container {
   max-width: 600px;
-  margin: 0 auto;
+  margin: 15px auto;
   padding: 20px;
   font-family: 'Arial', sans-serif;
+  border: 1px solid grey;
+  border-radius: 10px;
+  background-color: rgb(82, 129, 129);
 }
 
 h1 {
   font-size: 2em;
-  color: #333;
+  color: #fffcfc;
   margin-bottom: 20px;
 }
 
@@ -19,13 +22,13 @@ label {
   display: inline-block;
   width: 150px;
   font-weight: bold;
-  color: #555;
+  color: rgb(214, 213, 212);
 }
 
 span {
   margin-left: 10px;
   font-weight: normal;
-  color: #333;
+  color: #faf6f6;
 }
 
 input {

@@ -1,17 +1,32 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #sidenav class="sidenav" mode="side" position="start">
-    <mat-nav-list>
-      <a mat-list-item (click)="sidenav.toggle()">Close Menu</a>
-      <a mat-list-item routerLink="/account-settings" (click)="sidenav.toggle()">Account Settings</a>
-      <!-- Add more links as needed -->
-    </mat-nav-list>
-  </mat-sidenav>
-
   <mat-sidenav-content class="sidenav-content">
     <div class="content">
       <h1>Welcome to the Dashboard, {{ username }}!</h1>
-      <!-- Add dashboard content here -->
-      <button mat-raised-button color="primary" (click)="logout()">Logout</button>
+      <!-- <button mat-raised-button color="primary" (click)="logout()">Logout</button> -->
+      <!-- Getting Started Section -->
+      <div class="getting-started">
+        <h2>Getting Started</h2>
+        <p>Welcome to your interview preparation journey! To get the most out of our application, here's a quick guide:</p>
+        <ul>
+          <li>
+            <strong>Interview Questions:</strong> Start by exploring and answering the default interview questions. Feel free to add any new questions you encounter.
+          </li>
+          <li>
+            <strong>Interview Schedule:</strong> Keep track of your upcoming interviews with our easy-to-use calendar.
+          </li>
+          <li>
+            <strong>Performance Reviews:</strong> After each interview, rate your performance and review past assessments to improve.
+          </li>
+          <li>
+            <strong>Interview Resources:</strong> Access and save valuable resources, such as articles, books, and videos, to aid your preparation.
+          </li>
+          <li>
+            <strong>Account Settings:</strong> Manage your personal details and account settings with ease.
+          </li>
+        </ul>
+        <p>This dashboard will evolve into a dynamic feed as we continue to develop the application.</p>
+        <p>When the social feed is integrated, this section will move to a dedicated Getting Started page.</p>
+      </div>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

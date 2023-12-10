@@ -1,8 +1,11 @@
 .container {
   margin: 0 auto;
   margin-top: 20px;
-  background-color: rgb(181, 164, 214);
+  background-color: rgb(82, 129, 129);
   overflow-y: auto;
+  border: 1px solid rgb(26, 26, 26);
+  border-radius: 10px;
+  color: aliceblue;
 }
 
 /* .pending-reviews,
@@ -11,8 +14,9 @@
 } */
 
 h2 {
-  color: #333;
+  color: #dbd7d7;
   margin-bottom: 15px;
+  font-weight: 800;
 }
 
 ul {
@@ -23,7 +27,7 @@ ul {
 li {
   margin: 15px;
   padding: 15px;
-  border: 1px solid #ddd;
+  border: 1px solid #5f5e5e;
   border-radius: 5px;
 }
 
@@ -100,4 +104,9 @@ button:disabled {
 .form-container {
   max-height: calc(100vh - 64px);
   overflow-y: auto;
+}
+
+h3 {
+  color: rgb(235, 230, 225);
+  font-weight: 600;
 }

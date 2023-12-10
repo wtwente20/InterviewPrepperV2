@@ -24,7 +24,9 @@
     <div *ngIf="showAddResourceForm">
       <form (ngSubmit)="createUserResource(newUserResourceForm.value)" #newUserResourceForm="ngForm">
         <!-- Form Fields for Adding New Resource -->
+        <h4>Resource Name</h4>
         <input type="text" ngModel name="resource_name" placeholder="Resource Name" required />
+        <h4>Resource Link</h4>
         <input type="text" ngModel name="resource_link" placeholder="Resource Link" required />
         <select ngModel name="resource_type" required>
           <option value="" disabled selected>Select Resource Type</option>
