@@ -1,3 +1,11 @@
+.interview-guidelines-container {
+  max-width: 960px;
+  margin: 20px auto;
+  padding: 15px;
+  background-color: rgb(139, 157, 175);
+  border-radius: 10px;
+}
+
 .resources-container {
   max-width: 960px;
   margin: 20px auto;
@@ -88,6 +96,28 @@
   margin-left: 10px;
 }
 
+.dropdown-btn {
+  background-color: #3e4c5a;
+  color: white;
+  padding: 10px 15px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  margin: 10px auto;
+}
+
+.dropdown-content {
+  background-color: #f1f1f1;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: max-height 0.3s ease-out;
+  overflow: hidden;
+}
+
 /* Adjust for smaller screens */
 @media (max-width: 768px) {
   .user-resources li {
@@ -103,5 +133,9 @@
   .user-resources button {
     width: 100%;
     margin: 5px 0;
+  }
+
+  .dropdown-btn {
+    font-size: 0.9rem;
   }
 }

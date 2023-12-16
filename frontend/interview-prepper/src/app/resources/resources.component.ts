@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Observable, catchError, map, of } from 'rxjs';
 import { Resource } from '../models/resource.model';
 import { UserResource } from '../models/user-resource.model';
@@ -6,11 +6,14 @@ import { AuthService } from '../services/auth.service';
 import { ResourceService } from '../services/resource.service';
 import { UserResourceService } from '../services/user-resource.service';
 
+type SectionKey = 'starMethod' | 'behavioralTips' | 'technicalStrategies' | 'commonQuestions';
+
 @Component({
   selector: 'app-resources',
   templateUrl: './resources.component.html',
   styleUrl: './resources.component.css'
 })
+
 export class ResourcesComponent implements OnInit {
   public resources: Resource[] = [];
   public userResources: UserResource[] = [];
@@ -18,11 +21,18 @@ export class ResourcesComponent implements OnInit {
   editingResource: UserResource | null = null;
   showAddResourceForm = false;
   resourceTypes: string[] = ['YouTube', 'Book', 'Article', 'Other'];
+  sections = {
+    starMethod: false,
+    behavioralTips: false,
+    technicalStrategies: false,
+    commonQuestions: false
+  };
 
   constructor(
     private resourceService: ResourceService,
     private userResourceService: UserResourceService,
-    private authService: AuthService
+    private authService: AuthService,
+    private changeDetectorRef: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -32,6 +42,13 @@ export class ResourcesComponent implements OnInit {
 
   toggleAddResourceForm(): void {
     this.showAddResourceForm = !this.showAddResourceForm;
+  }
+
+  
+  toggleSection(section: SectionKey) {
+    this.sections[section] = !this.sections[section];
+    console.log(`Toggled ${section}: `, this.sections[section]);
+    this.changeDetectorRef.detectChanges();
   }
 
   checkAuthentication(): void {

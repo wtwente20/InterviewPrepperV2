@@ -1,3 +1,41 @@
+<div class="interview-guidelines-container">
+  <div class="interview-prep-resources">
+    <h2>Interview Preparation</h2>
+    <p>Click the boxes below for more information.</p>
+    <!-- STAR Method Dropdown -->
+    <div class="dropdown">
+      <button class="dropdown-btn" (click)="toggleSection('starMethod')">STAR Method</button>
+      <div class="dropdown-content" *ngIf="sections.starMethod">
+        <p>Learn about the Situation, Task, Action, Result method to excel in behavioral interviews.</p>
+      </div>
+    </div>
+    
+    <!-- Behavioral Interview Tips Dropdown -->
+    <div class="dropdown">
+      <button class="dropdown-btn" (click)="toggleSection('behavioralTips')">Behavioral Interview Tips</button>
+      <div class="dropdown-content" *ngIf="sections.behavioralTips">
+        <p>Tips and strategies for answering behavioral interview questions effectively.</p>
+      </div>
+    </div>
+
+    <!-- Technical Interview Strategies Dropdown -->
+    <div class="dropdown">
+      <button class="dropdown-btn" (click)="toggleSection('technicalStrategies')">Technical Interview Strategies</button>
+      <div class="dropdown-content" *ngIf="sections.technicalStrategies">
+        <p>Key strategies for preparing and excelling in technical interviews.</p>
+      </div>
+    </div>
+
+    <!-- Common Interview Questions and Answers Dropdown -->
+    <div class="dropdown">
+      <button class="dropdown-btn" (click)="toggleSection('commonQuestions')">Common Interview Questions and Answers</button>
+      <div class="dropdown-content" *ngIf="sections.commonQuestions">
+        <p>Explore commonly asked interview questions and effective ways to answer them.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="resources-container">
   <!-- General Resources Section -->
   <div class="general-resources">
