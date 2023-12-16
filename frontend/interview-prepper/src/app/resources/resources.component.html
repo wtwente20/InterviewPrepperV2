@@ -6,7 +6,26 @@
     <div class="dropdown">
       <button class="dropdown-btn" (click)="toggleSection('starMethod')">STAR Method</button>
       <div class="dropdown-content" *ngIf="sections.starMethod">
-        <p>Learn about the Situation, Task, Action, Result method to excel in behavioral interviews.</p>
+        <p>
+          The <strong>STAR</strong> method is a technique used to answer behavioral interview questions in a structured and compelling way. It stands for:
+        </p>
+        <ul>
+          <li><strong>Situation:</strong> Describe the context within which you performed a task or faced a challenge at work.</li>
+          <li><strong>Task:</strong> Explain the actual task that was involved. This could include specific challenges or objectives.</li>
+          <li><strong>Action:</strong> Describe the specific actions you took to address the situation or task.</li>
+          <li><strong>Result:</strong> Share the outcomes or results of your actions. These should ideally quantify your success or highlight learning experiences.</li>
+        </ul>
+        <p>
+          This method is effective because it provides a clear and concise narrative of your experiences and skills. It helps interviewers understand how you approach and solve real-world problems. Here are some tips for using the STAR method effectively:
+        </p>
+        <ul>
+          <li>Be specific and detailed about the situation and your role.</li>
+          <li>Focus on actions that demonstrate your skills and abilities.</li>
+          <li>Ensure your result is a positive outcome, showcasing your contribution and effectiveness.</li>
+        </ul>
+        <p>
+          Remember, the STAR method is not just about telling a story; it's about showcasing your problem-solving and critical-thinking skills in a professional setting.
+        </p>
       </div>
     </div>
     
@@ -14,7 +33,22 @@
     <div class="dropdown">
       <button class="dropdown-btn" (click)="toggleSection('behavioralTips')">Behavioral Interview Tips</button>
       <div class="dropdown-content" *ngIf="sections.behavioralTips">
-        <p>Tips and strategies for answering behavioral interview questions effectively.</p>
+        <p>
+          Behavioral interviews are a technique used by employers to understand how a candidate has acted in specific situations in the past. The idea is that past behavior is the best predictor of future performance. In these interviews, candidates are asked to provide examples from their past work experiences to demonstrate their skills and abilities.
+        </p>
+        <p>
+          Here are some key tips for preparing for a behavioral interview:
+        </p>
+        <ul>
+          <li>Reflect on past experiences and identify key moments where you demonstrated important skills and abilities relevant to the job.</li>
+          <li>Prepare specific examples that showcase your problem-solving, teamwork, leadership, and other relevant skills.</li>
+          <li>Use the <strong>STAR method</strong> (Situation, Task, Action, Result) to structure your responses. This method helps ensure your answers are clear, concise, and relevant.</li>
+          <li>Practice your responses to common behavioral questions, but be prepared to adapt your answers to the specific questions asked.</li>
+          <li>Be honest and authentic in your responses. It's important to provide real examples and be genuine about your experiences and learning outcomes.</li>
+        </ul>
+        <p>
+          Remember, the goal of a behavioral interview is to assess how you've handled various work situations and challenges in the past. By being well-prepared and using the STAR method, you can effectively convey your strengths and how they align with the employer's needs.
+        </p>
       </div>
     </div>
 
@@ -22,7 +56,25 @@
     <div class="dropdown">
       <button class="dropdown-btn" (click)="toggleSection('technicalStrategies')">Technical Interview Strategies</button>
       <div class="dropdown-content" *ngIf="sections.technicalStrategies">
-        <p>Key strategies for preparing and excelling in technical interviews.</p>
+        <p>
+          Technical interviews are designed to assess your technical ability, problem-solving skills, and knowledge relevant to the role you're applying for. They often involve coding challenges, algorithmic problems, system design, or other technical questions.
+        </p>
+        <p>
+          Here are some strategies to help you prepare for a technical interview:
+        </p>
+        <ul>
+          <li><strong>Understand the Basics:</strong> Ensure you have a strong grasp of the fundamental concepts in your field, whether it's software development, data science, engineering, etc.</li>
+          <li><strong>Practice Coding:</strong> If coding is part of the interview, practice with online platforms like LeetCode, HackerRank, or CodeSignal. Focus on a variety of problems and try to understand different algorithms.</li>
+          <li><strong>Review Previous Projects:</strong> Be prepared to discuss your past projects, the technologies you used, and the challenges you faced.</li>
+          <li><strong>System Design:</strong> For roles involving system architecture, be ready to design systems or components and explain your decisions.</li>
+          <li><strong>Mock Interviews:</strong> Conduct mock interviews with friends or use online platforms to simulate the interview environment.</li>
+          <li><strong>Clarify Questions:</strong> Don't hesitate to ask for clarifications if a question is not clear. This also shows your communication skills.</li>
+          <li><strong>Think Aloud:</strong> During problem-solving, verbalize your thought process. This helps interviewers understand how you approach problems.</li>
+          <li><strong>Review the Job Description:</strong> Tailor your preparation to the specific skills and technologies listed in the job description.</li>
+        </ul>
+        <p>
+          Remember, technical interviews are not just about getting the right answer; they're also about demonstrating how you approach problems, your analytical thinking, and your ability to communicate effectively.
+        </p>
       </div>
     </div>
 
@@ -30,7 +82,49 @@
     <div class="dropdown">
       <button class="dropdown-btn" (click)="toggleSection('commonQuestions')">Common Interview Questions and Answers</button>
       <div class="dropdown-content" *ngIf="sections.commonQuestions">
-        <p>Explore commonly asked interview questions and effective ways to answer them.</p>
+        <p>
+          Preparing for common interview questions is essential for making a great impression. Here are strategies for answering some frequently asked questions:
+        </p>
+    
+        <h4>1. Tell Me About Yourself</h4>
+        <p>
+          This question is often an opener. Provide a brief and focused summary of your professional background, relevant experience, and why you are interested in the role. Avoid personal details and concentrate on your career trajectory.
+        </p>
+    
+        <h4>2. What Is Your Greatest Strength?</h4>
+        <p>
+          Choose a strength that is relevant to the job and provide specific examples to illustrate it. Explain how this strength has been beneficial in your past roles and how it aligns with the job you're interviewing for.
+        </p>
+    
+        <h4>3. What Is Your Greatest Weakness?</h4>
+        <p>
+          Pick a real weakness, then follow up with steps you've taken to improve it. Be genuine, but avoid mentioning a weakness that is a critical skill for the job. The goal is to show self-awareness and a desire for personal growth.
+        </p>
+    
+        <h4>4. Describe a Time Where You Had a Conflict With a Coworker and How You Overcame It.</h4>
+        <p>
+          Use the STAR method to describe the situation, your task, the action you took, and the result. Focus on how you handled the situation professionally, the communication skills you used, and the positive outcome.
+        </p>
+    
+        <!-- Additional Common Questions -->
+        <h4>5. Why Do You Want to Work Here?</h4>
+        <p>
+          Research the company and explain what makes it attractive to you. Mention aspects like the company's values, culture, projects, and how they align with your career goals.
+        </p>
+    
+        <h4>6. How Do You Handle Stress and Pressure?</h4>
+        <p>
+          Provide examples of how you've managed stress in professional settings. Discuss the strategies you use, like prioritization, taking breaks, or seeking support when needed.
+        </p>
+    
+        <h4>7. Describe Your Ideal Work Environment.</h4>
+        <p>
+          Describe qualities of a work environment that enable you to thrive. Be honest, but also consider the company culture and how it aligns with what you describe.
+        </p>
+    
+        <p>
+          Remember, the key to answering interview questions is to provide responses that are honest, clear, and demonstrate your qualifications and fit for the role.
+        </p>
       </div>
     </div>
   </div>
